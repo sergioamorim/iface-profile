@@ -26,8 +26,10 @@ public class UserAcademicProfile {
 	
 	private String college;
 	
+	@ManyToOne
 	private Date dateStart;
 	
+	@ManyToOne
 	private Date dateEnd;
 	
 	

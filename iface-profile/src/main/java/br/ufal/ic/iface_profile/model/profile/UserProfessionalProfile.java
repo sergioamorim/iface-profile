@@ -26,8 +26,10 @@ public class UserProfessionalProfile {
 	
 	private String office;
 	
+	@ManyToOne
 	private Date dateStart;
 	
+	@ManyToOne
 	private Date dateEnd;
 	
 	public int getId() {

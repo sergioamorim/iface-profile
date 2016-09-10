@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -19,6 +20,7 @@ public class UserProfile {
 	@GeneratedValue
 	private int id;
 	
+	@ManyToOne
 	private User user;
 	
 	private String name;
@@ -27,10 +29,13 @@ public class UserProfile {
 	
 	private String picture;
 	
+	@ManyToOne
 	private Date birthDate;
 	
+	@ManyToOne
 	private Link homeTown;
 	
+	@ManyToOne
 	private Link currentCity;
 	
 	private Gender gender;
@@ -38,6 +43,7 @@ public class UserProfile {
 	@OneToMany
 	private List<UserContact> userContacts;
 	
+	@ManyToOne
 	private UserCivilStatus userRelationship;
 	
 	
