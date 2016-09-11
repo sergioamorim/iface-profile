@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import br.ufal.ic.iface_profile.model.infrastructure.User;
 
@@ -29,7 +31,7 @@ public class UserProfile {
 	
 	private String picture;
 	
-	@ManyToOne
+	@Temporal(TemporalType.DATE)
 	private Date birthDate;
 	
 	@ManyToOne

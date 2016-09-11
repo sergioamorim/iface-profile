@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import br.ufal.ic.iface_profile.model.infrastructure.User;
 
@@ -26,10 +28,10 @@ public class UserAcademicProfile {
 	
 	private String college;
 	
-	@ManyToOne
+	@Temporal(TemporalType.DATE)
 	private Date dateStart;
 	
-	@ManyToOne
+	@Temporal(TemporalType.DATE)
 	private Date dateEnd;
 	
 	
