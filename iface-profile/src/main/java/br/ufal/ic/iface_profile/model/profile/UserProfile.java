@@ -40,6 +40,7 @@ public class UserProfile {
 	@ManyToOne
 	private Link currentCity;
 	
+	@ManyToOne
 	private Gender gender;
 	
 	@OneToMany
