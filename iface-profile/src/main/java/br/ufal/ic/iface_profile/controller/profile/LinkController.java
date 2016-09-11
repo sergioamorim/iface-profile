@@ -16,7 +16,7 @@ import br.ufal.ic.iface_profile.repository.interfaces.profile.LinkRepositoryInte
 public class LinkController extends AbstractController<Link, Integer>{
 
 	@Autowired
-	@Qualifier("LinkRepository")
+	@Qualifier("linkRepository")
 	private LinkRepositoryInterface repository;
 	
 	protected LinkRepositoryInterface getRepository(){
