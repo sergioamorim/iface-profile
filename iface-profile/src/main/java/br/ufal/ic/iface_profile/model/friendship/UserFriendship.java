@@ -3,6 +3,7 @@ package br.ufal.ic.iface_profile.model.friendship;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import br.ufal.ic.iface_profile.model.infrastructure.User;
@@ -16,9 +17,14 @@ public class UserFriendship {
 	@GeneratedValue
 	
 	private int id;
+	
+	@ManyToOne
 	private User user_x;
+	
+	@ManyToOne
 	private User user_y;
-	private boolean approved;
+	
+	private Boolean approved;
 	
 	public int getId() {
 		return id;
@@ -38,10 +44,10 @@ public class UserFriendship {
 	public void setUser_y(User user_y) {
 		this.user_y = user_y;
 	}
-	public boolean isApproved() {
+	public Boolean getApproved() {
 		return approved;
 	}
-	public void setApproved(boolean approved) {
+	public void setApproved(Boolean approved) {
 		this.approved = approved;
 	}
 }
