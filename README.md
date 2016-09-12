@@ -11,7 +11,7 @@ Team members:
 - Igor Theotônio icat@ic.ufal.br
 - Lucas Peixoto lpdac@ic.ufal.br
 - Sergio Amorim sata@ic.ufal.br
-- Vinicius Costa mvc@ic.ufal.br
+- Vinicius Costa mvsc@ic.ufal.br
 
 This module of iFace is implements classes and methods related to profile of users. Information about users, friendship, activity history (storytelling) are some of the features of this module.
 
@@ -24,8 +24,8 @@ The history of all activities performed by the users is registered by this modul
 Detailed description (only acessible by team members and by the professor in charge): https://www.sharelatex.com/project/57b45e64f1e40ff118274054
 
 #####UML Diagrams (Portuguese only, translation in progress)
-![UML Diagram #1](perfil.jpg)
-![UML Diagram #2](amizade_historico.jpg)
+![UML Diagram #1](uml-diagrams/diagram-1.jpg)
+![UML Diagram #2](uml-diagrams/diagram-2.jpg)
 
 ####Comments:
-This module is still in development. The Team Coders used Eclipse, Maven and Hibernate (with Spring) tools to develop this module. Some of Java Code Conventions are being used (Oracle) [http://www.oracle.com/technetwork/java/codeconvtoc-136057.html]
+This module is still in development. The Team Coders are using Eclipse, Maven and Hibernate (with Spring framework) tools to develop this module. Some of Java Code Conventions (Oracle) are being used [http://www.oracle.com/technetwork/java/codeconvtoc-136057.html]
