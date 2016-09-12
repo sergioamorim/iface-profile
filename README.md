@@ -24,8 +24,8 @@ The history of all activities performed by the users is registered by this modul
 Detailed description (only acessible by team members and by the professor in charge): https://www.sharelatex.com/project/57b45e64f1e40ff118274054
 
 #####UML Diagrams (Portuguese only, translation in progress)
-![UML Diagram #1](documentation/uml-diagrams/diagram-1.jpg)
-![UML Diagram #2](documentation/uml-diagrams/diagram-2.jpg)
+![UML Diagram #1](documentation/uml-diagrams/diagrams-1.jpg)
+![UML Diagram #2](documentation/uml-diagrams/diagrams-2.jpg)
 
 ####Comments:
 This module is still in development. The Team Coders are using Eclipse, Maven and Hibernate (with Spring framework) tools to develop this module. Some of Java Code Conventions (Oracle) are being used [http://www.oracle.com/technetwork/java/codeconvtoc-136057.html]
