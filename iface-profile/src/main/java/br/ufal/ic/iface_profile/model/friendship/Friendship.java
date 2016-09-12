@@ -11,7 +11,7 @@ import br.ufal.ic.iface_profile.model.infrastructure.User;
 @Entity
 @Table (name = "userfriendship")
 
-public class UserFriendship {
+public class Friendship {
 
 	@Id
 	@GeneratedValue
