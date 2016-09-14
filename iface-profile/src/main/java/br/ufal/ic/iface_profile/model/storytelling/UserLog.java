@@ -5,7 +5,10 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import br.ufal.ic.iface_profile.model.infrastructure.User;
 import br.ufal.ic.iface_profile.model.profile.Link;
@@ -19,12 +22,21 @@ public class UserLog {
 	@GeneratedValue
 	private int id;
 	
+	@ManyToOne
 	private User user;
+	
 	private String title;
+	
 	private String description;
+	
 	private String image;
+	
+	@ManyToOne
 	private Link link;
+	
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date timestamp;
+	
 	private String activity;
 	
 	public int getid() {
