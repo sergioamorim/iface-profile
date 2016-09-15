@@ -6,8 +6,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.ufal.ic.iface_profile.controller.AbstractController;
-import br.ufal.ic.iface_profile.model.storytelling.UserLog;
 import br.ufal.ic.iface_profile.repository.interfaces.storytelling.UserLogRepositoryInterface;
 
 @RestController

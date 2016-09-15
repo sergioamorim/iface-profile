@@ -12,7 +12,7 @@ import br.ufal.ic.iface_profile.repository.interfaces.profile.CivilStatusReposit
 
 @RestController
 @Transactional
-@RequestMapping(value="/civilstatus")
+@RequestMapping(value="/civil_status")
 public class CivilStatusController extends AbstractController<CivilStatus, Integer> {
 	
 	@Autowired

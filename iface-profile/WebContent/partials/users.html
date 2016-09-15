@@ -1,0 +1,16 @@
+<html>
+<title>Usuarios</title>
+<body>
+	<form method="post" action="/service/user" onsubmit="submitForm()">
+		Nome: <input id="txtNome" type="text">
+		<input type="submit" value="Enviar"/>
+	</form>
+</body>
+</html>
+
+<script>
+	function submitForm(){
+		$('#txtNome').val();
+	}
+
+</script>
