@@ -1,5 +1,8 @@
 # Created by https://www.gitignore.io/api/eclipse,java,maven
 
+### Hibernate configuration file ###
+src/main/resources/hibernate-config.xml
+
 ### Eclipse ###
 
 .metadata
