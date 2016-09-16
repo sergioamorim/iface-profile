@@ -1,16 +1,38 @@
 <html>
 <title>Usuarios</title>
 <body>
-	<form method="post" action="/service/user" onsubmit="submitForm()">
-		Nome: <input id="txtNome" type="text">
+	<form method="post" id="myform" action="javascript:" onsubmit="submitForm()" enctype="application/json">
+		Nome: <input id="txtNome" type="text" name="name">
+		Email: <input id="txtEmail" type="text" name="email">
 		<input type="submit" value="Enviar"/>
 	</form>
 </body>
 </html>
 
+<script src="/iface-profile/js/jquery-3.1.0.min.js"></script>
+
 <script>
-	function submitForm(){
-		$('#txtNome').val();
-	}
+function formToJSON(){
+     var json = '{"name":"'+$("#txtNome").val()+'","username": "'+$("#txtEmail").val()+'"}';
+     return json;
+}
+
+
+function submitForm(){
+	var formData = formToJSON();
+	alert(formData);
+	$.ajax({
+		  type: "POST",
+		  headers:{
+		        "Content-Type":"application/json",
+		        "Accept":"application/json"
+		  },
+		  url: "/iface-profile/service/user",
+		  data: formData,
+		  success: function(){alert("sucesso")},
+		  dataType: "json",
+		  contentType : "application/json"
+		});
+}
 
 </script>
