@@ -1,84 +1,85 @@
+
 # Created by https://www.gitignore.io/api/eclipse,java,maven
 
 ### Hibernate configuration file ###
-src/main/resources/hibernate-config.xml
+iface-profile/src/main/resources/hibernate-config.xml
 
 ### Eclipse ###
 
-.metadata
-bin/
-tmp/
-*.tmp
-*.bak
-*.swp
-*~.nib
-local.properties
-.settings/
-.loadpath
-.recommenders
+iface-profile/.metadata
+iface-profile/bin/
+iface-profile/tmp/
+iface-profile/*.tmp
+iface-profile/*.bak
+iface-profile/*.swp
+iface-profile/*~.nib
+iface-profile/local.properties
+iface-profile/.settings/
+iface-profile/.loadpath
+iface-profile/.recommenders
 
 # Eclipse Core
-.project
+iface-profile/.project
 
 # External tool builders
-.externalToolBuilders/
+iface-profile/.externalToolBuilders/
 
 # Locally stored "Eclipse launch configurations"
-*.launch
+iface-profile/*.launch
 
 # PyDev specific (Python IDE for Eclipse)
-*.pydevproject
+iface-profile/*.pydevproject
 
 # CDT-specific (C/C++ Development Tooling)
-.cproject
+iface-profile/.cproject
 
 # JDT-specific (Eclipse Java Development Tools)
-.classpath
+iface-profile/.classpath
 
 # Java annotation processor (APT)
-.factorypath
+iface-profile/.factorypath
 
 # PDT-specific (PHP Development Tools)
-.buildpath
+iface-profile/.buildpath
 
 # sbteclipse plugin
-.target
+iface-profile/.target
 
 # Tern plugin
-.tern-project
+iface-profile/.tern-project
 
 # TeXlipse plugin
-.texlipse
+iface-profile/.texlipse
 
 # STS (Spring Tool Suite)
-.springBeans
+iface-profile/.springBeans
 
 # Code Recommenders
-.recommenders/
+iface-profile/.recommenders/
 
 
 ### Maven ###
-target/
-pom.xml.tag
-pom.xml.releaseBackup
-pom.xml.versionsBackup
-pom.xml.next
-release.properties
-dependency-reduced-pom.xml
-buildNumber.properties
-.mvn/timing.properties
+iface-profile/target/
+iface-profile/pom.xml.tag
+iface-profile/pom.xml.releaseBackup
+iface-profile/pom.xml.versionsBackup
+iface-profile/pom.xml.next
+iface-profile/release.properties
+iface-profile/dependency-reduced-pom.xml
+iface-profile/buildNumber.properties
+iface-profile/.mvn/timing.properties
 
 
 ### Java ###
-*.class
+iface-profile/*.class
 
 # Mobile Tools for Java (J2ME)
-.mtj.tmp/
+iface-profile/.mtj.tmp/
 
 # Package Files #
-*.jar
-*.war
-*.ear
+iface-profile/*.jar
+iface-profile/*.war
+iface-profile/*.ear
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
+iface-profile/hs_err_pid*
