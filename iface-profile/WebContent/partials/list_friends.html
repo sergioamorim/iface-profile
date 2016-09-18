@@ -1,0 +1,118 @@
+<html>
+<head>
+<title>Friends</title>
+<link rel="stylesheet" type="text/css"
+	href="/iface-profile/css/modal.css">
+</head>
+<body>
+	<table id="friendshipTable" style="width: 100%">
+		<tr>
+			<th>ID</th>
+			<th>Usuário 1</th>
+			<th>Usuário 2</th>
+			<th>Status</th>
+			<th>Opções</th>
+		</tr>
+	</table>
+</body>
+</html>
+
+
+<script src="/iface-profile/js/jquery-3.1.0.min.js"></script>
+
+<script>
+var objFriendship;
+	$.ajax({
+		type : "GET",
+		headers : {
+			"Content-Type" : "application/json",
+			"Accept" : "application/json"
+		},
+		url : "/iface-profile/service/friendship",
+		success : function(data) {
+			objFriendship = data;
+			for (var i = 0; i < data.length; i++) {
+				var tr = "<tr>";
+				var td1 = "<td align='center'>" + data[i]["id"] + "</td>";
+				var td2 = "<td align='center'>" + data[i]["user_x"]["name"]
+						+ "</td>";
+				var td3 = "<td align='center'>" + data[i]["user_y"]["name"]
+						+ "</td>";
+				if (data[i].approved) {
+					var td4 = "<td align='center'>" + "Aceito" + "</td>";
+					var td5 = "<td align='center'>"
+							+ "<button onclick='deleteFriendship("
+							+ data[i]["id"] + ")'>Excluir</button></td></tr>";
+				} else {
+					var td4 = "<td align='center'>" + "Pendente" + "</td>";
+					var td5 = "<td align='center'>"
+							+ "<button onclick='acceptFriendshipRequest("
+							+ i + ")'>Aceitar</button>"
+							+ "<button onclick='deleteFriendshipRequest("
+							+ data[i]["id"] + ")'>Recusar</button></td></tr>";
+				}
+				$("#friendshipTable").append(tr + td1 + td2 + td3 + td4 + td5);
+			}
+		}
+	});
+	
+	function changeBoolean (friendshipData) {
+		var json = JSON.parse(friendshipData);
+		json["approved"] = true;
+		json = JSON.stringify(json);
+		return json;
+	}
+
+	function acceptFriendshipRequest(i) {
+		var friendshipData = JSON.stringify(objFriendship[i]);
+		friendshipData = changeBoolean(friendshipData);
+		if (confirm("Deseja aceitar a solicitação de amizade?")) {
+			$
+					.ajax({
+						type : "PUT",
+						headers : {
+							"Content-Type" : "application/json",
+							"Accept" : "application/json"
+						},
+						url : "/iface-profile/service/friendship/",
+						data : friendshipData,
+						success : function() {
+							alert("Solicitação aceita com sucesso.");
+							document.location = "/iface-profile/partials/list_friends.html";
+						},
+						dataType : "json",
+						contentType : "application/json"
+					})
+		}
+	}
+
+	function deleteFriendshipRequest(idFriendship) {
+		if (confirm("Deseja recusar a solicitação de amizade?")) {
+			$
+					.ajax({
+						type : "DELETE",
+						url : "/iface-profile/service/friendship/"
+								+ idFriendship,
+						success : function() {
+							alert("Solicitação recusada com sucesso.");
+							document.location = "/iface-profile/partials/list_friends.html";
+						}
+					});
+		}
+	}
+
+	function deleteFriendship(idFriendship) {
+		if (confirm("Deseja excluir a amizade?")) {
+			$
+					.ajax({
+						type : "DELETE",
+						url : "/iface-profile/service/friendship/"
+								+ idFriendship,
+						success : function() {
+							alert("Amizade excluída com sucesso.");
+							document.location = "/iface-profile/partials/list_friends.html";
+						}
+					});
+		}
+	}
+</script>
