@@ -47,7 +47,7 @@ public class UserCivilStatusController extends AbstractController<UserCivilStatu
 	public void delete(@PathVariable Integer id) {
 		UserCivilStatus deletedUserCivilStatus = getRepository().findById(id);
 		
-		User user = deletedUserCivilStatus.getUsuario();
+		User user = deletedUserCivilStatus.getUser();
 		
 		UserLog userLog = new UserLog();
 		userLog.setUser(user);
@@ -77,7 +77,7 @@ public class UserCivilStatusController extends AbstractController<UserCivilStatu
 		}
 		
 		UserLog userLog = new UserLog();		
-		User user = newUserCivilStatus.getUsuario();
+		User user = newUserCivilStatus.getUser();
 		userLog.setUser(user);
 		
 		userLog.setActivity("Add civil status");
@@ -103,7 +103,7 @@ public class UserCivilStatusController extends AbstractController<UserCivilStatu
 		}
 		
 		UserLog userLog = new UserLog();		
-		User user = newUserCivilStatus.getUsuario();
+		User user = newUserCivilStatus.getUser();
 		userLog.setUser(user);
 		
 		userLog.setActivity("Civil status modification");
