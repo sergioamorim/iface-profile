@@ -80,7 +80,7 @@ public class UserCivilStatusController extends AbstractController<UserCivilStatu
 		User user = newUserCivilStatus.getUsuario();
 		userLog.setUser(user);
 		
-		userLog.setActivity("Add academic profile");
+		userLog.setActivity("Add civil status");
 		userLog.setTitle(user.getName()+" added "+
 							newUserCivilStatus.getMyCivilStatus().getName()+
 								" to profile");
@@ -106,7 +106,7 @@ public class UserCivilStatusController extends AbstractController<UserCivilStatu
 		User user = newUserCivilStatus.getUsuario();
 		userLog.setUser(user);
 		
-		userLog.setActivity("Relationship began");
+		userLog.setActivity("Civil status modification");
 		
 		userLog.setTitle(user.getName()+
 							" modified "+

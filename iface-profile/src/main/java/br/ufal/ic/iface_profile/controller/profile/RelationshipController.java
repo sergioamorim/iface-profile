@@ -52,7 +52,7 @@ public class RelationshipController extends AbstractController<Relationship, Int
 		UserLog userLog = new UserLog();
 		userLog.setUser(user);
 		
-		userLog.setActivity("Ended relationship");
+		userLog.setActivity("Relationship ending");
 		
 		userLog.setTitle(user.getName()+
 							" ended "+
@@ -108,7 +108,7 @@ public class RelationshipController extends AbstractController<Relationship, Int
 		User user = newRelationship.getSender();
 		userLog.setUser(user);
 		
-		userLog.setActivity("Relationship began");
+		userLog.setActivity("Relationship modification");
 		
 		userLog.setTitle(user.getName()+
 							" changed the relationship with "+

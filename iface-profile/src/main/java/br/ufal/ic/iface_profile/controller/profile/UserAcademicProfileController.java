@@ -106,12 +106,12 @@ public class UserAcademicProfileController extends AbstractController<UserAcadem
 		User user = newUserAcademicProfile.getUser();
 		userLog.setUser(user);
 		
-		userLog.setActivity("Relationship began");
+		userLog.setActivity("Academic profile modification");
 		
 		userLog.setTitle(user.getName()+
 							" modified "+
 								newUserAcademicProfile.getCollege()+
-									" from profile");
+									" on profile");
 		
 		userLog.setTimestamp(new Date());
 		
