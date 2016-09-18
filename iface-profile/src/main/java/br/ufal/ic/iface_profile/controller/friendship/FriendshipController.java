@@ -1,18 +1,29 @@
 package br.ufal.ic.iface_profile.controller.friendship;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.MediaType;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+
 import br.ufal.ic.iface_profile.controller.AbstractController;
+import br.ufal.ic.iface_profile.exceptions.ValidationException;
 import br.ufal.ic.iface_profile.model.friendship.Friendship;
 import br.ufal.ic.iface_profile.model.infrastructure.User;
 import br.ufal.ic.iface_profile.model.storytelling.UserLog;
@@ -67,5 +78,39 @@ public class FriendshipController extends AbstractController <Friendship, Intege
 		userLogRepository.save(userYLog);
 		
 		getRepository().delete(deletedFriendship);
+	}
+	
+	@RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public Friendship save(@RequestBody @Valid Friendship newFriendship, BindingResult result,
+			HttpServletResponse response) throws JsonParseException,
+			JsonMappingException, IOException {
+		if (result.hasErrors()) {
+			throw new ValidationException(result);
+		}
+		
+		User user_x = newFriendship.getUser_x();
+		User user_y = newFriendship.getUser_y();
+		
+		UserLog userXLog = new UserLog();
+		UserLog userYLog = new UserLog();
+		
+		userXLog.setUser(user_x);
+		userYLog.setUser(user_y);
+		
+		userXLog.setActivity("Nova amizade");
+		userYLog.setActivity("Nova amizade");
+		
+		userXLog.setTimestamp(new Date());
+		userYLog.setTimestamp(new Date());
+		
+		userXLog.setTitle("Nova amizade com"+user_y.getName());
+		userYLog.setTitle("Nova amizade com"+user_x.getName());
+		
+		UserLogRepository userLogRepository = new UserLogRepository();
+		userLogRepository.save(userXLog);
+		userLogRepository.save(userYLog);
+		
+		return getRepository().save(newFriendship);
 	}
 }
