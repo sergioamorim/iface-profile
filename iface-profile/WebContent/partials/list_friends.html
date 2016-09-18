@@ -21,6 +21,7 @@
 <script src="/iface-profile/js/jquery-3.1.0.min.js"></script>
 
 <script>
+var objFriendship;
 	$.ajax({
 		type : "GET",
 		headers : {
@@ -29,6 +30,7 @@
 		},
 		url : "/iface-profile/service/friendship",
 		success : function(data) {
+			objFriendship = data;
 			for (var i = 0; i < data.length; i++) {
 				var tr = "<tr>";
 				var td1 = "<td align='center'>" + data[i]["id"] + "</td>";
@@ -45,27 +47,25 @@
 					var td4 = "<td align='center'>" + "Pendente" + "</td>";
 					var td5 = "<td align='center'>"
 							+ "<button onclick='acceptFriendshipRequest("
-							+ data[i] + ")'>Aceitar</button>"
+							+ i + ")'>Aceitar</button>"
 							+ "<button onclick='deleteFriendshipRequest("
 							+ data[i]["id"] + ")'>Recusar</button></td></tr>";
 				}
-
 				$("#friendshipTable").append(tr + td1 + td2 + td3 + td4 + td5);
-
 			}
 		}
 	});
 	
 	function changeBoolean (friendshipData) {
-		var json = friendshipData;
+		var json = JSON.parse(friendshipData);
 		json["approved"] = true;
+		json = JSON.stringify(json);
 		return json;
 	}
 
-	function acceptFriendshipRequest(friendshipData) {
+	function acceptFriendshipRequest(i) {
+		var friendshipData = JSON.stringify(objFriendship[i]);
 		friendshipData = changeBoolean(friendshipData);
-		JSON.stringfy(friendshipData);
-		alert('teste');
 		if (confirm("Deseja aceitar a solicitação de amizade?")) {
 			$
 					.ajax({
