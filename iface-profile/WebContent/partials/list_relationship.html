@@ -1,0 +1,149 @@
+<html>
+<head>
+<title>Relationships</title>
+<link rel="stylesheet" type="text/css" href="/iface-profile/css/modal.css" >
+</head>
+<body>
+	<table id="userTable" style="width:100%">
+		  <tr>
+		  	<th>ID</th>
+		  	<th>ID_remetente</th>
+		  	<th>ID_destinatario</th>
+		  	<th>ID_tipo de relacionamento</th>
+		  	<th>Status do relacionamento</th>
+		    <th>Opcoes</th> 
+		  </tr>
+	</table>
+	
+	<div id="modal" class="modal" style="width: 40%; margin-left: 30%">
+
+	  <div class="modal-content">
+	    <span class="close">x</span>
+	    <h3 align="center" style="width: 100%"><b>Alterar dados do relacionamento</b></h3>
+	    <form id="myform" action="javascript:" onsubmit="submitForm()">
+	    <table style="margin-left: 100px">
+	    	
+	    	<tr>
+				<td>ID_remetente:</td>
+		 		<td><input id="senderTxt" type="text" name="sender">
+		 		<input id="txtId" type="hidden"/></td>
+		 	</tr>
+		 	<tr>
+				<td>ID_destinatario:</td>
+		 		<td><input id="receiverTxt" type="text" name="receiver"></td>
+		 	</tr>
+		 	<tr>
+				<td>ID_tipo de relacionamento:</td>
+		 		<td><input id="relationshipTypeTxt" type="text" name="relationshipType"></td>
+		 	</tr>
+		 	<tr>
+				<td></td>
+		 		<td align="right"><input type="submit" value="Atualizar"/></td>
+		 	</tr>
+	    </table>
+	    </form>
+	  </div>
+	
+	</div>
+</body>
+</html>
+
+
+<script src="/iface-profile/js/jquery-3.1.0.min.js"></script>
+
+<script>
+$('#modal').hide();
+
+$.ajax({
+  type: "GET",
+  headers:{
+        "Content-Type":"application/json",
+        "Accept":"application/json"
+  },
+  url: "/iface-profile/service/relationship",
+  success: function(data){
+	  for(var i=0;i<data.length;i++){
+	        var tr="<tr>";
+	        var td1="<td align='center'>"+data[i]["id"]+"</td>";
+	        var td2="<td align='center'>"+data[i]["sender"]["name"]+"</td>";
+	        var td3="<td align='center'>"+data[i]["receiver"]["name"]+"</td>";
+	        var td4="<td align='center'>"+data[i]["relationshipType"]+"</td>";
+	        var td5="<td align='center'>"+data[i]["statusSolicitation"]+"</td>";
+	        var td6="<td align='center'>"
+	        	+"<button onclick='abrirModal("+data[i]["id"]+")'>Editar</button>"
+	        	+"<button onclick='excluirUsuario("+data[i]["id"]+")'>Excluir</button></td></tr>";
+
+	       $("#userTable").append(tr+td1+td2+td3+td4+td5+td6); 
+
+	    }  
+  }
+});
+
+function abrirModal(idUsed){
+	$.ajax({
+		  type: "GET",
+		  url: "/iface-profile/service/relationship/"+idUsed,
+		  success: function(data){
+			  $('#txtId').val(data["id"]);
+	          $('#senderTxt').val(data["sender"]["id"]);
+	          $('#receiverTxt').val(data["receiver"]["id"]);
+	          $('#relationshipTypeTxt').val(data["relationshipType"]);
+			 
+			  $('#modal').show();
+		  }
+		});
+}
+
+window.onclick = function(event) {
+    if (event.target == modal) {
+    	$('#modal').hide();
+    }
+}
+
+$(".close").click(function(){
+	$('#modal').hide();
+});
+
+
+function formToJSON(){
+    var json = '{"id": '+$("#txtId").val()+',"sender":{"id":'+$("#senderTxt").val()+'},"receiver":{"id":'+$("#receiverTxt").val()+'},"relationshipType":{"id":'+$("#relationshipTypeTxt").val()+'}}';
+    return json;
+}
+
+
+function submitForm(){
+	var formData = formToJSON();
+	$.ajax({
+		  type: "PUT",
+		  headers:{
+		        "Content-Type":"application/json",
+		        "Accept":"application/json"
+		  },
+		  url: "/iface-profile/service/relationship",
+		  data: formData,
+		  success: function(){
+			  alert("Alterado com sucesso");
+			  document.location = "/iface-profile/partials/list_relationship.html";
+		  },
+		  dataType: "json",
+		  contentType : "application/json"
+		});
+}
+
+function excluirUsuario(idUsed){
+	if(confirm("Deseja remover o relacionamento "+idUsed+"?")){
+		$.ajax({
+			  type: "DELETE",
+			  url: "/iface-profile/service/relationship/"+idUsed,
+			  success: function(){
+				  alert("Excluido com sucesso");
+				  document.location = "/iface-profile/partials/list_relationship.html";
+			  }
+		});
+	}
+}
+
+
+
+
+</script>
