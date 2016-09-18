@@ -19,7 +19,7 @@ public class UserRepository extends GenericHibernateRepository<User, Integer>
 		this.setSession(session);
 	}
 	
-	public User getUserById(int id){
+	public User getUserById(Integer id){
 		return this.findById(id);
 	}
 
