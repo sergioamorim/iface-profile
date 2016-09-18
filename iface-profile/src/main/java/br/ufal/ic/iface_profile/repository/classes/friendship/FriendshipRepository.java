@@ -25,4 +25,27 @@ public class FriendshipRepository extends GenericHibernateRepository<Friendship,
 		return friendships;
 	}
 
+	@Override
+	public void sendFriendRequest(User x, User y) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<Friendship> checkFriendRequests(User u) {
+		List<Friendship> friendRequests = this.findByCriteria(
+				Restrictions.and(
+						Restrictions.or(
+							Restrictions.eq("user_x", u),
+							Restrictions.eq("user_y", u))), 
+						Restrictions.eq("approved", false));
+		return friendRequests;
+	}
+
+	@Override
+	public List<User> findNotFriends(User u) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
