@@ -1,0 +1,51 @@
+<html>
+<title>UserCivilStatus</title>
+<body>
+	<form method="post" id="myform" action="javascript:" onsubmit="submitForm()" enctype="application/json">
+		<table id="userTable">
+			<tr>
+				<td>Usuário(id):</td>
+				<td><input id="usuarioTxt" type="text" name="usuario"></td>
+			</tr>
+			<tr>
+				<td>Meu status civil(id):</td>
+				<td><input id="myCivilStatusTxt" type="text" name="myCivilStatus"></td>
+			</tr>
+			<tr>
+				<td>Relacionamento(id):</td>
+				<td><input id="myRelationshipTxt" type="text" name="myRelationship"></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td align="right"><input type="submit" value="Enviar"/></td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>
+
+<script src="/iface-profile/js/jquery-3.1.0.min.js"></script>
+
+<script>
+function formToJSON(){
+    var json = '{"usuario":{"id":'+$("#usuarioTxt").val()+'},"myCivilStatus":{"id":'+$("#myCivilStatusTxt").val()+'},"myRelationship":{"id":'+$("#myRelationshipTxt").val()+'}}';
+    return json;
+}
+
+function submitForm(){
+	var formData = formToJSON();
+	alert(formData);
+	$.ajax({
+		  type: "POST",
+		  headers:{
+		        "Content-Type":"application/json",
+		        "Accept":"application/json"
+		  },
+		  url: "/iface-profile/service/usercivilstatus",
+		  data: formData,
+		  success: function(){alert("Sucesso!")},
+		  dataType: "json",
+		  contentType : "application/json"
+		});
+}
+</script>

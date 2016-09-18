@@ -1,0 +1,191 @@
+<html>
+<head>
+<title>UserProfiles</title>
+<link rel="stylesheet" type="text/css" href="/iface-profile/css/modal.css" >
+</head>
+<body>
+	<table id="userTable" style="width:100%">
+		  <tr>
+		  	<th>ID</th>
+		  	<th>Usuario</th>
+		  	<th>Nome</th>
+		  	<th>Idade</th>
+		  	<th>Foto</th>
+		  	<th>Data de nascimento</th>
+		  	<th>Cidade natal</th>
+		  	<th>Cidade atual</th>
+		  	<th>Gênero</th>
+		  	<th>Status Civil</th>
+		    <th>Opcoes</th> 
+		  </tr>
+	</table>
+	
+	<div id="modal" class="modal" style="width: 40%; margin-left: 30%">
+
+	  <div class="modal-content">
+	    <span class="close">x</span>
+	    <h3 align="center" style="width: 100%"><b>Alterar dados do perfil de usuário</b></h3>
+	    <form id="myform" action="javascript:" onsubmit="submitForm()">
+	    <table style="margin-left: 100px">
+	    	
+	    	<tr>
+				<td>ID_usuario:</td>
+		 		<td><input id="userTxt" type="text" name="user">
+		 		<input id="txtId" type="hidden"/></td>
+		 	</tr>
+		 	<tr>
+				<td>Nome:</td>
+				<td><input id="nameTxt" type="text" name="name"></td>
+			</tr>
+			<tr>
+				<td>Idade:</td>
+				<td><input id="ageTxt" type="text" name="age"></td>
+			</tr>
+			<tr>
+				<td>Foto(String):</td>
+				<td><input id="pictureTxt" type="text" name="picture"></td>
+			</tr>
+			<tr>
+				<td>Data de nascimento (formato dd-MM-yyyy):</td>
+				<td><input id="birthDateTxt" type="text" name="birthDate"></td>
+			</tr>
+			<tr>
+				<td>ID_Cidade_natal</td>
+				<td><input id="homeTownTxt" type="text" name="homeTown"></td>
+			</tr>
+			<tr>
+				<td>ID_Cidade_atual:</td>
+				<td><input id="currentCityTxt" type="text" name="currentCity"></td>
+			</tr>
+			<tr>
+				<td>ID_Gênero:</td>
+				<td><input id="genderTxt" type="text" name="gender"></td>
+			</tr>
+			<tr>
+				<td>ID_Status_Civil:</td>
+				<td><input id="userRelationshipTxt" type="text" name="userRelationship">
+			</tr>
+		 	<tr>
+				<td></td>
+		 		<td align="right"><input type="submit" value="Atualizar"/></td>
+		 	</tr>
+	    </table>
+	    </form>
+	  </div>
+	
+	</div>
+</body>
+</html>
+
+
+<script src="/iface-profile/js/jquery-3.1.0.min.js"></script>
+
+<script>
+$('#modal').hide();
+
+$.ajax({
+  type: "GET",
+  headers:{
+        "Content-Type":"application/json",
+        "Accept":"application/json"
+  },
+  url: "/iface-profile/service/userprofile",
+  success: function(data){
+	  for(var i=0;i<data.length;i++){
+	        var tr="<tr>";
+	        var td1="<td align='center'>"+data[i]["id"]+"</td>";
+	        var td2="<td align='center'>"+data[i]["user"]["name"]+"</td>";
+	        var td3="<td align='center'>"+data[i]["name"]+"</td>";
+	        var td4="<td align='center'>"+data[i]["age"]+"</td>";
+	        var td5="<td align='center'>"+data[i]["picture"]+"</td>";
+	        var td6="<td align='center'>"+data[i]["birthDate"]+"</td>";
+	        var td7="<td align='center'>"+data[i]["homeTown"]["name"]+"</td>";
+	        var td8="<td align='center'>"+data[i]["currentCity"]["name"]+"</td>";
+	        var td9="<td align='center'>"+data[i]["gender"]["name"]+"</td>";
+	        var td10="<td align='center'>"+data[i]["userRelationship"]["myCivilStatus"]["name"]+"</td>";
+	        var td11="<td align='center'>"
+	        	+"<button onclick='abrirModal("+data[i]["id"]+")'>Editar</button>"
+	        	+"<button onclick='excluirUsuario("+data[i]["id"]+")'>Excluir</button></td></tr>";
+
+	       $("#userTable").append(tr+td1+td2+td3+td4+td5+td6+td7+td8+td9+td10+td11); 
+
+	    }  
+  }
+});
+
+function abrirModal(idUsed){
+	$.ajax({
+		  type: "GET",
+		  url: "/iface-profile/service/userprofile/"+idUsed,
+		  success: function(data){
+			  $('#txtId').val(data["id"]);
+	          $('#userTxt').val(data["user"]["id"]);
+	          $('#nameTxt').val(data["name"]);
+	          $('#ageTxt').val(data["age"]);
+	          $('#pictureTxt').val(data["picture"]);
+	          $('#birthDateTxt').val(data["birthDate"]);
+	          $('#homeTownTxt').val(data["homeTown"]["id"]);
+	          $('#currentCityTxt').val(data["currentCity"]["id"]);
+	          $('#genderTxt').val(data["gender"]["id"]);
+	          $('#userRelationshipTxt').val(data["userRelationship"]["id"]);
+	          
+			 
+			  $('#modal').show();
+		  }
+		});
+}
+
+window.onclick = function(event) {
+    if (event.target == modal) {
+    	$('#modal').hide();
+    }
+}
+
+$(".close").click(function(){
+	$('#modal').hide();
+});
+
+
+
+function formToJSON(){
+    var json = '{"id": '+$("#txtId").val()+',"user":{"id":'+$("#userTxt").val()+'},"name":"'+$("#nameTxt").val()+'","age":"'+$("#ageTxt").val()+'","picture":"'+$("#pictureTxt").val()+'","birthDate":"'+$("#birthDateTxt").val()+'T00:00:00","homeTown":{"id":'+$("#homeTownTxt").val()+'},"currentCity":{"id":'+$("#currentCityTxt").val()+'},"gender":{"id":'+$("#genderTxt").val()+'},"userRelationship":{"id":'+$("#userRelationshipTxt").val()+'}}';
+    return json;
+}
+
+
+function submitForm(){
+	var formData = formToJSON();
+	$.ajax({
+		  type: "PUT",
+		  headers:{
+		        "Content-Type":"application/json",
+		        "Accept":"application/json"
+		  },
+		  url: "/iface-profile/service/userprofile",
+		  data: formData,
+		  success: function(){
+			  alert("Alterado com sucesso");
+			  document.location = "/iface-profile/partials/list_userprofile.html";
+		  },
+		  dataType: "json",
+		  contentType : "application/json"
+		});
+}
+
+function excluirUsuario(idUsed){
+	if(confirm("Deseja remover o perfil do usuário de id "+idUsed+"?")){
+		$.ajax({
+			  type: "DELETE",
+			  url: "/iface-profile/service/userprofile/"+idUsed,
+			  success: function(){
+				  alert("Excluido com sucesso");
+				  document.location = "/iface-profile/partials/list_userprofile.html";
+			  }
+		});
+	}
+}
+
+
+
+
+</script>

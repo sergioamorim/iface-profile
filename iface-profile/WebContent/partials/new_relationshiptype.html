@@ -1,0 +1,47 @@
+<html>
+<title>RelationshipType</title>
+<body>
+	<form method="post" id="myform" action="javascript:" onsubmit="submitForm()" enctype="application/json">
+		<table id="userTable">
+			<tr>
+				<td>Estado de relacionamento do remetente:</td>
+				<td><input id="relationshipTypeSenderTxt" type="text" name="senderRelationship"></td>
+			</tr>
+			<tr>
+				<td>Estado de relacionamento do destinatário:</td>
+				<td><input id="relationshipTypeReceiverTxt" type="text" name="receiverRelationship"></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td align="right"><input type="submit" value="Enviar"/></td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>
+
+<script src="/iface-profile/js/jquery-3.1.0.min.js"></script>
+
+<script>
+function formToJSON(){
+    var json = '{"senderRelationship":"'+$("#relationshipTypeSenderTxt").val()+'","receiverRelationship":"'+$("#relationshipTypeReceiverTxt").val()+'"}';
+    return json;
+}
+
+function submitForm(){
+	var formData = formToJSON();
+	alert(formData);
+	$.ajax({
+		  type: "POST",
+		  headers:{
+		        "Content-Type":"application/json",
+		        "Accept":"application/json"
+		  },
+		  url: "/iface-profile/service/relationshiptype",
+		  data: formData,
+		  success: function(){alert("Sucesso!")},
+		  dataType: "json",
+		  contentType : "application/json"
+		});
+}
+</script>

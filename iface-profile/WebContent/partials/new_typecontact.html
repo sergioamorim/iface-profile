@@ -1,0 +1,43 @@
+<html>
+<title>TypeContact</title>
+<body>
+	<form method="post" id="myform" action="javascript:" onsubmit="submitForm()" enctype="application/json">
+		<table id="userTable">
+			<tr>
+				<td>Tipo de contato:</td>
+				<td><input id="typecontactTxt" type="text" name="name"></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td align="right"><input type="submit" value="Enviar"/></td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>
+
+<script src="/iface-profile/js/jquery-3.1.0.min.js"></script>
+
+<script>
+function formToJSON(){
+    var json = '{"name":"'+$("#typecontactTxt").val()+'"}';
+    return json;
+}
+
+function submitForm(){
+	var formData = formToJSON();
+	alert(formData);
+	$.ajax({
+		  type: "POST",
+		  headers:{
+		        "Content-Type":"application/json",
+		        "Accept":"application/json"
+		  },
+		  url: "/iface-profile/service/typecontact",
+		  data: formData,
+		  success: function(){alert("Sucesso!")},
+		  dataType: "json",
+		  contentType : "application/json"
+		});
+}
+</script>
