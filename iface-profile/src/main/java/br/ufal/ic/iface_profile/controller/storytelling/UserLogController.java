@@ -41,27 +41,9 @@ public class UserLogController extends AbstractController<UserLog, Integer>{
 		return this.repository;
 	}
 	
-	@RequestMapping(value = "/userlog", method = RequestMethod.GET)
+	@RequestMapping(value = "/userlog/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public List<UserLog> getUserLogswe() {
+    public List<UserLog> getUserLogs(@PathVariable Integer id) {
 		return getRepository().getLogs(new User());
     }
-	
-	@RequestMapping(value = "/userlog", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public UserLog addUserLog(@RequestBody @Valid UserLog newUserLog, BindingResult result,
-			HttpServletResponse response) throws JsonParseException,
-	JsonMappingException, IOException {
-		if (result.hasErrors()) {
-			throw new ValidationException(result);
-		}
-		return getRepository().save(newUserLog);
-    }
-	
-	@RequestMapping(value = "/userlog/{id}", method = RequestMethod.DELETE)
-	@ResponseBody
-	public void delete(@PathVariable int id) {
-		UserLog userlog = getRepository().findById(id);
-		getRepository().delete(userlog);
-	}
 }
