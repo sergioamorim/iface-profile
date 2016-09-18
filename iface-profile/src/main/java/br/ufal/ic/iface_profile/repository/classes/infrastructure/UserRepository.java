@@ -18,9 +18,5 @@ public class UserRepository extends GenericHibernateRepository<User, Integer>
 	public UserRepository(Session session){
 		this.setSession(session);
 	}
-	
-	public User getUserById(Integer id){
-		return this.findById(id);
-	}
 
 }
