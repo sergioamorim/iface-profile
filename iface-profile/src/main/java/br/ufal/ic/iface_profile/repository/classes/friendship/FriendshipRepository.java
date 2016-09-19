@@ -2,12 +2,16 @@ package br.ufal.ic.iface_profile.repository.classes.friendship;
 
 import java.util.List;
 
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.Subqueries;
 import org.springframework.stereotype.Component;
 
 import br.ufal.ic.iface_profile.model.friendship.Friendship;
 import br.ufal.ic.iface_profile.model.infrastructure.User;
 import br.ufal.ic.iface_profile.repository.classes.GenericHibernateRepository;
+import br.ufal.ic.iface_profile.repository.classes.infrastructure.UserRepository;
 import br.ufal.ic.iface_profile.repository.interfaces.friendship.FriendshipRepositoryInterface;
 
 @Component
@@ -15,37 +19,16 @@ public class FriendshipRepository extends GenericHibernateRepository<Friendship,
 		implements FriendshipRepositoryInterface {
 
 	@Override
-	public List<Friendship> findFriends(User u) {
-		List<Friendship> friendships = this.findByCriteria(
-				Restrictions.and(
-						Restrictions.or(
-							Restrictions.eq("user_x", u),
-							Restrictions.eq("user_y", u))), 
-						Restrictions.eq("approved", true));
-		return friendships;
-	}
-
-	@Override
-	public void sendFriendRequest(User x, User y) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public List<Friendship> checkFriendRequests(User u) {
-		List<Friendship> friendRequests = this.findByCriteria(
-				Restrictions.and(
-						Restrictions.or(
-							Restrictions.eq("user_x", u),
-							Restrictions.eq("user_y", u))), 
-						Restrictions.eq("approved", false));
-		return friendRequests;
-	}
-
-	@Override
 	public List<User> findNotFriends(User u) {
-		// TODO Auto-generated method stub
-		return null;
+		UserRepository ur = new UserRepository(this.getSession());
+		DetachedCriteria userSubquery1 = DetachedCriteria.forClass(Friendship.class, "f")
+				.setProjection(Projections.property("f.user_x")).add(Restrictions.eq("user_y", u));
+		DetachedCriteria userSubquery2 = DetachedCriteria.forClass(Friendship.class, "f")
+				.setProjection(Projections.property("f.user_y")).add(Restrictions.eq("user_x", u));
+		return ur.findByCriteria(Restrictions.and(
+				Restrictions.and(Restrictions.not(Subqueries.propertyIn("id", userSubquery1)),
+						Restrictions.not(Subqueries.propertyIn("id", userSubquery2))),
+				Restrictions.not(Restrictions.eq("id", u.getId()))));
 	}
 
 }

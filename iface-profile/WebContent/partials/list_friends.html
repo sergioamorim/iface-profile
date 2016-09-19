@@ -21,7 +21,7 @@
 <script src="/iface-profile/js/jquery-3.1.0.min.js"></script>
 
 <script>
-var objFriendship;
+	var objFriendship;
 	$.ajax({
 		type : "GET",
 		headers : {
@@ -46,8 +46,8 @@ var objFriendship;
 				} else {
 					var td4 = "<td align='center'>" + "Pendente" + "</td>";
 					var td5 = "<td align='center'>"
-							+ "<button onclick='acceptFriendshipRequest("
-							+ i + ")'>Aceitar</button>"
+							+ "<button onclick='acceptFriendshipRequest(" + i
+							+ ")'>Aceitar</button>"
 							+ "<button onclick='deleteFriendshipRequest("
 							+ data[i]["id"] + ")'>Recusar</button></td></tr>";
 				}
@@ -55,8 +55,8 @@ var objFriendship;
 			}
 		}
 	});
-	
-	function changeBoolean (friendshipData) {
+
+	function changeBoolean(friendshipData) {
 		var json = JSON.parse(friendshipData);
 		json["approved"] = true;
 		json = JSON.stringify(json);
