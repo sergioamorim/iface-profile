@@ -45,10 +45,10 @@ public class Relationship {
 	public void setReceiver(User receiver) {
 		this.receiver = receiver;
 	}
-	protected RelationshipType getRelationshipType() {
+	public RelationshipType getRelationshipType() {
 		return relationshipType;
 	}
-	protected void setRelationshipType(RelationshipType relationshipType) {
+	public void setRelationshipType(RelationshipType relationshipType) {
 		this.relationshipType = relationshipType;
 	}
 	public boolean isStatusSolicitation() {

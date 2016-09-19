@@ -56,7 +56,7 @@ public class RelationshipController extends AbstractController<Relationship, Int
 		
 		userLog.setTitle(user.getName()+
 							" ended "+
-								deletedRelationship.getRelatioshipType()+
+								deletedRelationship.getRelationshipType()+
 									" with "+
 										deletedRelationship.getReceiver().getName());
 		
@@ -83,7 +83,7 @@ public class RelationshipController extends AbstractController<Relationship, Int
 		
 		userLog.setActivity("Relationship began");
 		userLog.setTitle(user.getName()+" began "+
-							newRelationship.getRelatioshipType()+
+							newRelationship.getRelationshipType()+
 								" with "+
 									newRelationship.getReceiver().getName());
 		
@@ -114,7 +114,7 @@ public class RelationshipController extends AbstractController<Relationship, Int
 							" changed the relationship with "+
 								newRelationship.getReceiver().getName()+
 									" to "+
-										newRelationship.getRelatioshipType());
+										newRelationship.getRelationshipType());
 		
 		userLog.setTimestamp(new Date());
 		
