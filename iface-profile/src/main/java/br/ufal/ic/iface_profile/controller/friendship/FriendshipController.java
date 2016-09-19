@@ -27,8 +27,8 @@ import br.ufal.ic.iface_profile.exceptions.ValidationException;
 import br.ufal.ic.iface_profile.model.friendship.Friendship;
 import br.ufal.ic.iface_profile.model.infrastructure.User;
 import br.ufal.ic.iface_profile.model.storytelling.UserLog;
-import br.ufal.ic.iface_profile.repository.classes.storytelling.UserLogRepository;
 import br.ufal.ic.iface_profile.repository.interfaces.friendship.FriendshipRepositoryInterface;
+import br.ufal.ic.iface_profile.repository.interfaces.storytelling.UserLogRepositoryInterface;
 
 @RestController
 @Transactional
@@ -43,6 +43,10 @@ public class FriendshipController extends AbstractController <Friendship, Intege
 	protected FriendshipRepositoryInterface getRepository() {
 		return this.repository;
 	}
+	
+	@Autowired
+	@Qualifier("userLogRepository")
+	private UserLogRepositoryInterface logRepository;
 	
 	@RequestMapping(value = "/friends", method = RequestMethod.GET)
     @ResponseBody
@@ -73,9 +77,8 @@ public class FriendshipController extends AbstractController <Friendship, Intege
 		userXLog.setTitle("Undo friendship with "+user_y.getName());
 		userYLog.setTitle("Undo friendship with "+user_x.getName());
 		
-		UserLogRepository userLogRepository = new UserLogRepository();
-		userLogRepository.save(userXLog);
-		userLogRepository.save(userYLog);
+		logRepository.save(userXLog);
+		logRepository.save(userYLog);
 		
 		getRepository().delete(deletedFriendship);
 	}
@@ -107,9 +110,8 @@ public class FriendshipController extends AbstractController <Friendship, Intege
 		userXLog.setTitle("New friendship with "+user_y.getName());
 		userYLog.setTitle("New friendship with "+user_x.getName());
 		
-		UserLogRepository userLogRepository = new UserLogRepository();
-		userLogRepository.save(userXLog);
-		userLogRepository.save(userYLog);
+		logRepository.save(userXLog);
+		logRepository.save(userYLog);
 		
 		return getRepository().save(newFriendship);
 	}

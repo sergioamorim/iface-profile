@@ -26,8 +26,8 @@ import br.ufal.ic.iface_profile.exceptions.ValidationException;
 import br.ufal.ic.iface_profile.model.infrastructure.User;
 import br.ufal.ic.iface_profile.model.profile.UserProfessionalProfile;
 import br.ufal.ic.iface_profile.model.storytelling.UserLog;
-import br.ufal.ic.iface_profile.repository.classes.storytelling.UserLogRepository;
 import br.ufal.ic.iface_profile.repository.interfaces.profile.UserProfessionalProfileRepositoryInterface;
+import br.ufal.ic.iface_profile.repository.interfaces.storytelling.UserLogRepositoryInterface;
 
 @RestController
 @Transactional
@@ -41,6 +41,10 @@ public class UserProfessionalProfileController extends AbstractController<UserPr
 	protected UserProfessionalProfileRepositoryInterface getRepository() {
 		return repository;
 	}
+	
+	@Autowired
+	@Qualifier("userLogRepository")
+	private UserLogRepositoryInterface logRepository;
 	
 	@RequestMapping(value = "{id}", method = RequestMethod.DELETE)
 	@ResponseBody
@@ -61,8 +65,7 @@ public class UserProfessionalProfileController extends AbstractController<UserPr
 		
 		userLog.setTimestamp(new Date());
 		
-		UserLogRepository userLogRepository = new UserLogRepository();
-		userLogRepository.save(userLog);
+		logRepository.save(userLog);
 		
 		getRepository().delete(deletedUserProfessionalProfile);
 	}
@@ -87,8 +90,7 @@ public class UserProfessionalProfileController extends AbstractController<UserPr
 		
 		userLog.setTimestamp(new Date());
 		
-		UserLogRepository userLogRepository = new UserLogRepository();
-		userLogRepository.save(userLog);
+		logRepository.save(userLog);
 
 		return getRepository().save(newUserProfessionalProfile);
 	}
@@ -115,8 +117,7 @@ public class UserProfessionalProfileController extends AbstractController<UserPr
 		
 		userLog.setTimestamp(new Date());
 		
-		UserLogRepository userLogRepository = new UserLogRepository();
-		userLogRepository.save(userLog);
+		logRepository.save(userLog);
 
 		return getRepository().update(newUserProfessionalProfile);
 	}
