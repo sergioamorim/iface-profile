@@ -27,8 +27,8 @@ import br.ufal.ic.iface_profile.exceptions.ValidationException;
 import br.ufal.ic.iface_profile.model.friendship.Friendship;
 import br.ufal.ic.iface_profile.model.infrastructure.User;
 import br.ufal.ic.iface_profile.model.storytelling.UserLog;
-import br.ufal.ic.iface_profile.repository.classes.storytelling.UserLogRepository;
 import br.ufal.ic.iface_profile.repository.interfaces.friendship.FriendshipRepositoryInterface;
+import br.ufal.ic.iface_profile.repository.interfaces.storytelling.UserLogRepositoryInterface;
 
 @RestController
 @Transactional
@@ -44,11 +44,16 @@ public class FriendshipController extends AbstractController <Friendship, Intege
 		return this.repository;
 	}
 	
-	@RequestMapping(value = "/friends", method = RequestMethod.GET)
-    @ResponseBody
-    public List<Friendship> getFriends() {
-		return getRepository().findFriends(new User());
-    }
+	@Autowired
+	@Qualifier("userLogRepository")
+	private UserLogRepositoryInterface logRepository;
+	
+	@RequestMapping (value = "/not_friends")
+	public List <User> findNotFriends () {
+		User u = new User();
+		u.setId(1);
+		return getRepository().findNotFriends(u);
+	}
 	
 	@RequestMapping(value = "{id}", method = RequestMethod.DELETE)
 	@ResponseBody
@@ -73,9 +78,8 @@ public class FriendshipController extends AbstractController <Friendship, Intege
 		userXLog.setTitle("Undo friendship with "+user_y.getName());
 		userYLog.setTitle("Undo friendship with "+user_x.getName());
 		
-		UserLogRepository userLogRepository = new UserLogRepository();
-		userLogRepository.save(userXLog);
-		userLogRepository.save(userYLog);
+		logRepository.save(userXLog);
+		logRepository.save(userYLog);
 		
 		getRepository().delete(deletedFriendship);
 	}
@@ -107,9 +111,8 @@ public class FriendshipController extends AbstractController <Friendship, Intege
 		userXLog.setTitle("New friendship with "+user_y.getName());
 		userYLog.setTitle("New friendship with "+user_x.getName());
 		
-		UserLogRepository userLogRepository = new UserLogRepository();
-		userLogRepository.save(userXLog);
-		userLogRepository.save(userYLog);
+		logRepository.save(userXLog);
+		logRepository.save(userYLog);
 		
 		return getRepository().save(newFriendship);
 	}

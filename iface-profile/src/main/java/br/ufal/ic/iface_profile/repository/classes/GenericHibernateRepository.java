@@ -90,7 +90,7 @@ public abstract class GenericHibernateRepository<T, ID extends Serializable> imp
 	}
 
 	@SuppressWarnings("unchecked")
-	protected List<T> findByCriteria(Criterion... criterion) {
+	public List<T> findByCriteria(Criterion... criterion) {
 		Criteria crit = getSession().createCriteria(getPersistentClass());
 		for (Criterion c : criterion) {
 			crit.add(c);
