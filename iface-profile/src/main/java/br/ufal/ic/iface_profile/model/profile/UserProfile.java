@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -43,7 +44,7 @@ public class UserProfile {
 	@ManyToOne
 	private Gender gender;
 	
-	@OneToMany
+	@OneToMany(fetch = FetchType.EAGER)
 	private List<UserContact> userContacts;
 	
 	@ManyToOne

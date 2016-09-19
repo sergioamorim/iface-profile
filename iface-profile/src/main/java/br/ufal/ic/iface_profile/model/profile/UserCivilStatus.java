@@ -17,7 +17,7 @@ public class UserCivilStatus {
 	private int id;
 	
 	@ManyToOne
-	private User usuario;
+	private User user;
 	
 	@ManyToOne
 	private CivilStatus myCivilStatus;
@@ -31,11 +31,11 @@ public class UserCivilStatus {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public User getUsuario() {
-		return usuario;
+	public User getUser() {
+		return user;
 	}
-	public void setUsuario(User usuario) {
-		this.usuario = usuario;
+	public void setUser(User usuario) {
+		this.user = usuario;
 	}
 	public CivilStatus getMyCivilStatus() {
 		return myCivilStatus;

@@ -1,6 +1,7 @@
 package br.ufal.ic.iface_profile.model.profile;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -22,8 +23,8 @@ public class Relationship {
 	@ManyToOne
 	private User receiver;
 	
-	@ManyToOne
-	private RelationshipType relatioshipType;
+	@ManyToOne(fetch = FetchType.EAGER)
+	private RelationshipType relationshipType;
 	
 	
 	public int getId() {
@@ -44,11 +45,11 @@ public class Relationship {
 	public void setReceiver(User receiver) {
 		this.receiver = receiver;
 	}
-	public RelationshipType getRelatioshipType() {
-		return relatioshipType;
+	public RelationshipType getRelationshipType() {
+		return relationshipType;
 	}
-	public void setRelatioshipType(RelationshipType relatioshipType) {
-		this.relatioshipType = relatioshipType;
+	public void setRelationshipType(RelationshipType relationshipType) {
+		this.relationshipType = relationshipType;
 	}
 	public boolean isStatusSolicitation() {
 		return statusSolicitation;
