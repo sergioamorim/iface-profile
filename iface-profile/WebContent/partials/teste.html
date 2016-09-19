@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Editor Imagem - Teste</title>
+</head>
+<body>
+
+<script type="text/javascript" src="http://feather.aviary.com/imaging/v3/editor.js"></script>
+
+
+<script type='text/javascript'>
+var featherEditor = new Aviary.Feather({
+	apiKey: '64ab3d8694414ad8938d35a3adaddb71',
+	theme: 'dark', 
+	tools: 'all',
+	appendTo: '',
+	onSave: function(imageID, newURL) {
+		var img = document.getElementById(imageID);
+		img.src = newURL;
+	},
+	onError: function(errorObj) {
+		alert(errorObj.message);
+	}
+});
+function launchEditor(id, src) {
+	featherEditor.launch({
+		image: id,
+		url: src
+	});
+	return false;
+}
+</script>
+
+<div id='injection_site'></div>
+
+<img id='image1' src='http://images.aviary.com/imagesv5/feather_default.jpg'/>
+
+<p><input type='image' src='http://images.aviary.com/images/edit-photo.png' value='Editar imagem' onclick="return launchEditor('image1', 'http://images.aviary.com/imagesv5/feather_default.jpg');" /></p>
+
+
+</body>
+</html>
