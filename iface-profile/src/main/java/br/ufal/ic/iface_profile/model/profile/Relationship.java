@@ -15,7 +15,7 @@ public class Relationship {
 
 	@Id
 	@GeneratedValue
-	private int id;
+	private Integer id;
 	
 	@ManyToOne
 	private User sender;
@@ -27,10 +27,10 @@ public class Relationship {
 	private RelationshipType relationshipType;
 	
 	
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public User getSender() {

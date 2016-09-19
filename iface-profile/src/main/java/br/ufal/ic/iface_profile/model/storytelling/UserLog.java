@@ -20,7 +20,7 @@ public class UserLog {
 
 	@Id
 	@GeneratedValue
-	private int id;
+	private Integer id;
 	
 	@ManyToOne
 	private User user;
@@ -39,10 +39,10 @@ public class UserLog {
 	
 	private String activity;
 	
-	public int getid() {
+	public Integer getid() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	

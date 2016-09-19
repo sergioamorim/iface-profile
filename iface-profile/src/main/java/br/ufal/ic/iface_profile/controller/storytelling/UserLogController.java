@@ -18,7 +18,7 @@ import br.ufal.ic.iface_profile.repository.interfaces.storytelling.UserLogReposi
 
 @RestController
 @Transactional
-@RequestMapping(value = "/userlog")
+@RequestMapping(value = "/user_log")
 
 public class UserLogController extends AbstractController<UserLog, Integer>{
 	@Autowired

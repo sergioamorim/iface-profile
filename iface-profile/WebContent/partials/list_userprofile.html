@@ -14,7 +14,7 @@
 		  	<th>Data de nascimento</th>
 		  	<th>Cidade natal</th>
 		  	<th>Cidade atual</th>
-		  	<th>Gênero</th>
+		  	<th>Gï¿½nero</th>
 		  	<th>Status Civil</th>
 		    <th>Opcoes</th> 
 		  </tr>
@@ -24,7 +24,7 @@
 
 	  <div class="modal-content">
 	    <span class="close">x</span>
-	    <h3 align="center" style="width: 100%"><b>Alterar dados do perfil de usuário</b></h3>
+	    <h3 align="center" style="width: 100%"><b>Alterar dados do perfil de usuï¿½rio</b></h3>
 	    <form id="myform" action="javascript:" onsubmit="submitForm()">
 	    <table style="margin-left: 100px">
 	    	
@@ -58,7 +58,7 @@
 				<td><input id="currentCityTxt" type="text" name="currentCity"></td>
 			</tr>
 			<tr>
-				<td>ID_Gênero:</td>
+				<td>ID_Gï¿½nero:</td>
 				<td><input id="genderTxt" type="text" name="gender"></td>
 			</tr>
 			<tr>
@@ -89,7 +89,7 @@ $.ajax({
         "Content-Type":"application/json",
         "Accept":"application/json"
   },
-  url: "/iface-profile/service/userprofile",
+  url: "/iface-profile/service/user_profile",
   success: function(data){
 	  for(var i=0;i<data.length;i++){
 	        var tr="<tr>";
@@ -116,7 +116,7 @@ $.ajax({
 function abrirModal(idUsed){
 	$.ajax({
 		  type: "GET",
-		  url: "/iface-profile/service/userprofile/"+idUsed,
+		  url: "/iface-profile/service/user_profile/"+idUsed,
 		  success: function(data){
 			  $('#txtId').val(data["id"]);
 	          $('#userTxt').val(data["user"]["id"]);
@@ -161,7 +161,7 @@ function submitForm(){
 		        "Content-Type":"application/json",
 		        "Accept":"application/json"
 		  },
-		  url: "/iface-profile/service/userprofile",
+		  url: "/iface-profile/service/user_profile",
 		  data: formData,
 		  success: function(){
 			  alert("Alterado com sucesso");
@@ -173,10 +173,10 @@ function submitForm(){
 }
 
 function excluirUsuario(idUsed){
-	if(confirm("Deseja remover o perfil do usuário de id "+idUsed+"?")){
+	if(confirm("Deseja remover o perfil do usuï¿½rio de id "+idUsed+"?")){
 		$.ajax({
 			  type: "DELETE",
-			  url: "/iface-profile/service/userprofile/"+idUsed,
+			  url: "/iface-profile/service/user_profile/"+idUsed,
 			  success: function(){
 				  alert("Excluido com sucesso");
 				  document.location = "/iface-profile/partials/list_userprofile.html";

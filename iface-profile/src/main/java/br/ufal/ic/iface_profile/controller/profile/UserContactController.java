@@ -31,7 +31,7 @@ import br.ufal.ic.iface_profile.repository.interfaces.profile.UserContactReposit
 
 @RestController
 @Transactional
-@RequestMapping(value = "/usercontact")
+@RequestMapping(value = "/user_contact")
 public class UserContactController extends AbstractController<UserContact, Integer>{
 	@Autowired
 	@Qualifier("userContactRepository")

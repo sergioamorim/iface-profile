@@ -12,7 +12,7 @@ import br.ufal.ic.iface_profile.repository.interfaces.profile.LinkRepositoryInte
 
 @RestController
 @Transactional
-@RequestMapping(value = "/linkcontroller")
+@RequestMapping(value = "/link")
 public class LinkController extends AbstractController<Link, Integer>{
 
 	@Autowired

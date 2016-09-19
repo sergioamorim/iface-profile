@@ -11,7 +11,7 @@
 		  	<th>Instituicao_de_ensino</th>
 		  	<th>Curso</th>
 		  	<th>Data de ingresso</th>
-		  	<th>Data de término</th>
+		  	<th>Data de tï¿½rmino</th>
 		    <th>Opcoes</th> 
 		  </tr>
 	</table>
@@ -20,7 +20,7 @@
 
 	  <div class="modal-content">
 	    <span class="close">x</span>
-	    <h3 align="center" style="width: 100%"><b>Alterar dados do perfil acadêmico do usuário</b></h3>
+	    <h3 align="center" style="width: 100%"><b>Alterar dados do perfil acadï¿½mico do usuï¿½rio</b></h3>
 	    <form id="myform" action="javascript:" onsubmit="submitForm()">
 	    <table style="margin-left: 100px">
 	    	
@@ -42,7 +42,7 @@
 		 		<td><input id="dataStartTxt" type="text" name="dataStart"></td>
 		 	</tr>
 		 	<tr>
-				<td>Data de término:</td>
+				<td>Data de tï¿½rmino:</td>
 		 		<td><input id="dataEndTxt" type="text" name="dataEnd"></td>
 		 	</tr>
 		 	<tr>
@@ -69,7 +69,7 @@ $.ajax({
         "Content-Type":"application/json",
         "Accept":"application/json"
   },
-  url: "/iface-profile/service/useracademicprofile",
+  url: "/iface-profile/service/user_academic_profile",
   success: function(data){
 	  for(var i=0;i<data.length;i++){
 	        var tr="<tr>";
@@ -92,7 +92,7 @@ $.ajax({
 function abrirModal(idUsed){
 	$.ajax({
 		  type: "GET",
-		  url: "/iface-profile/service/useracademicprofile/"+idUsed,
+		  url: "/iface-profile/service/user_academic_profile/"+idUsed,
 		  success: function(data){
 			  $('#txtId').val(data["id"]);
 	          $('#userTxt').val(data["user"]["id"]);
@@ -131,7 +131,7 @@ function submitForm(){
 		        "Content-Type":"application/json",
 		        "Accept":"application/json"
 		  },
-		  url: "/iface-profile/service/useracademicprofile",
+		  url: "/iface-profile/service/user_academic_profile",
 		  data: formData,
 		  success: function(){
 			  alert("Alterado com sucesso");
@@ -143,10 +143,10 @@ function submitForm(){
 }
 
 function excluirUsuario(idUsed){
-	if(confirm("Deseja remover o perfil acadêmico do usuário de id "+idUsed+"?")){
+	if(confirm("Deseja remover o perfil acadï¿½mico do usuï¿½rio de id "+idUsed+"?")){
 		$.ajax({
 			  type: "DELETE",
-			  url: "/iface-profile/service/useracademicprofile/"+idUsed,
+			  url: "/iface-profile/service/user_academic_profile/"+idUsed,
 			  success: function(){
 				  alert("Excluido com sucesso");
 				  document.location = "/iface-profile/partials/list_useracademicprofile.html";

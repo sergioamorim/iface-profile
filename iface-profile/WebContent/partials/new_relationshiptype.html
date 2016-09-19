@@ -8,7 +8,7 @@
 				<td><input id="relationshipTypeSenderTxt" type="text" name="senderRelationship"></td>
 			</tr>
 			<tr>
-				<td>Estado de relacionamento do destinatário:</td>
+				<td>Estado de relacionamento do destinatï¿½rio:</td>
 				<td><input id="relationshipTypeReceiverTxt" type="text" name="receiverRelationship"></td>
 			</tr>
 			<tr>
@@ -37,7 +37,7 @@ function submitForm(){
 		        "Content-Type":"application/json",
 		        "Accept":"application/json"
 		  },
-		  url: "/iface-profile/service/relationshiptype",
+		  url: "/iface-profile/service/relationship_type",
 		  data: formData,
 		  success: function(){alert("Sucesso!")},
 		  dataType: "json",

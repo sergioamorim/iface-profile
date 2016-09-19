@@ -9,8 +9,8 @@
 		  	<th>ID</th>
 		  	<th>usuario</th>
 		  	<th>Local de trabalho</th>
-		  	<th>Cargo/Função</th>
-		  	<th>Data de admissão</th>
+		  	<th>Cargo/Funï¿½ï¿½o</th>
+		  	<th>Data de admissï¿½o</th>
 		  	<th>Data de dispensa</th>
 		    <th>Opcoes</th> 
 		  </tr>
@@ -20,7 +20,7 @@
 
 	  <div class="modal-content">
 	    <span class="close">x</span>
-	    <h3 align="center" style="width: 100%"><b>Alterar dados do perfil acadêmico do usuário</b></h3>
+	    <h3 align="center" style="width: 100%"><b>Alterar dados do perfil acadï¿½mico do usuï¿½rio</b></h3>
 	    <form id="myform" action="javascript:" onsubmit="submitForm()">
 	    <table style="margin-left: 100px">
 	    	
@@ -34,11 +34,11 @@
 		 		<td><input id="linkTxt" type="text" name="link"></td>
 		 	</tr>
 		 	<tr>
-				<td>Cargo/função:</td>
+				<td>Cargo/funï¿½ï¿½o:</td>
 		 		<td><input id="officeTxt" type="text" name="office"></td>
 		 	</tr>
 		 	<tr>
-				<td>Data de admissão:</td>
+				<td>Data de admissï¿½o:</td>
 		 		<td><input id="dateStartTxt" type="text" name="dateStart"></td>
 		 	</tr>
 		 	<tr>
@@ -69,7 +69,7 @@ $.ajax({
         "Content-Type":"application/json",
         "Accept":"application/json"
   },
-  url: "/iface-profile/service/userprofessionalprofile",
+  url: "/iface-profile/service/user_professional_profile",
   success: function(data){
 	  for(var i=0;i<data.length;i++){
 	        var tr="<tr>";
@@ -92,7 +92,7 @@ $.ajax({
 function abrirModal(idUsed){
 	$.ajax({
 		  type: "GET",
-		  url: "/iface-profile/service/userprofessionalprofile/"+idUsed,
+		  url: "/iface-profile/service/user_professional_profile/"+idUsed,
 		  success: function(data){
 			  $('#txtId').val(data["id"]);
 	          $('#userTxt').val(data["user"]["id"]);
@@ -131,7 +131,7 @@ function submitForm(){
 		        "Content-Type":"application/json",
 		        "Accept":"application/json"
 		  },
-		  url: "/iface-profile/service/userprofessionalprofile",
+		  url: "/iface-profile/service/user_professional_profile",
 		  data: formData,
 		  success: function(){
 			  alert("Alterado com sucesso");
@@ -143,10 +143,10 @@ function submitForm(){
 }
 
 function excluirUsuario(idUsed){
-	if(confirm("Deseja remover o perfil profissional do usuário de id "+idUsed+"?")){
+	if(confirm("Deseja remover o perfil profissional do usuï¿½rio de id "+idUsed+"?")){
 		$.ajax({
 			  type: "DELETE",
-			  url: "/iface-profile/service/userprofessionalprofile/"+idUsed,
+			  url: "/iface-profile/service/user_professional_profile/"+idUsed,
 			  success: function(){
 				  alert("Excluido com sucesso");
 				  document.location = "/iface-profile/partials/list_userprofessionalprofile.html";

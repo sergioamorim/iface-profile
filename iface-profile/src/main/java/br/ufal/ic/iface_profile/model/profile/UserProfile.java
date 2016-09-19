@@ -21,14 +21,14 @@ import br.ufal.ic.iface_profile.model.infrastructure.User;
 public class UserProfile {
 	@Id
 	@GeneratedValue
-	private int id;
+	private Integer id;
 	
 	@ManyToOne
 	private User user;
 	
 	private String name;
 	
-	private int age;
+	private Integer age;
 	
 	private String picture;
 	
@@ -51,10 +51,10 @@ public class UserProfile {
 	private UserCivilStatus userRelationship;
 	
 	
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public User getUser() {
@@ -69,10 +69,10 @@ public class UserProfile {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getAge() {
+	public Integer getAge() {
 		return age;
 	}
-	public void setAge(int age) {
+	public void setAge(Integer age) {
 		this.age = age;
 	}
 	public String getPicture() {

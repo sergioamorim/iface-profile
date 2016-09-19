@@ -11,18 +11,18 @@ public class Link {
 	
 	@Id
 	@GeneratedValue
-	private int id;
+	private Integer id;
 	
 	private String name;
 	
 	private String url;
 	
-	private boolean status;
+	private Boolean status;
 	
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public String getName() {
@@ -37,10 +37,10 @@ public class Link {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	public boolean isStatus() {
+	public Boolean getStatus() {
 		return status;
 	}
-	public void setStatus(boolean status) {
+	public void setStatus(Boolean status) {
 		this.status = status;
 	}
 	

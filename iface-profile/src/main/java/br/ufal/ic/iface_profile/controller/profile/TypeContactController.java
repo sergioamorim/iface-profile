@@ -12,7 +12,7 @@ import br.ufal.ic.iface_profile.repository.interfaces.profile.TypeContactReposit
 
 @RestController
 @Transactional
-@RequestMapping(value="/typecontact")
+@RequestMapping(value="/type_contact")
 public class TypeContactController extends AbstractController<TypeContact,Integer >{
 
 	@Autowired

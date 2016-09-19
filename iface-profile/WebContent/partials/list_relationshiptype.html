@@ -7,8 +7,8 @@
 	<table id="userTable" style="width:100%">
 		  <tr>
 		  	<th>ID</th>
-		  	<th>Relação remetente</th>
-		    <th>Relação destinatário</th>
+		  	<th>Relaï¿½ï¿½o remetente</th>
+		    <th>Relaï¿½ï¿½o destinatï¿½rio</th>
 		    <th>Opcoes</th> 
 		  </tr>
 	</table>
@@ -17,17 +17,17 @@
 
 	  <div class="modal-content">
 	    <span class="close">x</span>
-	    <h3 align="center" style="width: 100%"><b>Alterar dados do tipo de relação</b></h3>
+	    <h3 align="center" style="width: 100%"><b>Alterar dados do tipo de relaï¿½ï¿½o</b></h3>
 	    <form id="myform" action="javascript:" onsubmit="submitForm()">
 	    <table style="margin-left: 100px">
 	    	
 	    	<tr>
-				<td>Relação remetente:</td>
+				<td>Relaï¿½ï¿½o remetente:</td>
 		 		<td><input id="relationshipTypeSenderTxt" type="text" name="senderRelationship">
 		 		<input id="txtId" type="hidden"/></td>
 		 	</tr>
 		 	<tr>
-				<td>Relação destinatário:</td>
+				<td>Relaï¿½ï¿½o destinatï¿½rio:</td>
 		 		<td><input id="relationshipTypeReceiverTxt" type="text" name="receiverRelationship"></td>
 		 	</tr>
 		 	<tr>
@@ -54,7 +54,7 @@ $.ajax({
         "Content-Type":"application/json",
         "Accept":"application/json"
   },
-  url: "/iface-profile/service/relationshiptype",
+  url: "/iface-profile/service/relationship_type",
   success: function(data){
 	  for(var i=0;i<data.length;i++){
 	        var tr="<tr>";
@@ -74,7 +74,7 @@ $.ajax({
 function abrirModal(idUsed){
 	$.ajax({
 		  type: "GET",
-		  url: "/iface-profile/service/relationshiptype/"+idUsed,
+		  url: "/iface-profile/service/relationship_type/"+idUsed,
 		  success: function(data){
 			  $('#txtId').val(data["id"]);
 	          $('#relationshipTypeSenderTxt').val(data["senderRelationship"]);
@@ -111,7 +111,7 @@ function submitForm(){
 		        "Content-Type":"application/json",
 		        "Accept":"application/json"
 		  },
-		  url: "/iface-profile/service/relationshiptype",
+		  url: "/iface-profile/service/relationship_type",
 		  data: formData,
 		  success: function(){
 			  alert("Alterado com sucesso");
@@ -126,7 +126,7 @@ function excluirUsuario(idUsed){
 	if(confirm("Deseja remover o tipo de relacionamento "+idUsed+"?")){
 		$.ajax({
 			  type: "DELETE",
-			  url: "/iface-profile/service/relationshiptype/"+idUsed,
+			  url: "/iface-profile/service/relationship_type/"+idUsed,
 			  success: function(){
 				  alert("Excluido com sucesso");
 				  document.location = "/iface-profile/partials/list_relationshiptype.html";

@@ -12,7 +12,7 @@ import br.ufal.ic.iface_profile.repository.interfaces.profile.RelationshipTypeRe
 
 @RestController
 @Transactional
-@RequestMapping(value="/relationshiptype")
+@RequestMapping(value="/relationship_type")
 public class RelationshipTypeController extends AbstractController<RelationshipType, Integer>{
 
 	@Autowired

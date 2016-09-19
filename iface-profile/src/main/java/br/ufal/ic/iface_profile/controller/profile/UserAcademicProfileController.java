@@ -31,7 +31,7 @@ import br.ufal.ic.iface_profile.repository.interfaces.profile.UserAcademicProfil
 
 @RestController
 @Transactional
-@RequestMapping(value = "/useracademicprofile")
+@RequestMapping(value = "/user_academic_profile")
 public class UserAcademicProfileController extends AbstractController<UserAcademicProfile, Integer>{
 	
 	@Autowired

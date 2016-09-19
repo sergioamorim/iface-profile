@@ -18,7 +18,7 @@
 
 	  <div class="modal-content">
 	    <span class="close">x</span>
-	    <h3 align="center" style="width: 100%"><b>Alterar dados do status civil do usuário</b></h3>
+	    <h3 align="center" style="width: 100%"><b>Alterar dados do status civil do usuï¿½rio</b></h3>
 	    <form id="myform" action="javascript:" onsubmit="submitForm()">
 	    <table style="margin-left: 100px">
 	    	
@@ -59,7 +59,7 @@ $.ajax({
         "Content-Type":"application/json",
         "Accept":"application/json"
   },
-  url: "/iface-profile/service/usercivilstatus",
+  url: "/iface-profile/service/user_civil_status",
   success: function(data){
 	  for(var i=0;i<data.length;i++){
 	        var tr="<tr>";
@@ -80,7 +80,7 @@ $.ajax({
 function abrirModal(idUsed){
 	$.ajax({
 		  type: "GET",
-		  url: "/iface-profile/service/usercivilstatus/"+idUsed,
+		  url: "/iface-profile/service/user_civil_status/"+idUsed,
 		  success: function(data){
 			  $('#txtId').val(data["id"]);
 	          $('#usuarioTxt').val(data["usuario"]["id"]);
@@ -117,7 +117,7 @@ function submitForm(){
 		        "Content-Type":"application/json",
 		        "Accept":"application/json"
 		  },
-		  url: "/iface-profile/service/usercivilstatus",
+		  url: "/iface-profile/service/user_civil_status",
 		  data: formData,
 		  success: function(){
 			  alert("Alterado com sucesso");
@@ -129,10 +129,10 @@ function submitForm(){
 }
 
 function excluirUsuario(idUsed){
-	if(confirm("Deseja remover o status civil do usuário de id "+idUsed+"?")){
+	if(confirm("Deseja remover o status civil do usuï¿½rio de id "+idUsed+"?")){
 		$.ajax({
 			  type: "DELETE",
-			  url: "/iface-profile/service/usercivilstatus/"+idUsed,
+			  url: "/iface-profile/service/user_civil_status/"+idUsed,
 			  success: function(){
 				  alert("Excluido com sucesso");
 				  document.location = "/iface-profile/partials/list_usercivilstatus.html";

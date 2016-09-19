@@ -18,7 +18,7 @@ public class UserProfessionalProfile {
 
 	@Id
 	@GeneratedValue
-	private int id;
+	private Integer id;
 	
 	@ManyToOne
 	private User user;
@@ -34,10 +34,10 @@ public class UserProfessionalProfile {
 	@Temporal(TemporalType.DATE)
 	private Date dateEnd;
 	
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public User getUser() {

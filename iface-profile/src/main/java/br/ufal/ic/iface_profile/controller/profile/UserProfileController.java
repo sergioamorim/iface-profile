@@ -31,7 +31,7 @@ import br.ufal.ic.iface_profile.repository.interfaces.profile.UserProfileReposit
 
 @RestController
 @Transactional
-@RequestMapping(value = "/userprofile")
+@RequestMapping(value = "/user_profile")
 public class UserProfileController extends AbstractController<UserProfile, Integer>{
 	
 	@Autowired

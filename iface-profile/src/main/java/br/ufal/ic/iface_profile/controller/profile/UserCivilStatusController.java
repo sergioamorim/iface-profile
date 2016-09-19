@@ -31,7 +31,7 @@ import br.ufal.ic.iface_profile.repository.interfaces.profile.UserCivilStatusRep
 
 @RestController
 @Transactional
-@RequestMapping(value = "/usercivilstatus")
+@RequestMapping(value = "/user_civil_status")
 public class UserCivilStatusController extends AbstractController<UserCivilStatus, Integer>{
 	
 	@Autowired

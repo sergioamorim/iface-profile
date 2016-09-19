@@ -4,7 +4,7 @@
 	<form method="post" id="myform" action="javascript:" onsubmit="submitForm()" enctype="application/json">
 		<table id="userTable">
 			<tr>
-				<td>Usuário(id):</td>
+				<td>Usuï¿½rio(id):</td>
 				<td><input id="usuarioTxt" type="text" name="usuario"></td>
 			</tr>
 			<tr>
@@ -41,7 +41,7 @@ function submitForm(){
 		        "Content-Type":"application/json",
 		        "Accept":"application/json"
 		  },
-		  url: "/iface-profile/service/usercivilstatus",
+		  url: "/iface-profile/service/user_civil_status",
 		  data: formData,
 		  success: function(){alert("Sucesso!")},
 		  dataType: "json",
