@@ -3,12 +3,16 @@ package br.ufal.ic.iface_profile.model.profile;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 import br.ufal.ic.iface_profile.model.infrastructure.User;
 
@@ -20,10 +24,12 @@ public class UserAcademicProfile {
 	@GeneratedValue
 	private Integer id;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
+	@Cascade(CascadeType.ALL)
 	private User user;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
+	@Cascade(CascadeType.ALL)
 	private Link link;
 	
 	private String college;
