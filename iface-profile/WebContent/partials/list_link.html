@@ -9,6 +9,7 @@
 		  	<th>ID</th>
 		  	<th>Nome do Link</th>
 		    <th>URL</th>
+		    <th>Status</th>
 		    <th>Opcoes</th> 
 		  </tr>
 	</table>
@@ -29,6 +30,10 @@
 		 	<tr>
 				<td>Email:</td>
 		 		<td><input id="urlTxt" type="text" name="url"></td>
+		 	</tr>
+		 	<tr>
+				<td>Status:</td>
+		 		<td><input id="statusTxt" type="text" name="status"></td>
 		 	</tr>
 		 	<tr>
 				<td></td>
@@ -61,11 +66,12 @@ $.ajax({
 	        var td1="<td align='center'>"+data[i]["id"]+"</td>";
 	        var td2="<td align='center'>"+data[i]["name"]+"</td>";
 	        var td3="<td align='center'>"+data[i]["url"]+"</td>";
-	        var td4="<td align='center'>"
+	        var td4="<td align='center'>"+data[i]["status"]+"</td>";
+	        var td5="<td align='center'>"
 	        	+"<button onclick='abrirModal("+data[i]["id"]+")'>Editar</button>"
 	        	+"<button onclick='excluirUsuario("+data[i]["id"]+")'>Excluir</button></td></tr>";
 
-	       $("#userTable").append(tr+td1+td2+td3+td4); 
+	       $("#userTable").append(tr+td1+td2+td3+td4+td5); 
 
 	    }  
   }
@@ -79,6 +85,7 @@ function abrirModal(idUsed){
 			  $('#txtId').val(data["id"]);
 	          $('#linkTxt').val(data["name"]);
 	          $('#urlTxt').val(data["url"]);
+	          $('#statusTxt').val(data["status"]);
 			 
 			  $('#modal').show();
 		  }
@@ -97,7 +104,7 @@ $(".close").click(function(){
 
 
 function formToJSON(){
-    var json = '{"id": '+$("#txtId").val()+',"name":"'+$("#linkTxt").val()+'","url": "'+$("#urlTxt").val()+'"}';
+    var json = '{"id": '+$("#txtId").val()+',"name":"'+$("#linkTxt").val()+'","url": "'+$("#urlTxt").val()+'","status": "'+$('#statusTxt').val()+'"}';
     return json;
 }
 
