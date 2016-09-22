@@ -64,7 +64,7 @@ $.ajax({
 	  for(var i=0;i<data.length;i++){
 	        var tr="<tr>";
 	        var td1="<td align='center'>"+data[i]["id"]+"</td>";
-	        var td2="<td align='center'>"+data[i]["usuario"]["name"]+"</td>";
+	        var td2="<td align='center'>"+data[i]["user"]["name"]+"</td>";
 	        var td3="<td align='center'>"+data[i]["myCivilStatus"]["name"]+"</td>";
 	        var td4="<td align='center'>"+data[i]["myRelationship"]["id"]+"</td>";
 	        var td5="<td align='center'>"
@@ -83,7 +83,7 @@ function abrirModal(idUsed){
 		  url: "/iface-profile/service/user_civil_status/"+idUsed,
 		  success: function(data){
 			  $('#txtId').val(data["id"]);
-	          $('#usuarioTxt').val(data["usuario"]["id"]);
+	          $('#usuarioTxt').val(data["user"]["id"]);
 	          $('#myCivilStatusTxt').val(data["myCivilStatus"]["id"]);
 	          $('#myRelationshipTxt').val(data["myRelationship"]["id"]);
 			 
@@ -104,7 +104,7 @@ $(".close").click(function(){
 
 
 function formToJSON(){
-    var json = '{"id": '+$("#txtId").val()+',"usuario":{"id":'+$("#usuarioTxt").val()+'},"myCivilStatus":{"id":'+$("#myCivilStatusTxt").val()+'},"myRelationship":{"id":'+$("#myRelationshipTxt").val()+'}}';
+    var json = '{"id": '+$("#txtId").val()+',"user":{"id":'+$("#usuarioTxt").val()+'},"myCivilStatus":{"id":'+$("#myCivilStatusTxt").val()+'},"myRelationship":{"id":'+$("#myRelationshipTxt").val()+'}}';
     return json;
 }
 
