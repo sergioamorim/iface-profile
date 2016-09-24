@@ -13,6 +13,9 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 import br.ufal.ic.iface_profile.model.infrastructure.User;
 
 @Entity
@@ -35,19 +38,24 @@ public class UserProfile {
 	@Temporal(TemporalType.DATE)
 	private Date birthDate;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
+	@Cascade(CascadeType.ALL)
 	private Link homeTown;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
+	@Cascade(CascadeType.ALL)
 	private Link currentCity;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
+	@Cascade(CascadeType.ALL)
 	private Gender gender;
 	
 	@OneToMany(fetch = FetchType.EAGER)
+	@Cascade(CascadeType.ALL)
 	private List<UserContact> userContacts;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
+	@Cascade(CascadeType.ALL)
 	private UserCivilStatus userRelationship;
 	
 	
