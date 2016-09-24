@@ -9,4 +9,5 @@ import br.ufal.ic.iface_profile.repository.interfaces.RepositoryInterface;
 public interface FriendshipRepositoryInterface extends RepositoryInterface <Friendship, Integer>{
 	
 	public List<User> findNotFriends (User u);
+	public List<User> findFriends (Integer x);
 }
