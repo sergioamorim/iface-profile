@@ -1,0 +1,87 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<title>iFace - Cadastro</title>
+
+<script src='/iface-profile/js/angular/angular.js'></script>
+<script src='/iface-profile/js/angular/angular-locale_pt-br.js'></script>
+<script src='/iface-profile/js/angular/angular-messages.js'></script>
+<link rel="stylesheet" type="text/css"
+	href="/iface-profile/css/bootstrap/bootstrap.css">
+<style>
+.jumbotron {
+			width: 600px;
+			margin-left: auto;
+			margin-right: auto;
+			margin-top: 20px;
+		}
+
+div.left {
+	width: 40%;
+	float: left;
+}
+
+div.right {
+	width: 40%;
+	float: right;
+}
+</style>
+<script>
+	
+</script>
+</head>
+<body>
+	<div class="jumbotron">
+		<div class="left">
+			<form class="form">
+				<div class="form-group">
+					<label for="name">Nome*:</label> <input type="text"
+						class="form-control" id="name">
+				</div>
+				<div class="form-group">
+					<label for="name">Data de nascimento*:</label> <input type="text"
+						class="form-control" placeholder = "DD/MM/AAAA" id="birthdate">
+				</div>
+				<div class="form-group">
+					<label for="birthcity">Cidade Natal*:</label> <input type="text"
+						class="form-control" id="birthcity">
+				</div>
+				<div class="form-group">
+					<label for="civilstatus">Estado Civil:</label> <select class="form-control"
+						id="civilstatus">
+						<option>Solteiro(a)</option>
+						<option>Em um relacionamento sério</option>
+						<option>Casado(a)</option>
+						<option>Divorciado(a)</option>
+						<option>Viúvo(a)</option>
+					</select>
+				</div>
+			</form>
+		</div>
+		
+		<div class="right">
+			<form class="form">
+				<div class="form-group">
+					<label for="lastname">Sobrenome*:</label> <input type="text"
+						class="form-control" id="lastname">
+				</div>
+				<div class="form-group">
+					<label for="gender">Gênero*:</label> <select class="form-control"
+						id="gender">
+						<option>Masculino</option>
+						<option>Feminino</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="actualcity">Cidade Atual:</label> <input type="text"
+						class="form-control" id="actualcity">
+				</div>
+			</form>
+		</div>
+
+	</div>
+
+	<div ng-include="'footer.html'"></div>
+</body>
+
+</html>
