@@ -1,6 +1,7 @@
 package br.ufal.ic.iface_profile.repository.classes.infrastructure;
 
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Component;
 
 import br.ufal.ic.iface_profile.model.infrastructure.User;
@@ -17,6 +18,11 @@ public class UserRepository extends GenericHibernateRepository<User, Integer>
 	
 	public UserRepository(Session session){
 		this.setSession(session);
+	}
+
+	@Override
+	public User getUserByUsername(String username) {
+		return this.findByCriteria(Restrictions.eq("username", username)).get(0);
 	}
 
 }
