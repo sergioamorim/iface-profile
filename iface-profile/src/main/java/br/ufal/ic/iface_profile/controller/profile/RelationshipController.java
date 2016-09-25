@@ -67,10 +67,10 @@ public class RelationshipController extends AbstractController<Relationship, Int
 		userLog.setActivity("Relationship ending");
 		
 		userLog.setTitle(user.getName()+
-							" ended "+
-								deletedRelationship.getRelationshipType()+
-									" with "+
-										deletedRelationship.getReceiver().getName());
+							" removed " +
+								deletedRelationship.getReceiver().getName() +
+									" as " +
+										deletedRelationship.getRelationshipType().getSenderDegreeOfKinship());
 		
 		userLog.setTimestamp(new Date());
 		
