@@ -22,11 +22,11 @@ public class RelationshipTypeController extends AbstractController<RelationshipT
 	@Qualifier("relationshipTypeRepository")
 	private RelationshipTypeRepositoryInterface repository;
 	
-	@RequestMapping(value="/find_relationship_type_by_gender/{id1_sender}_{id2_receiver}", method = RequestMethod.GET)
+	@RequestMapping(value="/find_relationship_type_by_gender/{id1_gender_sender}_{id2_dok_receiver}", method = RequestMethod.GET)
 	@ResponseBody
-	public RelationshipType findRelationshipTypeByGender(@PathVariable Integer id1_sender,
-								@PathVariable Integer id2_receiver){
-		return getRepository().findRelationshipTypeByGender(id1_sender, id2_receiver);
+	public RelationshipType findRelationshipTypeByGender(@PathVariable Integer id1_gender_sender,
+								@PathVariable Integer id2_dok_receiver){
+		return getRepository().findRelationshipTypeByGender(id1_gender_sender, id2_dok_receiver);
 	}
 	
 	@Override
