@@ -2,6 +2,7 @@ package br.ufal.ic.iface_profile.controller.profile;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -41,6 +42,13 @@ public class RelationshipController extends AbstractController<Relationship, Int
 	protected RelationshipRepositoryInterface getRepository(){
 		return this.repository;
 	}
+	
+	@RequestMapping(value = "/find_relationship/{id}", method = RequestMethod.GET)
+	@ResponseBody
+	public List<User> findRelationship(@PathVariable Integer id){
+		return getRepository().findRelationships(id);
+	}
+	
 	
 	@Autowired
 	@Qualifier("userLogRepository")

@@ -31,6 +31,8 @@ public class UserProfile {
 	
 	private String name;
 	
+	private String lastname;
+	
 	private Integer age;
 	
 	private String picture;
@@ -46,8 +48,7 @@ public class UserProfile {
 	@Cascade(CascadeType.ALL)
 	private Link currentCity;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@Cascade(CascadeType.ALL)
+	@ManyToOne
 	private Gender gender;
 	
 	@OneToMany(fetch = FetchType.EAGER)
@@ -76,6 +77,12 @@ public class UserProfile {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public String getLastname() {
+		return lastname;
+	}
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
 	}
 	public Integer getAge() {
 		return age;
