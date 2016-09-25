@@ -5,6 +5,7 @@
    
     <link rel="stylesheet" type="text/css" href="app/lib/bootstrap/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="app/css/app.css">
+    <link rel="stylesheet" type="text/css" href="app/css/ui.css">
     <script src='app/lib/angular/angular.js'></script>
     <script src='app/lib/angular/angular-locale_pt-br.js'></script>
     <script src='app/lib/angular/angular-messages.js'></script>
@@ -13,11 +14,17 @@
     <script src='app/js/services/contatosAPIService.js'></script>
     <script src='app/js/value/configValue.js'></script>
 	<script src='app/js/filters/nameFilter.js'></script>
+	<script src='app/js/directives/uiAlertDirective.js'></script>
+	<script src='app/js/directives/uiDateDirective.js'></script>
   </head>
   <body ng-controller="listaTelefonicaCtrl">
     <div class="jumbotron">
     	<h3>{{app}}</h3>
-    	{{message}}
+    	
+    	<ui-alert title="Ops, aconteceu um problema!">
+    		{{error}}sfsdfsdf
+    	</ui-alert>
+    	
     	<input type="text" class="form-control" ng-model="criterioBusca" placeholder="O que você procura?"/>
     	<table class="table table-striped" ng-show="contatos.length > 0">
     		<tr>
@@ -32,8 +39,7 @@
     			<td>{{contato.name | name}}</td>
     			<td>{{contato.username}}</td>
     			<td>{{contato.operadora.nome | lowercase}}</td>
-    			<td>{{contato.data | date:'EEEE dd/MM/yyyy HH:mm'}}</td>
-  
+    			<td>{{contato.data | date:'EEEE dd/MM/yyyy HH:mm'}} </td>
     		</tr>
     	</table>
     	<hr/>
@@ -41,9 +47,11 @@
     	<form name="contatoForm">
 	    	<input class="form-control" type="text" ng-model="contato.name" name="nome" placeholder="Nome" ng-required="true" ng-minlength="10"/>
 	    	<input class="form-control" type="text" ng-model="contato.username" name="telefone" placeholder="Telefone" ng-required="true" ng-pattern="/^\d{4,5}-\d{4}$/"/>
+	    	<input class="form-control" type="text" ng-model="contato.data" name="data" placeholder="Data" ui-date/>
 	    	<select class="form-control" ng-model="contato.operadora" ng-options="operadora.nome group by operadora.categoria for operadora in operadoras | orderBy: 'nome'">
 	    		<option value="">Selecione uma operadora</option>
 	    	</select>
+	    	{{contato}}
     	</form>
     	<div ng-messages="contatoForm.nome.$error" class="alert alert-danger" ng-show="contatoForm.nome.$invalid && contatoForm.nome.$dirty">
 	    	<div ng-message="required">
