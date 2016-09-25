@@ -1,83 +1,223 @@
-<html>
+<html ng-app="signUp">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>iFace - Cadastro</title>
 
-<script src='/iface-profile/app/lib/angular/angular.js'></script>
-<script src='/iface-profile/app/lib/angular/angular-locale_pt-br.js'></script>
-<script src='/iface-profile/app/lib/angular/angular-messages.js'></script>
-<link rel="stylesheet" type="text/css"
-	href="/iface-profile/app/lib/bootstrap/bootstrap.css">
+<script src='/iface-profile/js/angular/angular.js'></script>
+<script src='/iface-profile/js/angular/angular-locale_pt-br.js'></script>
+<script src='/iface-profile/js/angular/angular-messages.js'></script>
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+<link href="http://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
 <style>
-.jumbotron {
-			width: 600px;
-			margin-left: auto;
-			margin-right: auto;
-			margin-top: 20px;
-		}
-
-div.left {
-	width: 40%;
-	float: left;
+body {
+	min-height: 100%;
+	background-color: #263238;
 }
 
-div.right {
-	width: 40%;
-	float: right;
+.text-center {
+	text-align: center;
+}
+
+.space-bot {
+	margin-bottom: 35px;
+}
+
+.space-top {
+	margin-top: 35px;
+}
+
+/* Title */
+h1 {
+	color: white;
+	font-family: 'Roboto';
+	text-transform: uppercase;
+	font-weight: 900;
+	font-size: 25px;
+	text-align: center;
+}
+
+/* Sign Up */
+.container {
+	max-width: 800px;
+	max-height: 100px;
+	margin-top: 10px;
+}
+
+.alert-danger {
+	text-align: center;
+}
+
+.signup-screen {
+	padding: 20px;
+	padding-bottom: 40px;
+	border-radius: 5px;
+	background-color: #2c3940;
+	box-shadow: 0 1px 6px rgba(0, 0, 0, .3);
+	color: white;
+}
+
+.btn {
+	border-radius: 2px;
+}
+
+.cancel {
+	background-color: #df405a;
+}
+
+.done {
+	background-color: #5CAB7D;
+}
+
+.done:hover {
+	background-color: #6dc793;
+}
+
+.done:focus {
+	background-color: #6dc793;
+}
+
+.cancel:hover {
+	background-color: #f0435f;
+}
+
+.cancel:focus {
+	background-color: #f0435f;
+}
+
+.input-group {
+	width: 100%;
+}
+
+.input-group .ng-invalid {
+	border: 2px solid #e74c3c;
+	border-radius: 3px;
+}
+
+/* Error Box */
+.alert {
+	padding: 15px;
+	margin-bottom: 20px;
+	border: 1px solid transparent;
+	border-radius: 2px;
+	border-color: #e85a71;
+	background-color: #e85a71;
+	color: white;
+}
+
+.help-block {
+	font-size: 12px;
+	color: white
 }
 </style>
 <script>
-	
+	angular.module("signUp", [ "ngMessages" ]);
+	angular.module("signUp").controller("signUpCtrl", function($scope, $http) {
+		$scope.app = "Cadastro";
+	});
 </script>
 </head>
-<body>
-	<div class="jumbotron">
-		<div class="left">
-			<form class="form">
-				<div class="form-group">
-					<label for="name">Nome*:</label> <input type="text"
-						class="form-control" id="name">
+<body ng-controller="signUpCtrl">
+	<div class="container">
+		<div class="signup-screen">
+			<div class="space-bot text-center">
+				<h1>Cadastro</h1>
+				<div class="divider"></div>
+			</div>
+			<form class="form-register" method="post" name="register" novalidate>
+				<div class="row">
+					<form class="col s12">
+						<div class="row">
+							<div class="input-field col s6">
+								<form action="#">
+									<div class="file-field input-field">
+										<div class="btn">
+											<span>Upload</span> <input type="file" multiple
+												accept='image/*'>
+										</div>
+										<div class="file-path-wrapper">
+											<input class="file-path validate" type="text">
+										</div>
+									</div>
+								</form>
+							</div>
+							<div class="input-field col s6">
+								<center>
+									<img src="http://api.androidhive.info/images/ic_profile.png"
+										alt="Profile Picture" style="width: 128px; height: 128px;">
+								</center>
+							</div>
+						</div>
+						<div class="row">
+							<div class="input-field col s6">
+								<i class="material-icons prefix">account_circle</i> <input
+									name="name" id="first_name" type="text"
+									ng-model="UserProfile.name" ng-required="true" ng-minlength='2'
+									class="validate" required> <label for="first_name">
+									Nome</label>
+								<div ng-messages="register.name.$error"
+									class="alert alert-danger"
+									ng-show="register.name.$invalid && register.name.$dirty">
+									<div ng-message="required">Por favor, preencha o campo
+										nome.</div>
+									<div ng-message="minlength">O nome deve ter pelo menos 2
+										caracteres.</div>
+								</div>
+							</div>
+							<div class="input-field col s6">
+								<input name="lastname" id="last_name" type="text"
+									class="validate" ng-model="UserProfile.lastname"
+									ng-required="true" ng-minlength="2"> <label
+									for="last_name" class="active">Sobrenome</label>
+								<div ng-messages="register.lastname.$error"
+									class="alert alert-danger"
+									ng-show="register.lastname.$invalid && register.lastname.$dirty">
+									<div ng-message="required">Por favor, preencha o campo
+										sobrenome.</div>
+									<div ng-message="minlength">O sobrenome deve ter pelo
+										menos 2 caracteres.</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="input-field col s6">
+								<i class="material-icons prefix">date_range</i> <input
+									name="birthdate" type="text" id="birth_date" class="validate"
+									ng-model="UserProfile.birthDate" ng-required="true"> <label
+									for="birth_date">Data de nascimento</label>
+							</div>
+							<div class="input-field col s6">
+								<label for="options">Gênero</label>
+								<p>
+									<input name="options" type="radio" id="gender1"
+										class="with-gap" ng-model="UserProfile.gender"
+										value="masculino" ><label for="gender1">Masculino</label>
+									<input name="options" type="radio" id="gender2"
+										class="with-gap" ng-model="UserProfile.gender"
+										value="feminino"><label for="gender2">Feminino</label>
+								</p>
+							</div>
+						</div>
+					</form>
 				</div>
-				<div class="form-group">
-					<label for="name">Data de nascimento*:</label> <input type="text"
-						class="form-control" placeholder = "DD/MM/AAAA" id="birthdate">
-				</div>
-				<div class="form-group">
-					<label for="birthcity">Cidade Natal*:</label> <input type="text"
-						class="form-control" id="birthcity">
-				</div>
-				<div class="form-group">
-					<label for="civilstatus">Estado Civil:</label> <select class="form-control"
-						id="civilstatus">
-						<option>Solteiro(a)</option>
-						<option>Em um relacionamento sério</option>
-						<option>Casado(a)</option>
-						<option>Divorciado(a)</option>
-						<option>Viúvo(a)</option>
-					</select>
-				</div>
+
+				<button ng-disabled="form-register.$invalid"
+					class="waves-effect waves-light btn done">
+					<i class="material-icons left">done</i> Done
+				</button>
+				<button type="button" class="waves-effect waves-light btn cancel">
+					<i class="material-icons left">clear</i>Cancel
+				</button>
 			</form>
 		</div>
-		
-		<div class="right">
-			<form class="form">
-				<div class="form-group">
-					<label for="lastname">Sobrenome*:</label> <input type="text"
-						class="form-control" id="lastname">
-				</div>
-				<div class="form-group">
-					<label for="gender">Gênero*:</label> <select class="form-control"
-						id="gender">
-						<option>Masculino</option>
-						<option>Feminino</option>
-					</select>
-				</div>
-				<div class="form-group">
-					<label for="actualcity">Cidade Atual:</label> <input type="text"
-						class="form-control" id="actualcity">
-				</div>
-			</form>
-		</div>
+
+	</div>
 
 	</div>
 
