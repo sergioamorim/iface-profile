@@ -112,15 +112,13 @@
 	    		<option value="">Selecione uma operadora</option>
 	    	</select>
     	</form>
-    	<div ng-messages="contatoForm.nome.$error" class="alert alert-danger" ng-show="contatoForm.nome.$invalid">
-	    	<div ng-message="required">
-	    		Por favor, preencha o campo nome!
-	    	</div>
-	    	<div ng-message="minlength">
-	    		O nome deve ter pelo menos 10 caracteres.
-	    	</div>
-    	</div>
-    	<div class="alert alert-danger" ng-show="contatoForm.telefone.$error.required && contatoForm.telefone.$dirty">
+		<div ng-messages="contatoForm.nome.$error" class="alert alert-danger"
+			ng-show="contatoForm.nome.$invalid">
+			<div ng-message="required">Por favor, preencha o campo nome!</div>
+			<div ng-message="minlength">O nome deve ter pelo menos 10
+				caracteres.</div>
+		</div>
+		<div class="alert alert-danger" ng-show="contatoForm.telefone.$error.required && contatoForm.telefone.$dirty">
     		Por favor, preencha o campo telefone!
     	</div>
     	<div class="alert alert-danger" ng-show="contatoForm.telefone.$error.pattern && contatoForm.telefone.$dirty">
