@@ -21,8 +21,8 @@ public class UserRepository extends GenericHibernateRepository<User, Integer>
 	}
 
 	@Override
-	public User getUserByUsername(String username) {
-		return this.findByCriteria(Restrictions.eq("username", username)).get(0);
+	public User getUserByUsername(Integer id) {
+		return this.findByCriteria(Restrictions.eq("id", id)).get(0);
 	}
 
 }

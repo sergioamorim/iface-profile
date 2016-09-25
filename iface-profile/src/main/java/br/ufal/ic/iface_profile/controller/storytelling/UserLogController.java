@@ -34,9 +34,9 @@ public class UserLogController extends AbstractController<UserLog, Integer>{
 		return this.repository;
 	}
 	
-	@RequestMapping(value = "/user_log/{username}", method = RequestMethod.GET)
+	@RequestMapping(value = "/individual/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public List<UserLog> getUserLogs(@PathVariable String username) {
-		return getRepository().getLogs(userRepository.getUserByUsername(username));
+    public List<UserLog> getUserLogs(@PathVariable Integer id) {
+		return getRepository().getLogs(userRepository.getUserByUsername(id));
     }
 }
