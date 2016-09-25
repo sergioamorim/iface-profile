@@ -48,6 +48,12 @@ public class FriendshipController extends AbstractController <Friendship, Intege
 	@Qualifier("userLogRepository")
 	private UserLogRepositoryInterface logRepository;
 	
+	@RequestMapping (value="/find_friends/{id}", method = RequestMethod.GET)
+	@ResponseBody
+	public List<User> findFriends(@PathVariable Integer id){
+		return getRepository().findFriends(id);
+	}
+	
 	@RequestMapping (value = "/not_friends")
 	public List <User> findNotFriends () {
 		User u = new User();
