@@ -46,8 +46,7 @@ public class UserProfile {
 	@Cascade(CascadeType.ALL)
 	private Link currentCity;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@Cascade(CascadeType.ALL)
+	@ManyToOne
 	private Gender gender;
 	
 	@OneToMany(fetch = FetchType.EAGER)

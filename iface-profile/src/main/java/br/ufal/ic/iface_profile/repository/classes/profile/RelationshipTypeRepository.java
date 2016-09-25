@@ -13,7 +13,7 @@ import br.ufal.ic.iface_profile.repository.interfaces.profile.RelationshipTypeRe
 public class RelationshipTypeRepository extends GenericHibernateRepository<RelationshipType, Integer>
 				implements RelationshipTypeRepositoryInterface{
 	
-	public RelationshipType findRelationshipTypeByGender(Integer id_receiver,Integer id_sender){
+	public RelationshipType findRelationshipTypeByGender(Integer id_sender,Integer id_receiver){
 		SQLQuery q1 = this.getSession().createSQLQuery("SELECT * FROM relationshiptype "
 				+ "WHERE relationshiptype.senderDegreeOfKinship_id=:id_sender AND "
 				+ "relationshiptype.receiverDegreeOfKinship_id=:id_receiver").addEntity(RelationshipType.class);

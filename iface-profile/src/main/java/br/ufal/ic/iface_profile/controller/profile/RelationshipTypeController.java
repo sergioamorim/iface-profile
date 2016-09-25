@@ -3,7 +3,10 @@ package br.ufal.ic.iface_profile.controller.profile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.ufal.ic.iface_profile.controller.AbstractController;
@@ -18,6 +21,13 @@ public class RelationshipTypeController extends AbstractController<RelationshipT
 	@Autowired
 	@Qualifier("relationshipTypeRepository")
 	private RelationshipTypeRepositoryInterface repository;
+	
+	@RequestMapping(value="/find_relationship_type_by_gender/{id1_sender}_{id2_receiver}", method = RequestMethod.GET)
+	@ResponseBody
+	public RelationshipType findRelationshipTypeByGender(@PathVariable Integer id1_sender,
+								@PathVariable Integer id2_receiver){
+		return getRepository().findRelationshipTypeByGender(id1_sender, id2_receiver);
+	}
 	
 	@Override
 	protected RelationshipTypeRepositoryInterface getRepository(){
