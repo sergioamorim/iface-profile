@@ -17,7 +17,6 @@ public class DegreeOfKinship {
 	@ManyToOne
 	private Gender gender;
 	
-	@ManyToOne
 	private String degreeOfKinship;
 
 	public Integer getId() {
