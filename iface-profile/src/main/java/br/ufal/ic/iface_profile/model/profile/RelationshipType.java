@@ -3,6 +3,7 @@ package br.ufal.ic.iface_profile.model.profile;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -13,27 +14,34 @@ public class RelationshipType {
 	@GeneratedValue
 	private Integer id;
 	
-	private String senderRelationship;
+	@ManyToOne
+	private DegreeOfKinship senderDegreeOfKinship;
 	
-	private String receiverRelationship;
-	
-	
+	@ManyToOne
+	private DegreeOfKinship receiverDegreeOfKinship;
+
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getSenderRelationship() {
-		return senderRelationship;
+
+	public DegreeOfKinship getSenderDegreeOfKinship() {
+		return senderDegreeOfKinship;
 	}
-	public void setSenderRelationship(String senderRelationship) {
-		this.senderRelationship = senderRelationship;
+
+	public void setSenderDegreeOfKinship(DegreeOfKinship senderDegreeOfKinship) {
+		this.senderDegreeOfKinship = senderDegreeOfKinship;
 	}
-	public String getReceiverRelationship() {
-		return receiverRelationship;
+
+	public DegreeOfKinship getReceiverDegreeOfKinship() {
+		return receiverDegreeOfKinship;
 	}
-	public void setReceiverRelationship(String receiverRelationship) {
-		this.receiverRelationship = receiverRelationship;
+
+	public void setReceiverDegreeOfKinship(DegreeOfKinship receiverDegreeOfKinship) {
+		this.receiverDegreeOfKinship = receiverDegreeOfKinship;
 	}
+	
 }
