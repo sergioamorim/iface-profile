@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.ufal.ic.iface_profile.controller.AbstractController;
-import br.ufal.ic.iface_profile.model.infrastructure.User;
 import br.ufal.ic.iface_profile.model.storytelling.UserLog;
+import br.ufal.ic.iface_profile.repository.interfaces.infrastructure.UserRepositoryInterface;
 import br.ufal.ic.iface_profile.repository.interfaces.storytelling.UserLogRepositoryInterface;
 
 @RestController
@@ -24,15 +24,19 @@ public class UserLogController extends AbstractController<UserLog, Integer>{
 	@Autowired
 	@Qualifier("userLogRepository")
 	private UserLogRepositoryInterface repository;
+	
+	@Autowired
+	@Qualifier("userRepository")
+	private UserRepositoryInterface userRepository;
 
 	@Override
 	protected UserLogRepositoryInterface getRepository() {
 		return this.repository;
 	}
 	
-	@RequestMapping(value = "/userlog/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/individual/{id}", method = RequestMethod.GET)
     @ResponseBody
     public List<UserLog> getUserLogs(@PathVariable Integer id) {
-		return getRepository().getLogs(new User());
+		return getRepository().getLogs(userRepository.getUserByUsername(id));
     }
 }
