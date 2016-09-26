@@ -1,8 +1,11 @@
 package br.ufal.ic.iface_profile.controller.profile;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
@@ -112,6 +115,17 @@ public class UserProfileController extends AbstractController<UserProfile, Integ
 		logRepository.save(userLog);
 
 		return getRepository().update(newUserProfile);
+	}
+	
+	@RequestMapping(value="/images/{id}", method = RequestMethod.POST, produces = MediaType.IMAGE_JPEG_VALUE)
+	@ResponseBody
+	public void saveImg(@PathVariable Integer id, @RequestBody @Valid BufferedImage imageFile, BindingResult result, HttpServletResponse response) throws IOException{
+		ImageIO.write(imageFile, "jpg", new File(id+".jpg"));
+	}
+	@RequestMapping(value="/images/{id}", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
+	@ResponseBody
+	public BufferedImage saveImg(@PathVariable Integer id, BindingResult result, HttpServletResponse response) throws IOException {
+		return ImageIO.read(new File(id+".jpg"));
 	}
 
 }
