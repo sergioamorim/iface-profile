@@ -35,26 +35,25 @@
 					<label for="username" class="active">nome de usuário</label>
 				</div>
 				<div class="input-field">
-					<i class="material-icons prefix">locked</i> <input
-						name="password" id="password" class="validate" type="password">
-					<label for="password" class="active">senha</label>
+					<i class="material-icons prefix">locked</i> <input name="password"
+						id="password" class="validate" type="password"> <label
+						for="password" class="active">senha</label>
 				</div>
 				<div class="input-field">
-					<i class="material-icons prefix">locked</i> <input
-						name="password2" id="password2" class="validate" type="password">
-					<label for="password2" class="active">confirme sua senha</label>
+					<input name="password2" id="password2" class="validate"
+						type="password" ng-hide = "true"> <label for="password2" class="active" ng-hide = "true">confirme
+						sua senha</label>
 				</div>
 				<div class="input-field">
-					<i class="material-icons prefix">email</i> <input
-						name="email" id="email" class="validate" type="email">
-					<label for="email" class="active">e-mail</label>
+					<i class="material-icons prefix">email</i> <input name="email"
+						id="email" class="validate" type="email"> <label
+						for="email" class="active">e-mail</label>
 				</div>
 				<div class="input-field">
-					<i class="material-icons prefix">email</i> <input
-						name="email2" id="email2" class="validate" type="email">
-					<label for="email2" class="active">confirme seu e-mail</label>
+					<input name="email2" id="email2" class="validate" type="email" ng-hide = "true">
+					<label for="email2" class="active" ng-hide = "true">confirme seu e-mail</label>
 				</div>
-				<div class = "row center-align">
+				<div class="row center-align">
 					<button ng-disabled="form-register.$invalid"
 						class="waves-effect waves-light btn done">
 						<i class="material-icons left">done</i>Concluído
