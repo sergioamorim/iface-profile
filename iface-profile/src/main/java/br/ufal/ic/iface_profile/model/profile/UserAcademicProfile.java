@@ -32,7 +32,7 @@ public class UserAcademicProfile {
 	@Cascade(CascadeType.ALL)
 	private Link link;
 	
-	private String college;
+	private String school;
 	
 	@Temporal(TemporalType.DATE)
 	private Date dateStart;
@@ -59,11 +59,12 @@ public class UserAcademicProfile {
 	public void setLink(Link link) {
 		this.link = link;
 	}
-	public String getCollege() {
-		return college;
+	
+	public String getSchool() {
+		return school;
 	}
-	public void setCollege(String college) {
-		this.college = college;
+	public void setSchool(String school) {
+		this.school = school;
 	}
 	public Date getDateStart() {
 		return dateStart;
