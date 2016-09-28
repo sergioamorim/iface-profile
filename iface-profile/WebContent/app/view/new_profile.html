@@ -45,10 +45,10 @@
 								</div>
 							</div>
 							<div class="input-field col s6">
-								<center>
+								<div class = "text-center">
 									<img src="http://api.androidhive.info/images/ic_profile.png"
 										alt="Profile Picture" style="width: 128px; height: 128px;">
-								</center>
+								</div>
 							</div>
 						</div>
 						<div class="row">
@@ -57,7 +57,7 @@
 									name="name" id="first_name" type="text"
 									ng-model="UserProfile.name" ng-required="true" ng-minlength='2'
 									class="validate" required> <label for="first_name">
-									Nome</label>
+									First Name</label>
 								<div ng-messages="register.name.$error"
 									class="alert alert-danger"
 									ng-show="register.name.$invalid && register.name.$dirty">
@@ -71,7 +71,7 @@
 								<input name="lastname" id="last_name" type="text"
 									class="validate" ng-model="UserProfile.lastname"
 									ng-required="true" ng-minlength="2"> <label
-									for="last_name" class="active">Sobrenome</label>
+									for="last_name" class="active">Last Name</label>
 								<div ng-messages="register.lastname.$error"
 									class="alert alert-danger"
 									ng-show="register.lastname.$invalid && register.lastname.$dirty">
@@ -87,54 +87,46 @@
 								<i class="material-icons prefix">date_range</i> <input
 									name="birthdate" placeholder = "dd/mm/aaaa" type="text" id="birth_date" class="validate"
 									ng-model="UserProfile.birthDate" ng-required="true" ui-date> <label
-									for="birth_date">Data de nascimento</label>
+									for="birth_date">Birthdate</label>
 							</div>
 							<div class="input-field col s6">
-								<label for="formOptions">Gênero</label>
-								<form action="" id="formOptions">
+								<label for="options" style="margin-top: -10px">Gender</label>
+								
 									<p>
+								
 										<input name="options" type="radio" id="gender1"
 											class="with-gap" ng-model="UserProfile.gender.id"
-											value='1'><label for="gender1">Masculino</label>
+											value='1' ng-required="!UserProfile.gender.id"><label for="gender1" >Male</label>
 										<input name="options" type="radio" id="gender2"
 											class="with-gap" ng-model="UserProfile.gender.id"
-											value='2'><label for="gender2">Feminino</label>
+											value='2' ng-required="!UserProfile.gender.id"><label for="gender2" >Female</label>
 									</p>
-								</form>
+								
 							</div>
 						</div>
 						<div class="row">
-							<div class="input-field col s6">
-								<i class="material-icons prefix">phone</i> <input
-									name="telephone" type="text" id="telephone" class="validate"
-									ng-model="UserProfile.userContacts[0].contact" ui-phone> <label
-									for="telephone">Telefone Fixo</label>
-							</div>
+							
 							<div class="input-field col s6">
 								<i class="material-icons prefix">phone</i> <input
 									name="celphone" type="text" id="celphone" class="validate"
-									ng-model="UserProfile.userContacts[1].contact" ng-required="false" ui-phone> <label
-									for="celphone">Celular</label>
+									ng-model="userContact.contact" ng-required="true" ui-phone> <label
+									for="celphone">Mobile Phone</label>
 							</div>
-						</div>
-						<div class="row">
+						
 							<div class="input-field col s6">
 								<i class="material-icons prefix">home</i> <input
 									name="home_town" type="text" id="home_town" class="validate"
-									ng-model="UserProfile.homeTown.name" ng-required = "false"> <label
-									for="home_town">Cidade Natal</label>
-							</div>
-							<div class="input-field col s6">
-								<i class="material-icons prefix">location_city</i> <input
-									name="actual_city" type="text" id="actual_city" class="validate"
-									ng-model="UserProfile.actualCity.name" ng-required="false"> <label
-									for="actual_city">Cidade Atual</label>
+									ng-model="UserProfile.homeTown.name" ng-required = "true"> <label
+									for="home_town">Birth Place</label>
 							</div>
 						</div>
 					</div>
 				</div>
+				
+				{{UserProfile}}
+				
 
-				<button ng-disabled="form-register.$invalid"
+				<button ng-disabled="register.$invalid"
 					class="waves-effect waves-light btn done" ng-click = "newProfile(UserProfile)">
 					<i class="material-icons left">done</i> Done
 				</button>

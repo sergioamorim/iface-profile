@@ -16,6 +16,7 @@ public class RelationshipRepository extends GenericHibernateRepository<Relations
 	
 	@SuppressWarnings("unchecked")
 	public List<User> findRelationships(Integer x){
+		
 		SQLQuery q1 = this.getSession().createSQLQuery("SELECT * FROM relationship "
 				+ "WHERE relationship.sender_id=:x_id OR relationship.receiver_id=:x_id").addEntity(Relationship.class);
 		q1.setInteger("x_id", x);
