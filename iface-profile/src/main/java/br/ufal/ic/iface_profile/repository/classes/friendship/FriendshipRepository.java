@@ -22,12 +22,16 @@ public class FriendshipRepository extends GenericHibernateRepository<Friendship,
 	@Override
 	public List<User> findNotFriends(User u) {
 		UserRepository ur = new UserRepository(this.getSession());
+		
 		DetachedCriteria userSubquery1 = DetachedCriteria.forClass(Friendship.class, "f")
 				.setProjection(Projections.property("f.user_x")).add(Restrictions.eq("user_y", u));
+		
 		DetachedCriteria userSubquery2 = DetachedCriteria.forClass(Friendship.class, "f")
 				.setProjection(Projections.property("f.user_y")).add(Restrictions.eq("user_x", u));
+		
 		return ur.findByCriteria(Restrictions.and(
-				Restrictions.and(Restrictions.not(Subqueries.propertyIn("id", userSubquery1)),
+				Restrictions.and(
+						Restrictions.not(Subqueries.propertyIn("id", userSubquery1)),
 						Restrictions.not(Subqueries.propertyIn("id", userSubquery2))),
 				Restrictions.not(Restrictions.eq("id", u.getId()))));
 	}

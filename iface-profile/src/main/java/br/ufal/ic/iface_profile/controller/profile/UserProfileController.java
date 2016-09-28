@@ -45,6 +45,12 @@ public class UserProfileController extends AbstractController<UserProfile, Integ
 		return repository;
 	}
 	
+	@RequestMapping(value = "/user/{id}")
+	@ResponseBody
+	public UserProfile findUserProfileById(@PathVariable Integer id){
+		return getRepository().findUserProfileById(id);
+	}
+	
 	@Autowired
 	@Qualifier("userLogRepository")
 	private UserLogRepositoryInterface logRepository;
