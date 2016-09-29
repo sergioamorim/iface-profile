@@ -1,5 +1,9 @@
 angular.module("iFace").factory("profileAPI", function($http, config){
 	
+	var _getByUserId = function(id){
+		return $http.get(config.baseUrl+"/user_profile/user/"+id);
+	}
+	
 	var _addProfile = function(profile){
 		return $http({
 		            url: config.baseUrl+"/user_profile",
@@ -12,6 +16,7 @@ angular.module("iFace").factory("profileAPI", function($http, config){
 	}
 	
 	return{
-		addProfile: _addProfile
+		addProfile: _addProfile,
+		getByUserId: _getByUserId
 	}
 });
