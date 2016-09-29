@@ -1,62 +1,37 @@
-<html ng-app="iFace">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Perfil</title>
+<div class="navbar-fixed">
 
-<script src='/iface-profile/app/lib/angular/angular.js'></script>
-<script src='/iface-profile/app/lib/angular/angular-locale_pt-br.js'></script>
-<script src='/iface-profile/app/lib/angular/angular-messages.js'></script>
-<script type="text/javascript"
-	src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
-<script src='/iface-profile/app/js/app.js'></script>
-<script src='/iface-profile/app/js/controllers/profileCtrl.js'></script>
-<script src='/iface-profile/app/js/value/configValue.js'></script>
-<script src='/iface-profile/app/js/services/profileService.js'></script>
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
-<link href="http://fonts.googleapis.com/icon?family=Material+Icons"
-	rel="stylesheet">
-<link href='/iface-profile/app/css/profile.css' rel="stylesheet">
-
-</head>
-<body ng-controller="profileCtrl">
-	<div class="navbar-fixed">
-
-		<nav>
-			<a href="#" class="brand-logo" style="padding-left: 15px">iFace</a>
-			<div class="nav-wrapper">
-				<ul id="nav-mobile" class="right hide-on-med-and-down">
-					<li><a>Sair</a></li>
-				</ul>
-			</div>
-		</nav>
-	</div>
-	<div class="container">
-		<div class="profile-screen">
-			<div class="col s12">
-				<div class="row">
-					<img src="http://api.androidhive.info/images/ic_profile.png"
-						alt="Profile Picture" style="width: 160px; height: 160px;">
-					<h1>{{userProfile.name+" "+userProfile.lastname}}</h1>
-				</div>
-			</div>
-			<nav class="nav-wrapper" style="margin-top: 20px; margin-bottom:20px;">
-				<ul id="nav-mobile" class="left hide-on-med-and-down">
-				<li><a>Sobre</a></li>
-					<li><a>Amigos</a></li>
-				</ul>
-			</nav>
-			<label>Visão Geral</label>
-			<div class="divider"></div>
-			<label>Acadêmico</label>
-			<div class="divider"></div>
-			<label>Profissional</label>
-			<div class="divider"></div>
+	<nav>
+		<a href="#" class="brand-logo" style="padding-left: 15px">iFace</a>
+		<div class="nav-wrapper">
+			<ul id="nav-mobile" class="right hide-on-med-and-down">
+				<li><a>Sair</a></li>
+			</ul>
 		</div>
+	</nav>
+</div>
+<div class="container">
+	<div class="profile-screen">
+		<div class="col s12">
+			<div class="row">
+				<img src="http://api.androidhive.info/images/ic_profile.png"
+					alt="Profile Picture" style="width: 160px; height: 160px;">
+				<h1>{{userProfile.name+" "+userProfile.lastname}}</h1>
+			</div>
+		</div>
+		<nav class="nav-wrapper" style="margin-top: 20px; margin-bottom:20px;">
+			<ul id="nav-mobile" class="left hide-on-med-and-down">
+			<li><a>Sobre</a></li>
+				<li><a>Amigos</a></li>
+			</ul>
+		</nav>
+		<label>Visão Geral</label>
+		<div class="divider"></div>
+		<label>Acadêmico</label>
+		<div class="divider"></div>
+		<label>Profissional</label>
+		<div class="divider"></div>
 	</div>
-</body>
-</html>
+</div>
+
+
 

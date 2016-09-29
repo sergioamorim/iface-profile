@@ -1,2 +1,1 @@
-angular.module("listaTelefonica", ["ngMessages"]);
-angular.module("iFace", [ "ngMessages" ]);
+angular.module("iFace", [ "ngMessages", "ngRoute" ]);
