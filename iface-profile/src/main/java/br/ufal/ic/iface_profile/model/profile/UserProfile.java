@@ -40,11 +40,11 @@ public class UserProfile {
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@Cascade(CascadeType.ALL)
-	private Link homeTown;
+	private Link birthPlace;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@Cascade(CascadeType.ALL)
-	private Link currentCity;
+	private Link homeTown;
 	
 	@ManyToOne
 	private Gender gender;
@@ -101,11 +101,12 @@ public class UserProfile {
 	public void setHomeTown(Link homeTown) {
 		this.homeTown = homeTown;
 	}
-	public Link getCurrentCity() {
-		return currentCity;
+	
+	public Link getBirthPlace() {
+		return birthPlace;
 	}
-	public void setCurrentCity(Link currentCity) {
-		this.currentCity = currentCity;
+	public void setBirthPlace(Link birthPlace) {
+		this.birthPlace = birthPlace;
 	}
 	public Gender getGender() {
 		return gender;
