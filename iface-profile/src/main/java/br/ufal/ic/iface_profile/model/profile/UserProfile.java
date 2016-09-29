@@ -33,8 +33,6 @@ public class UserProfile {
 	
 	private String lastname;
 	
-	private Integer age;
-	
 	private String picture;
 	
 	@Temporal(TemporalType.DATE)
@@ -84,12 +82,7 @@ public class UserProfile {
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
 	}
-	public Integer getAge() {
-		return age;
-	}
-	public void setAge(Integer age) {
-		this.age = age;
-	}
+
 	public String getPicture() {
 		return picture;
 	}

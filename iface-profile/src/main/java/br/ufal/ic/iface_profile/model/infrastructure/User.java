@@ -16,6 +16,8 @@ public class User {
 	private String name;
 	
 	private String username;
+	
+	private boolean haveProfile;
 
 	public Integer getId() {
 		return id;
@@ -23,6 +25,14 @@ public class User {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getName() {
@@ -33,12 +43,13 @@ public class User {
 		this.name = name;
 	}
 
-	public String getUsername() {
-		return username;
+	public boolean isHaveProfile() {
+		return haveProfile;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setHaveProfile(boolean haveProfile) {
+		this.haveProfile = haveProfile;
 	}
-	
 }
+	
+	
