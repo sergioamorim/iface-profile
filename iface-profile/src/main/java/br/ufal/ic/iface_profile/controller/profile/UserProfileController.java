@@ -1,11 +1,16 @@
 package br.ufal.ic.iface_profile.controller.profile;
 
-import java.awt.image.BufferedImage;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Date;
 
-import javax.imageio.ImageIO;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
@@ -18,8 +23,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -123,15 +130,24 @@ public class UserProfileController extends AbstractController<UserProfile, Integ
 		return getRepository().update(newUserProfile);
 	}
 	
-	@RequestMapping(value="/images/{id}", method = RequestMethod.POST, produces = MediaType.IMAGE_JPEG_VALUE)
-	@ResponseBody
-	public void saveImg(@PathVariable Integer id, @RequestBody @Valid BufferedImage imageFile, BindingResult result, HttpServletResponse response) throws IOException{
-		ImageIO.write(imageFile, "jpg", new File(id+".jpg"));
-	}
-	@RequestMapping(value="/images/{id}", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
-	@ResponseBody
-	public BufferedImage saveImg(@PathVariable Integer id, BindingResult result, HttpServletResponse response) throws IOException {
-		return ImageIO.read(new File(id+".jpg"));
-	}
-
+	@RequestMapping(value="/images/{id}", method=RequestMethod.POST)
+    public @ResponseBody String handleFileUpload( 
+            @RequestParam("file") MultipartFile file, @PathVariable Integer id){
+    	URL resource = getClass().getResource("/");
+    	String path = resource.getPath();
+        if (!file.isEmpty()) {
+            try {
+                byte[] bytes = file.getBytes();
+                BufferedOutputStream stream = 
+                        new BufferedOutputStream(new FileOutputStream(new File(path+"../../app/profile-images/"+id)));
+                stream.write(bytes);
+                stream.close();
+                return path+"../../app/profile-images/"+id;
+            } catch (Exception e) {
+                return "FAIL ON UPLOAD FILE: " + e.getMessage();
+            }
+        } else {
+            return "EMPTY FILE ON UPLOAD";
+        }
+    }
 }
