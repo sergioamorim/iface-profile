@@ -2,7 +2,6 @@ angular.module("iFace").controller("newProfileCtrl", function($scope, profileAPI
 	$scope.app = "Cadastro";
 	$scope.newProfile = function(profile){
 		profile.user = {};
-		profile.age = 20;
 		profile.user.id = 1;
 		profile.userContacts = [];
 		profile.birthPlace.status = false;
