@@ -19,6 +19,12 @@ public class RelationshipType {
 	
 	@ManyToOne
 	private DegreeOfKinship receiverDegreeOfKinship;
+	
+	public RelationshipType(){}
+	public RelationshipType(DegreeOfKinship senderDegreeOfKinship, DegreeOfKinship receiverDegreeOfKinship){
+		this.senderDegreeOfKinship = senderDegreeOfKinship;
+		this.receiverDegreeOfKinship = receiverDegreeOfKinship;
+	}
 
 	public Integer getId() {
 		return id;

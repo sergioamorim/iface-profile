@@ -18,6 +18,12 @@ public class DegreeOfKinship {
 	private Gender gender;
 	
 	private String degreeOfKinship;
+	
+	public DegreeOfKinship(){}
+	public DegreeOfKinship(Gender gender, String degreeOfKinship){
+		this.gender = gender;
+		this.degreeOfKinship = degreeOfKinship;
+	}
 
 	public Integer getId() {
 		return id;

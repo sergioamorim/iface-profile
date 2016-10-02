@@ -15,6 +15,11 @@ public class Gender {
 	
 	private String name;
 	
+	public Gender(){}
+	public Gender(String name){
+		this.name = name;
+	}
+	
 	public Integer getId() {
 		return id;
 	}
