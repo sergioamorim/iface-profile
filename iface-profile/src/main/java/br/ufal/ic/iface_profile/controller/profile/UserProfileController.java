@@ -5,12 +5,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Date;
 
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
