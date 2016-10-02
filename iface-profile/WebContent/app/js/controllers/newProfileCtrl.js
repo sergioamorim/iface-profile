@@ -5,7 +5,7 @@ angular.module("iFace").controller("newProfileCtrl", function($scope, profileAPI
 		profile.age = 20;
 		profile.user.id = 1;
 		profile.userContacts = [];
-		profile.homeTown.status = false;
+		profile.birthPlace.status = false;
 		$scope.userContact.user = {};
 		$scope.userContact.user.id = 1;
 		profile.userContacts.push($scope.userContact);
