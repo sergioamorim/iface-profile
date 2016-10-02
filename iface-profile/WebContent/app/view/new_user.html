@@ -1,33 +1,33 @@
-<div class="container">
+<div class="containerSignup">
 	<div class="signup-screen">
 		<div class="text-center">
-			<h1 style = "margin-top:15px">Cadastre-se</h1>
+			<h1 class="userTitle" style = "margin-top:15px">Cadastre-se</h1>
 			<div class="divider"></div>
 		</div>
 		<form name="register">
 			<div class="input-field" style = "margin-top:20px">
 				<i class="material-icons prefix">account_circle</i> <input
 					name="username" id="username" class="validate" type="text" ng-model = "username" ng-required = "true" ng-minlength = '2'>
-				<label for="username" class="active">nome de usuário</label>
+				<label for="username" >nome de usuário</label>
 			</div>
 			<div class="input-field">
 				<i class="material-icons prefix">locked</i> <input name="password"
 					id="password" class="validate" type="password" ng-model = "password" ng-required = "true" ng-minlength = '2'> <label
-					for="password" class="active">senha</label>
+					for="password">senha</label>
 			</div>
 			<div class="input-field" ng-show = "register.password.$dirty">
 				<input name="password2" id="password2" class="validate"
-					type="password"> <label for="password2" class="active" >confirme
+					type="password"> <label for="password2">confirme
 					sua senha</label>
 			</div>
 			<div class="input-field" >
 				<i class="material-icons prefix">email</i> <input name="email"
 					id="email" class="validate" type="email" ng-model = "email" ng-required = "true" ng-minlength = '6'> <label
-					for="email" class="active">e-mail</label>
+					for="email">e-mail</label>
 			</div>
 			<div class="input-field" ng-show ="register.email.$dirty">
 				<input name="email2" id="email2" class="validate" type="email">
-				<label for="email2" class="active" >confirme seu e-mail</label>
+				<label for="email2">confirme seu e-mail</label>
 			</div>
 			<div class="row center-align">
 				<button ng-disabled="register.$invalid"

@@ -1,7 +1,7 @@
-<div class="container">
+<div class="containerNProfile">
 	<div class="signup-screen">
 		<div class="space-bot text-center">
-			<h1>Cadastro</h1>
+			<h1 class = "nprofileTitle">Cadastro</h1>
 			<div class="divider"></div>
 		</div>
 		<form name ="register">
@@ -34,7 +34,7 @@
 								name="name" id="first_name" type="text"
 								ng-model="UserProfile.name" ng-required="true" ng-minlength='2'
 								class="validate" required> <label for="first_name">
-								First Name</label>
+								Nome</label>
 							<div ng-messages="register.name.$error"
 								class="alert alert-danger"
 								ng-show="register.name.$invalid && register.name.$dirty">
@@ -48,7 +48,7 @@
 							<input name="lastname" id="last_name" type="text"
 								class="validate" ng-model="UserProfile.lastname"
 								ng-required="true" ng-minlength="2"> <label
-								for="last_name" class="active">Last Name</label>
+								for="last_name" >Sobrenome</label>
 							<div ng-messages="register.lastname.$error"
 								class="alert alert-danger"
 								ng-show="register.lastname.$invalid && register.lastname.$dirty">
@@ -62,21 +62,21 @@
 					<div class="row">
 						<div class="input-field col s6">
 							<i class="material-icons prefix">date_range</i> <input
-								name="birthdate" placeholder = "dd/mm/aaaa" type="text" id="birth_date" class="validate"
+								name="birthdate" type="text" id="birth_date" class="validate"
 								ng-model="UserProfile.birthDate" ng-required="true" ui-date> <label
-								for="birth_date">Birthdate</label>
+								for="birth_date">Data de Nascimento</label>
 						</div>
 						<div class="input-field col s6">
-							<label for="options" style="margin-top: -10px">Gender</label>
+							<label for="options" style="margin-top: -10px">G&ecircnero</label>
 							
 								<p>
 							
 									<input name="options" type="radio" id="gender1"
 										class="with-gap" ng-model="UserProfile.gender.id"
-										value='1' ng-required="!UserProfile.gender.id"><label for="gender1" >Male</label>
+										value='1' ng-required="!UserProfile.gender.id"><label for="gender1" >Masculino</label>
 									<input name="options" type="radio" id="gender2"
 										class="with-gap" ng-model="UserProfile.gender.id"
-										value='2' ng-required="!UserProfile.gender.id"><label for="gender2" >Female</label>
+										value='2' ng-required="!UserProfile.gender.id"><label for="gender2" >Feminino</label>
 								</p>
 							
 						</div>
@@ -87,14 +87,14 @@
 							<i class="material-icons prefix">phone</i> <input
 								name="celphone" type="text" id="celphone" class="validate"
 								ng-model="userContact.contact" ng-required="true" ui-phone> <label
-								for="celphone">Mobile Phone</label>
+								for="celphone">Celular</label>
 						</div>
 					
 						<div class="input-field col s6">
 							<i class="material-icons prefix">home</i> <input
 								name="home_town" type="text" id="home_town" class="validate"
 								ng-model="UserProfile.homeTown.name" ng-required = "true"> <label
-								for="home_town">Birth Place</label>
+								for="home_town">Cidade Natal</label>
 						</div>
 					</div>
 				</div>
