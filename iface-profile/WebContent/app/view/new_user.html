@@ -7,30 +7,30 @@
 		<form name="register">
 			<div class="input-field" style = "margin-top:20px">
 				<i class="material-icons prefix">account_circle</i> <input
-					name="username" id="username" class="validate" type="text" ng-model = "username" ng-required = "true" ng-minlength = '2'>
+					name="username" id="username" class="validate" type="text" ng-model = "user.username" ng-minlength = '2'>
 				<label for="username" >nome de usuário</label>
 			</div>
 			<div class="input-field">
 				<i class="material-icons prefix">locked</i> <input name="password"
-					id="password" class="validate" type="password" ng-model = "password" ng-required = "true" ng-minlength = '2'> <label
+					id="password" class="validate" type="password" ng-model = "user.password" ng-minlength = '2'> <label
 					for="password">senha</label>
 			</div>
-			<div class="input-field" ng-show = "register.password.$dirty">
+			<div class="input-field" ng-show = "user.password">
 				<input name="password2" id="password2" class="validate"
 					type="password"> <label for="password2">confirme
 					sua senha</label>
 			</div>
 			<div class="input-field" >
 				<i class="material-icons prefix">email</i> <input name="email"
-					id="email" class="validate" type="email" ng-model = "email" ng-required = "true" ng-minlength = '6'> <label
+					id="email" class="validate" type="email" ng-model = "user.email" ng-minlength = '6'> <label
 					for="email">e-mail</label>
 			</div>
-			<div class="input-field" ng-show ="register.email.$dirty">
+			<div class="input-field" ng-show ="user.email">
 				<input name="email2" id="email2" class="validate" type="email">
 				<label for="email2">confirme seu e-mail</label>
 			</div>
 			<div class="row center-align">
-				<button ng-disabled="register.$invalid"
+				<button ng-disabled="register.$invalid" ng-click="createUser(user)"
 					class="waves-effect waves-light btn done">
 					<i class="material-icons left">done</i>Concluído
 				</button>

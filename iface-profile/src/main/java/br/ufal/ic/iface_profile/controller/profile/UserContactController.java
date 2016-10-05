@@ -57,7 +57,7 @@ public class UserContactController extends AbstractController<UserContact, Integ
 		
 		userLog.setActivity("Remove contact");
 		
-		userLog.setTitle(user.getName()+
+		userLog.setTitle(user.getUserProfile().getName()+
 							" removed "+
 								deletedUserContact.getContact()+
 									" from profile");
@@ -83,7 +83,7 @@ public class UserContactController extends AbstractController<UserContact, Integ
 		userLog.setUser(user);
 		
 		userLog.setActivity("Add contact");
-		userLog.setTitle(user.getName()+" added "+
+		userLog.setTitle(user.getUserProfile().getName()+" added "+
 							newUserContact.getContact()+
 								" to profile");
 		
@@ -109,7 +109,7 @@ public class UserContactController extends AbstractController<UserContact, Integ
 		
 		userLog.setActivity("Contact modification");
 		
-		userLog.setTitle(user.getName()+
+		userLog.setTitle(user.getUserProfile().getName()+
 							" modified "+
 								newUserContact.getContact()+
 									" on profile");

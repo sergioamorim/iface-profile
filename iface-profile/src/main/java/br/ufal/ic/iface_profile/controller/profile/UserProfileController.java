@@ -5,11 +5,13 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.net.URLDecoder;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
@@ -70,7 +72,7 @@ public class UserProfileController extends AbstractController<UserProfile, Integ
 		
 		userLog.setActivity("Remove profile");
 		
-		userLog.setTitle(user.getName()+" said goodbye to iFace");
+		userLog.setTitle(user.getUserProfile().getName()+" said goodbye to iFace");
 		
 		userLog.setTimestamp(new Date());
 		
@@ -93,7 +95,7 @@ public class UserProfileController extends AbstractController<UserProfile, Integ
 		userLog.setUser(user);
 		
 		userLog.setActivity("Create profile");
-		userLog.setTitle(user.getName()+" starts using iFace");
+		userLog.setTitle(newUserProfile.getName()+" starts using iFace");
 		
 		userLog.setTimestamp(new Date());
 		
@@ -117,7 +119,7 @@ public class UserProfileController extends AbstractController<UserProfile, Integ
 		
 		userLog.setActivity("Profile modification");
 		
-		userLog.setTitle(user.getName()+"modified profile");
+		userLog.setTitle(user.getUserProfile().getName()+"modified profile");
 		
 		userLog.setTimestamp(new Date());
 		
@@ -126,19 +128,37 @@ public class UserProfileController extends AbstractController<UserProfile, Integ
 		return getRepository().update(newUserProfile);
 	}
 	
-	@RequestMapping(value="/images/{id}", method=RequestMethod.POST)
+	@RequestMapping(value="/upload_picture/{id}", method=RequestMethod.POST)
     public @ResponseBody String handleFileUpload( 
             @RequestParam("file") MultipartFile file, @PathVariable Integer id){
     	URL resource = getClass().getResource("/");
-    	String path = resource.getPath();
         if (!file.isEmpty()) {
             try {
+            	String path = URLDecoder.decode(resource.getPath(),"UTF-8");
                 byte[] bytes = file.getBytes();
                 BufferedOutputStream stream = 
-                        new BufferedOutputStream(new FileOutputStream(new File(path+"../../app/profile-images/"+id)));
+                        new BufferedOutputStream(new FileOutputStream(new File(path+"../../app/profile-images/profile"+id)));
                 stream.write(bytes);
                 stream.close();
-                return path+"../../app/profile-images/"+id;
+                return "/app/profile-images/profile"+id;
+            } catch (Exception e) {
+                return "FAIL ON UPLOAD FILE: " + e.getMessage();
+            }
+        } else {
+            return "EMPTY FILE ON UPLOAD";
+        }
+    }
+	
+	@RequestMapping(value="/download_picture", method=RequestMethod.POST)
+    public @ResponseBody String handleUrlDownload( @RequestParam("id") Integer id, @RequestParam("url") String url){
+    	URL resource = getClass().getResource("/");
+        if (!url.isEmpty()) {
+            try {
+            	String path = URLDecoder.decode(resource.getPath(),"UTF-8");
+                File f = new File(path+"../../app/profile-images/profile"+id);
+                FileUtils.copyURLToFile(new URL(URLDecoder.decode(url, "UTF-8")), f);
+                
+                return "/app/profile-images/profile"+id;
             } catch (Exception e) {
                 return "FAIL ON UPLOAD FILE: " + e.getMessage();
             }

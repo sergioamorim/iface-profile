@@ -18,6 +18,7 @@ var featherEditor = new Aviary.Feather({
 	onSave: function(imageID, newURL) {
 		var img = document.getElementById(imageID);
 		img.src = newURL;
+		featherEditor.close();
 	},
 	onError: function(errorObj) {
 		alert(errorObj.message);
@@ -34,9 +35,9 @@ function launchEditor(id, src) {
 
 <div id='injection_site'></div>
 
-<img id='image1' src='http://images.aviary.com/imagesv5/feather_default.jpg'/>
+<img id='image1' src='http://localhost:8080/iface-profile/app/profile-images/1'/>
 
-<p><input type='image' src='http://images.aviary.com/images/edit-photo.png' value='Editar imagem' onclick="return launchEditor('image1', 'http://images.aviary.com/imagesv5/feather_default.jpg');" /></p>
+<p><input type='button' value='Editar imagem' onclick="return launchEditor('image1', 'http://localhost:8080/iface-profile/app/profile-images/1');" /></p>
 
 
 </body>

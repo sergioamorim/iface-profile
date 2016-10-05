@@ -58,7 +58,7 @@ public class UserAcademicProfileController extends AbstractController<UserAcadem
 		
 		userLog.setActivity("Remove academic profile");
 		
-		userLog.setTitle(user.getName()+
+		userLog.setTitle(user.getUserProfile().getName()+
 							" removed "+
 								deletedUserAcademicProfile.getSchool()+
 									" from profile");
@@ -84,7 +84,7 @@ public class UserAcademicProfileController extends AbstractController<UserAcadem
 		userLog.setUser(user);
 		
 		userLog.setActivity("Add academic profile");
-		userLog.setTitle(user.getName()+" added "+
+		userLog.setTitle(user.getUserProfile().getName()+" added "+
 							newUserAcademicProfile.getSchool()+
 								" to profile");
 		
@@ -110,7 +110,7 @@ public class UserAcademicProfileController extends AbstractController<UserAcadem
 		
 		userLog.setActivity("Academic profile modification");
 		
-		userLog.setTitle(user.getName()+
+		userLog.setTitle(user.getUserProfile().getName()+
 							" modified "+
 								newUserAcademicProfile.getSchool()+
 									" on profile");

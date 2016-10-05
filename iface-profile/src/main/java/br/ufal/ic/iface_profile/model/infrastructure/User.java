@@ -1,9 +1,15 @@
 package br.ufal.ic.iface_profile.model.infrastructure;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import br.ufal.ic.iface_profile.model.profile.UserProfile;
 
 @Entity
 @Table(name="user")
@@ -13,11 +19,15 @@ public class User {
 	@GeneratedValue
 	private Integer id;
 	
-	private String name;
-	
 	private String username;
 	
-	private boolean haveProfile;
+	private String password;
+	
+	private String email;
+	
+	@JsonIgnore
+	@OneToOne(mappedBy="user", fetch=FetchType.LAZY)
+	private UserProfile userProfile;
 
 	public Integer getId() {
 		return id;
@@ -35,21 +45,30 @@ public class User {
 		this.username = username;
 	}
 
-	public String getName() {
-		return name;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
-	public boolean isHaveProfile() {
-		return haveProfile;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setHaveProfile(boolean haveProfile) {
-		this.haveProfile = haveProfile;
+	public void setEmail(String email) {
+		this.email = email;
 	}
+
+	public UserProfile getUserProfile() {
+		return userProfile;
+	}
+
+	public void setUserProfile(UserProfile userProfile) {
+		this.userProfile = userProfile;
+	}
+	
 }
 	
 	

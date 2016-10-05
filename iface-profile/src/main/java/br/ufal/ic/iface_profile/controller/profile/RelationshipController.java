@@ -66,9 +66,9 @@ public class RelationshipController extends AbstractController<Relationship, Int
 		
 		userLog.setActivity("Relationship ending");
 		
-		userLog.setTitle(user.getName()+
+		userLog.setTitle(user.getUserProfile().getName()+
 							" removed " +
-								deletedRelationship.getReceiver().getName() +
+								deletedRelationship.getReceiver().getUserProfile().getName() +
 									" as " +
 										deletedRelationship.getRelationshipType().getSenderDegreeOfKinship().getDegreeOfKinship());
 		
@@ -93,9 +93,9 @@ public class RelationshipController extends AbstractController<Relationship, Int
 		userLog.setUser(user);
 		
 		userLog.setActivity("Relationship began");
-		userLog.setTitle(user.getName() + 
+		userLog.setTitle(user.getUserProfile().getName() + 
 							" added " +
-								newRelationship.getReceiver().getName() +
+								newRelationship.getReceiver().getUserProfile().getName() +
 								" as " +
 									newRelationship.getRelationshipType().getSenderDegreeOfKinship().getDegreeOfKinship());
 		
@@ -121,9 +121,9 @@ public class RelationshipController extends AbstractController<Relationship, Int
 		
 		userLog.setActivity("Relationship modification");
 		
-		userLog.setTitle(user.getName()+
+		userLog.setTitle(user.getUserProfile().getName()+
 							" accepted "+
-								newRelationship.getSender().getName() +
+								newRelationship.getSender().getUserProfile().getName() +
 									" as "+
 										newRelationship.getRelationshipType().getReceiverDegreeOfKinship().getDegreeOfKinship());
 		

@@ -54,7 +54,7 @@ public class UserCivilStatusController extends AbstractController<UserCivilStatu
 		
 		userLog.setActivity("Remove civil status");
 		
-		userLog.setTitle(user.getName()+
+		userLog.setTitle(user.getUserProfile().getName()+
 							" removed "+
 								deletedUserCivilStatus.getMyCivilStatus().getName()+
 									" from profile");
@@ -81,7 +81,7 @@ public class UserCivilStatusController extends AbstractController<UserCivilStatu
 		userLog.setUser(user);
 		
 		userLog.setActivity("Add civil status");
-		userLog.setTitle(user.getName()+" added "+
+		userLog.setTitle(user.getUserProfile().getName()+" added "+
 							newUserCivilStatus.getMyCivilStatus().getName()+
 								" to profile");
 		
@@ -108,7 +108,7 @@ public class UserCivilStatusController extends AbstractController<UserCivilStatu
 		
 		userLog.setActivity("Civil status modification");
 		
-		userLog.setTitle(user.getName()+
+		userLog.setTitle(user.getUserProfile().getName()+
 							" modified "+
 								newUserCivilStatus.getMyCivilStatus().getName()+
 									" from profile");

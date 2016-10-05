@@ -58,7 +58,7 @@ public class UserProfessionalProfileController extends AbstractController<UserPr
 		
 		userLog.setActivity("Remove professional profile");
 		
-		userLog.setTitle(user.getName()+
+		userLog.setTitle(user.getUserProfile().getName()+
 							" removed "+
 								deletedUserProfessionalProfile.getOffice()+
 									" from profile");
@@ -84,7 +84,7 @@ public class UserProfessionalProfileController extends AbstractController<UserPr
 		userLog.setUser(user);
 		
 		userLog.setActivity("Add professional profile");
-		userLog.setTitle(user.getName()+" added "+
+		userLog.setTitle(user.getUserProfile().getName()+" added "+
 							newUserProfessionalProfile.getOffice()+
 								" to profile");
 		
@@ -110,7 +110,7 @@ public class UserProfessionalProfileController extends AbstractController<UserPr
 		
 		userLog.setActivity("Professional profile modification");
 		
-		userLog.setTitle(user.getName()+
+		userLog.setTitle(user.getUserProfile().getName()+
 							" modified "+
 								newUserProfessionalProfile.getOffice()+
 									" on profile");

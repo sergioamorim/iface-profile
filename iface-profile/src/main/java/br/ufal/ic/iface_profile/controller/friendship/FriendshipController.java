@@ -81,8 +81,8 @@ public class FriendshipController extends AbstractController <Friendship, Intege
 		userXLog.setTimestamp(new Date());
 		userYLog.setTimestamp(new Date());
 		
-		userXLog.setTitle("Undo friendship with "+user_y.getName());
-		userYLog.setTitle("Undo friendship with "+user_x.getName());
+		userXLog.setTitle("Undo friendship with "+user_y.getUserProfile().getName());
+		userYLog.setTitle("Undo friendship with "+user_x.getUserProfile().getName());
 		
 		logRepository.save(userXLog);
 		logRepository.save(userYLog);
@@ -114,8 +114,8 @@ public class FriendshipController extends AbstractController <Friendship, Intege
 		userXLog.setTimestamp(new Date());
 		userYLog.setTimestamp(new Date());
 		
-		userXLog.setTitle("New friendship with "+user_y.getName());
-		userYLog.setTitle("New friendship with "+user_x.getName());
+		userXLog.setTitle("New friendship with "+user_y.getUserProfile().getName());
+		userYLog.setTitle("New friendship with "+user_x.getUserProfile().getName());
 		
 		logRepository.save(userXLog);
 		logRepository.save(userYLog);
