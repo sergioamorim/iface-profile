@@ -23,6 +23,7 @@ angular.module("iFace").controller("newProfileCtrl", function($scope, $location,
 			$scope.urlImageProfile = config.rootUrl+data;
 		}).error(function(){
 			console.log("erro ao salvar");
+			$scope.urlImageProfile = "";
 		});
 		
 	}

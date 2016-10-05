@@ -13,8 +13,8 @@
 	<div class="profile-screen">
 		<div class="col s12">
 			<div class="row">
-				<img ng-src="{{userProfile.picture}}"
-					alt="Profile Picture" style="width: 160px; height: 160px;">
+				<img ng-src="{{userProfile.picture}}" alt="Profile Picture"
+					style="width: 160px; height: 160px;">
 				<h1 class="profileTitle">{{userProfile.name+"
 					"+userProfile.lastname}}</h1>
 			</div>
@@ -33,7 +33,7 @@
 				<div class="col s4">{{"G&ecircnero:
 					"+userProfile.gender.name}}</div>
 				<div class="col s4">{{"Data de nascimento:
-					"+userProfile.birthDate}}</div>
+					"+(userProfile.birthDate | date:'dd/MM/yyyy')}}</div>
 				<div class="col s4">{{"Natural de
 					"+userProfile.birthPlace.name}}</div>
 			</div>
@@ -42,8 +42,10 @@
 					"+userProfile.userContacts[0].contact}}</div>
 				<div class="col s4">{{"Estado Civil:
 					"+userProfile.userRelationship.name}}</div>
-					<div class="col s4">{{"Mora em
-					"+userProfile.homeTown.name}}</div>
+				<div ng-show = "userProfile.homeTown" class="col s4">{{"Mora em "+userProfile.homeTown.name}}</div>
+				<div ng-hide = "userProfile.homeTown" class="col s4"><button class="waves-effect waves-light btn"
+					style="margin-right: 20px; float: right">Adicionar
+					cidade atual</button></div>
 			</div>
 		</div>
 		<label>Fam&iacutelia e relacionamentos</label>
@@ -54,23 +56,29 @@
 				<div class="col s4"></div>
 				<div class="col s4"></div>
 			</div>
+			<div class="row">
+				<button class="waves-effect waves-light btn"
+					style="margin-right: 20px; float: right">Adicionar
+					relacionamento</button>
+			</div>
+
 		</div>
 		<label>Acadêmico</label>
 		<div class="divider"></div>
 		<div style="padding: 10px">
 			<div class="row">
-				<div class="col s4"></div>
-				<div class="col s4"></div>
-				<div class="col s4"></div>
+				<button class="waves-effect waves-light btn"
+					style="margin-right: 20px; float: right">Adicionar
+					informações</button>
 			</div>
 		</div>
 		<label>Profissional</label>
 		<div class="divider"></div>
 		<div style="padding: 10px">
 			<div class="row">
-				<div class="col s4"></div>
-				<div class="col s4"></div>
-				<div class="col s4"></div>
+				<button class="waves-effect waves-light btn"
+					style="margin-right: 20px; float: right">Adicionar
+					informações</button>
 			</div>
 		</div>
 	</div>
