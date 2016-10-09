@@ -3,7 +3,10 @@ package br.ufal.ic.iface_profile.repository.classes.profile;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.SQLQuery;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.Subqueries;
 import org.springframework.stereotype.Component;
 
 import br.ufal.ic.iface_profile.model.profile.DegreeOfKinship;
@@ -15,19 +18,27 @@ import br.ufal.ic.iface_profile.repository.interfaces.profile.RelationshipTypeRe
 public class RelationshipTypeRepository extends GenericHibernateRepository<RelationshipType, Integer>
 				implements RelationshipTypeRepositoryInterface{
 	
-	public RelationshipType findRelationshipTypeByGender(Integer gender_sender,Integer dok_receiver){
-		SQLQuery q1 = this.getSession().createSQLQuery("SELECT * FROM relationshiptype "
-				+ "INNER JOIN degree_of_kinship "
-				+ "ON relationshiptype.senderDegreeOfKinship_id=degree_of_kinship.id "
-				+ "WHERE degree_of_kinship.gender_id=:gender_sender AND "
-				+ "relationshiptype.receiverDegreeOfKinship_id=:dok_receiver").addEntity(RelationshipType.class);
-		q1.setInteger("gender_sender", gender_sender);
-		q1.setInteger("dok_receiver", dok_receiver);
-		@SuppressWarnings("unchecked")
-		List<RelationshipType> aux = q1.list();
-		RelationshipType ret = aux.get(0);
-		return ret;
+public RelationshipType findRelationshipTypeByGender(Integer gender_sender,Integer dok_receiver){
+		
+		DetachedCriteria userSubquery1 = DetachedCriteria.forClass(RelationshipType.class, "f")
+				.setProjection(Projections.property("f.senderDegreeOfKinship.id"))
+				.add(Restrictions.eq("receiverDegreeOfKinship.id",dok_receiver))
+				;
+		
+		DetachedCriteria userSubquery2 = DetachedCriteria.forClass(DegreeOfKinship.class, "f")
+				.setProjection(Projections.property("f.id"))
+				.add(Restrictions.eq("gender.id", gender_sender))
+				;
+		try{
+			return 	this.findByCriteria(Restrictions.and(	
+					(Subqueries.propertyIn("id", userSubquery1)),
+					(Subqueries.propertyIn("id", userSubquery2))
+				)).get(0);
+		}catch(NullPointerException e){
+			return null;
+		}	
 	}
+	
 	
 	public void initializeRelationshipTypes(List<DegreeOfKinship> m,List<DegreeOfKinship> f){
 		List<RelationshipType> u = new ArrayList<RelationshipType>();

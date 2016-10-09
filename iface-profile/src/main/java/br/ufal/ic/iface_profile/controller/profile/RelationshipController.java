@@ -45,7 +45,7 @@ public class RelationshipController extends AbstractController<Relationship, Int
 	
 	@RequestMapping(value = "/find_relationship/{id}", method = RequestMethod.GET)
 	@ResponseBody
-	public List<User> findRelationship(@PathVariable Integer id){
+	public List<Relationship> findRelationship(@PathVariable Integer id){
 		return getRepository().findRelationships(id);
 	}
 	

@@ -2,7 +2,6 @@ package br.ufal.ic.iface_profile.repository.classes.friendship;
 
 import java.util.List;
 
-import org.hibernate.SQLQuery;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
@@ -35,20 +34,37 @@ public class FriendshipRepository extends GenericHibernateRepository<Friendship,
 						Restrictions.not(Subqueries.propertyIn("id", userSubquery2))),
 				Restrictions.not(Restrictions.eq("id", u.getId()))));
 	}
-	
-	@SuppressWarnings("unchecked")
 	public List<User> findFriends(Integer x){
-		SQLQuery q1 = this.getSession().createSQLQuery("SELECT * FROM user INNER JOIN userfriendship "
-				+ "ON user.id=userfriendship.user_y_id "
-				+ "WHERE (user_x_id=:id) AND approved=1").addEntity(User.class);
-		SQLQuery q2 = this.getSession().createSQLQuery("SELECT * FROM user INNER JOIN userfriendship "
-				+ "ON user.id=userfriendship.user_x_id "
-				+ "WHERE (user_y_id=:id) AND approved=1").addEntity(User.class);
-		q1.setInteger("id", x);
-		q2.setInteger("id", x);
-		List<User> ul = q1.list();
-		ul.addAll(q2.list());
-		return ul;
+		UserRepository ur = new UserRepository(this.getSession());
+		DetachedCriteria userSubquery1 = DetachedCriteria.forClass(User.class, "f")
+				.setProjection(Projections.property("f.id"))
+				;
+		DetachedCriteria userSubquery2 = DetachedCriteria.forClass(Friendship.class, "f")
+				.setProjection(Projections.property("f.user_y.id"))
+				.add(Restrictions.and(
+						Restrictions.eq("user_x.id",x),
+						Restrictions.eq("approved",true))
+						)
+				;
+		
+		DetachedCriteria userSubquery3 = DetachedCriteria.forClass(Friendship.class, "f")
+				.setProjection(Projections.property("f.user_x.id"))
+				.add(Restrictions.and(
+						Restrictions.eq("user_y.id",x),
+						Restrictions.eq("approved",true))
+						)
+				;
+				
+		List<User> list1 = 	ur.findByCriteria(Restrictions.and(	
+				(Subqueries.propertyIn("id", userSubquery1)),
+				(Subqueries.propertyIn("id", userSubquery2))
+			));
+		List<User> list2 =ur.findByCriteria(Restrictions.and(	
+				(Subqueries.propertyIn("id", userSubquery1)),
+				(Subqueries.propertyIn("id", userSubquery3))
+			));
+		 list1.addAll(list2);
+		 return list1;
 	}
 
 }
