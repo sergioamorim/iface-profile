@@ -8,4 +8,5 @@ import br.ufal.ic.iface_profile.repository.interfaces.RepositoryInterface;
 public interface RelationshipRepositoryInterface extends RepositoryInterface<Relationship, Integer>{
 
 	public List<Relationship> findRelationships(Integer x);
+	public List<Relationship> findRelationshipRequests(Integer user_id);
 }

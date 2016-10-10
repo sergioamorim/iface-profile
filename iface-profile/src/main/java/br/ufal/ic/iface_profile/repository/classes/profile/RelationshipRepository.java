@@ -2,6 +2,7 @@ package br.ufal.ic.iface_profile.repository.classes.profile;
 
 import java.util.List;
 
+import org.hibernate.SQLQuery;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Component;
 
@@ -22,6 +23,15 @@ public class RelationshipRepository extends GenericHibernateRepository<Relations
 				 Restrictions.eq("statusSolicitation",true)
 				)	
 		 );
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Relationship> findRelationshipRequests(Integer user_id){
+		SQLQuery q1 = this.getSession().createSQLQuery("SELECT * FROM relationship "
+				+ "WHERE (sender_id:=id OR receiver_id:=id) AND statusSolicitation=0").addEntity(Relationship.class);
+		
+		q1.setInteger("id", user_id);
+		return q1.list();
 	}
 
 
