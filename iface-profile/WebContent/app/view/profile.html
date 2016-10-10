@@ -1,5 +1,17 @@
-<div class="navbar-fixed">
+<script>
+	$(document).ready(function() {
+		// the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+		$('.modal-trigger').leanModal();
+	});
+</script>
 
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('select').material_select();
+	});
+</script>
+
+<div class="navbar-fixed">
 	<nav>
 		<a href="#" class="brand-logo" style="padding-left: 15px">iFace</a>
 		<div class="nav-wrapper">
@@ -42,47 +54,128 @@
 					"+userProfile.userContacts[0].contact}}</div>
 				<div class="col s4">{{"Estado Civil:
 					"+userProfile.userRelationship.name}}</div>
-				<div ng-show = "userProfile.homeTown" class="col s4">{{"Mora em "+userProfile.homeTown.name}}</div>
-				<div ng-hide = "userProfile.homeTown" class="col s4"><button class="waves-effect waves-light btn"
-					style="margin-right: 20px; float: right">Adicionar
-					cidade atual</button></div>
+				<div ng-show="userProfile.homeTown" class="col s4">{{"Mora em
+					"+userProfile.homeTown.name}}</div>
+				<div ng-hide="userProfile.homeTown" class="col s4">
+					<a class="waves-effect waves-light btn modal-trigger"
+						href="#modal1">Adicionar cidade atual</a>
+					<div id="modal1" class="modal">
+						<div class="modal-content">
+							<div class="input-field col s6">
+								<input id="hometown" type="text" class="validate"> <label
+									for="hometown">Cidade Atual</label>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<a href="#index"
+								class=" modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
+							<a href="#index"
+								class=" modal-action modal-close waves-effect waves-green btn-flat">Conclu&iacutedo</a>
+						</div>
+					</div>
+				</div>
 			</div>
-		</div>
-		<label>Fam&iacutelia e relacionamentos</label>
-		<div class="divider"></div>
-		<div style="padding: 10px">
-			<div class="row">
-				<div class="col s4"></div>
-				<div class="col s4"></div>
-				<div class="col s4"></div>
-			</div>
-			<div class="row">
-				<button class="waves-effect waves-light btn"
-					style="margin-right: 20px; float: right">Adicionar
-					relacionamento</button>
-			</div>
+			<label>Fam&iacutelia e relacionamentos</label>
+			<div class="divider"></div>
+			<div style="padding: 10px">
+				<div class="row">
+					<div class="col s4"></div>
+					<div class="col s4"></div>
+					<div class="col s4"></div>
+				</div>
+				<div class="row">
+					<a class="waves-effect waves-light btn modal-trigger"
+						href="#modal2" style="float: right; margin-right: 20px;">Adicionar
+						relacionamento</a>
+					<div id="modal2" class="modal">
+						<div class="modal-content">
+							<div class="input-field col s6">
+								<input id="name" type="text" class="validate"> <label
+									for="name">Nome</label>
+							</div>
+							<div class="input-field col s6">
+								<select>
+									<option value="1">Option 1</option>
+									<option value="2">Option 2</option>
+									<option value="3">Option 3</option>
+								</select> <label>Escolha o tipo de relacionamento</label>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<a href="#index"
+								class=" modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
+							<a href="#index"
+								class=" modal-action modal-close waves-effect waves-green btn-flat">Conclu&iacutedo</a>
+						</div>
+					</div>
+				</div>
 
-		</div>
-		<label>Acadêmico</label>
-		<div class="divider"></div>
-		<div style="padding: 10px">
-			<div class="row">
-				<button class="waves-effect waves-light btn"
-					style="margin-right: 20px; float: right">Adicionar
-					informações</button>
 			</div>
-		</div>
-		<label>Profissional</label>
-		<div class="divider"></div>
-		<div style="padding: 10px">
-			<div class="row">
-				<button class="waves-effect waves-light btn"
-					style="margin-right: 20px; float: right">Adicionar
-					informações</button>
+			<label>Acadêmico</label>
+			<div class="divider"></div>
+			<div style="padding: 10px">
+				<div class="row">
+					<a class="waves-effect waves-light btn modal-trigger"
+						href="#modal3" style="float: right; margin-right: 20px;">Adicionar
+						informa&ccedil&otildees</a>
+					<div id="modal3" class="modal">
+						<div class="modal-content">
+							<div class="input-field col s6">
+								<input id="school" type="text" class="validate"> <label
+									for="school">Local</label>
+							</div>
+							<div class="input-field col s6">
+								<input name="startingdate" type="text" id="birth_date"
+									class="validate" ui-date> <label for="startingdate">Data
+									de in&iacutecio</label>
+							</div>
+							<div class="input-field col s6">
+								<input name="finishingdate" type="text" id="birth_date"
+									class="validate" ui-date> <label for="finishingdate">Data
+									de t&eacutermino</label>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<a href="#index"
+								class=" modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
+							<a href="#index"
+								class=" modal-action modal-close waves-effect waves-green btn-flat">Conclu&iacutedo</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<label>Profissional</label>
+			<div class="divider"></div>
+			<div style="padding: 10px">
+				<div class="row">
+					<a class="waves-effect waves-light btn modal-trigger"
+						href="#modal4" style="float: right; margin-right: 20px;">Adicionar
+						informa&ccedil&otildees</a>
+					<div id="modal4" class="modal">
+						<div class="modal-content">
+							<div class="input-field col s6">
+								<input id="workplace" type="text" class="validate"> <label
+									for="workplace">Local</label>
+							</div>
+							<div class="input-field col s6">
+								<input name="startingdate" type="text" id="birth_date"
+									class="validate" ui-date> <label for="startingdate">Data
+									de in&iacutecio</label>
+							</div>
+							<div class="input-field col s6">
+								<input name="finishingdate" type="text" id="birth_date"
+									class="validate" ui-date> <label for="finishingdate">Data
+									de t&eacutermino</label>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<a href="#index"
+								class=" modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
+							<a href="#index"
+								class=" modal-action modal-close waves-effect waves-green btn-flat">Conclu&iacutedo</a>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
-
-
-
