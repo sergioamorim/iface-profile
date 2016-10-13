@@ -40,6 +40,7 @@ angular.module("iFace").controller("newProfileCtrl", function($scope, $location,
 				$scope.urlImageProfile = config.rootUrl+data;
 			}).error(function(){
 				console.log("Erro ao salvar");
+				$scope.urlImageProfile = "";
 			});
 		},
 		onError: function(errorObj) {
@@ -48,7 +49,7 @@ angular.module("iFace").controller("newProfileCtrl", function($scope, $location,
 	});
 	
 	$scope.launchEditor = function(id, idUser) {
-		urlImage = config.rootUrl+"/app/profile-images/"+idUser;
+		urlImage = config.rootUrl+"/app/profile-images/profile"+idUser;
 		featherEditor.launch({
 			image: 'imagePreview',
 			url: urlImage
