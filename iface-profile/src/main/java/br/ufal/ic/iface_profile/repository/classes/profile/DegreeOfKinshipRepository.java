@@ -17,7 +17,7 @@ public class DegreeOfKinshipRepository extends GenericHibernateRepository<Degree
 	
 	public List<DegreeOfKinship> findDegreeOfKinshipByGender(Integer x){
 		
-		return this.findByCriteria(Restrictions.eq("degree_of_kinship.gender.id", x));	
+		return this.findByCriteria(Restrictions.eq("gender.id", x));	
 	}
 	
 	public void initializeDegreeOfKinships(List<Gender> g){
