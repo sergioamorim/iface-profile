@@ -19,7 +19,6 @@ angular.module("iFace").controller("newProfileCtrl", function($scope, $location,
 	
 	$scope.saveTempImage = function(image){
 		uploadAPI.uploadFileToUrl(image, 1).success(function(data){
-			console.log(data);
 			$scope.urlImageProfile = config.rootUrl+data;
 		}).error(function(){
 			console.log("erro ao salvar");
@@ -39,7 +38,6 @@ angular.module("iFace").controller("newProfileCtrl", function($scope, $location,
 			featherEditor.close();
 			uploadAPI.downloadEditedUserProfile(1, newURL).success(function(data){
 				$scope.urlImageProfile = config.rootUrl+data;
-				console.log(data);
 			}).error(function(){
 				console.log("Erro ao salvar");
 			});
@@ -50,8 +48,7 @@ angular.module("iFace").controller("newProfileCtrl", function($scope, $location,
 	});
 	
 	$scope.launchEditor = function(id, idUser) {
-		urlImage = "http://localhost:8080/iface-profile/app/profile-images/"+idUser;
-		//alert(url);
+		urlImage = config.rootUrl+"/app/profile-images/"+idUser;
 		featherEditor.launch({
 			image: 'imagePreview',
 			url: urlImage
