@@ -1,3 +1,3 @@
-angular.module("iFace").controller("editProfileCtrl", function($scope, profileAPI) {
+angular.module("iFace").controller("editProfileCtrl", function($scope, $location ,profileAPI) {
 	
 });
