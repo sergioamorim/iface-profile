@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.ufal.ic.iface_profile.model.profile.CivilStatus;
 import br.ufal.ic.iface_profile.model.profile.DegreeOfKinship;
 import br.ufal.ic.iface_profile.model.profile.Gender;
 import br.ufal.ic.iface_profile.model.profile.RelationshipType;
+import br.ufal.ic.iface_profile.repository.interfaces.profile.CivilStatusRepositoryInterface;
 import br.ufal.ic.iface_profile.repository.interfaces.profile.DegreeOfKinshipRepositoryInterface;
 import br.ufal.ic.iface_profile.repository.interfaces.profile.GenderRepositoryInterface;
 import br.ufal.ic.iface_profile.repository.interfaces.profile.RelationshipTypeRepositoryInterface;
@@ -33,6 +35,18 @@ public class UtilController {
 	@Qualifier("degreeOfKinshipRepository")
 	private DegreeOfKinshipRepositoryInterface degreeOfKinshiprepository;
 	
+	@Autowired
+	@Qualifier("civilStatusRepository")
+	private CivilStatusRepositoryInterface civilStatusRepository;
+	
+	@RequestMapping(value="/init_civil_status")
+	@ResponseBody
+	public void initializeCivilStatus(){
+		List<CivilStatus> cs = getCivilStatusRepository().findAll();
+		if (cs.isEmpty()){
+			getCivilStatusRepository().initializeCivilStatus(getGenderRepository().findAll());
+		}
+	}
 	@RequestMapping(value="/init_genders")
 	@ResponseBody
 	public void initializeGenders(){
@@ -62,6 +76,15 @@ public class UtilController {
 					getDegreeOfKinshiprepository().findDegreeOfKinshipByGender(2));
 		}
 	}
+	
+	@RequestMapping(value="/init_all")
+	@ResponseBody
+	public void initializeAll(){
+		initializeGenders();
+		initializeDegreeOfKinships();
+		initializeRelationshipTypes();
+		initializeCivilStatus();
+	}
 
 	public GenderRepositoryInterface getGenderRepository() {
 		return genderRepository;
@@ -85,6 +108,12 @@ public class UtilController {
 
 	public void setDegreeOfKinshiprepository(DegreeOfKinshipRepositoryInterface degreeOfKinshiprepository) {
 		this.degreeOfKinshiprepository = degreeOfKinshiprepository;
+	}
+	public CivilStatusRepositoryInterface getCivilStatusRepository() {
+		return civilStatusRepository;
+	}
+	public void setCivilStatusRepository(CivilStatusRepositoryInterface civilStatusRepository) {
+		this.civilStatusRepository = civilStatusRepository;
 	}
 
 }
