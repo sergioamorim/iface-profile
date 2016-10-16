@@ -15,8 +15,20 @@ angular.module("iFace").factory("profileAPI", function($http, config){
 		        });
 	}
 	
+	var _updateProfile = function(profile){
+		return $http({
+			url: config.baseUrl+"/user_profile",
+			method: "PUT",
+			data: profile,
+			headers: {
+				"Content-Type": "application/json"
+			}
+		})
+	}
+	
 	return{
 		addProfile: _addProfile,
-		getByUserId: _getByUserId
+		getByUserId: _getByUserId,
+		updateProfile: _updateProfile
 	}
 });

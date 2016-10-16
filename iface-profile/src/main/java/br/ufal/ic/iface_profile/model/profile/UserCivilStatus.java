@@ -10,8 +10,6 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
-import br.ufal.ic.iface_profile.model.infrastructure.User;
-
 @Entity
 @Table(name="usercivilstatus")
 public class UserCivilStatus {
@@ -19,9 +17,6 @@ public class UserCivilStatus {
 	@Id
 	@GeneratedValue
 	private Integer id;
-	
-	@ManyToOne
-	private User user;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@Cascade(CascadeType.ALL)
@@ -36,12 +31,6 @@ public class UserCivilStatus {
 	}
 	public void setId(Integer id) {
 		this.id = id;
-	}
-	public User getUser() {
-		return user;
-	}
-	public void setUser(User usuario) {
-		this.user = usuario;
 	}
 	public CivilStatus getMyCivilStatus() {
 		return myCivilStatus;

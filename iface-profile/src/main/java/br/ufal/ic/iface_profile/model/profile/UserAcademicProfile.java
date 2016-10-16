@@ -14,7 +14,14 @@ import javax.persistence.TemporalType;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import br.ufal.ic.iface_profile.model.infrastructure.User;
+import br.ufal.ic.iface_profile.util.CustomJsonDateDeserializer;
+import br.ufal.ic.iface_profile.util.CustomJsonDateSerializer;
 
 @Entity
 @Table(name="useracademicprofile")
@@ -26,18 +33,28 @@ public class UserAcademicProfile {
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@Cascade(CascadeType.ALL)
+	private UserProfile userProfile;
+	
+	@JsonIgnore
+	@ManyToOne
 	private User user;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@Cascade(CascadeType.ALL)
-	private Link link;
+	private Link educationalInstitution;
 	
-	private String school;
+	private String course;
 	
 	@Temporal(TemporalType.DATE)
+	@JsonDeserialize(using = CustomJsonDateDeserializer.class)
+	@JsonSerialize(using = CustomJsonDateSerializer.class)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", locale = "pt-BR", timezone = "UTC")
 	private Date dateStart;
 	
 	@Temporal(TemporalType.DATE)
+	@JsonDeserialize(using = CustomJsonDateDeserializer.class)
+	@JsonSerialize(using = CustomJsonDateSerializer.class)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", locale = "pt-BR", timezone = "UTC")
 	private Date dateEnd;
 	
 	
@@ -47,24 +64,19 @@ public class UserAcademicProfile {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public User getUser() {
-		return user;
+	
+	public Link getEducationalInstitution() {
+		return educationalInstitution;
 	}
-	public void setUser(User user) {
-		this.user = user;
-	}
-	public Link getLink() {
-		return link;
-	}
-	public void setLink(Link link) {
-		this.link = link;
+	public void setEducationalInstitution(Link educationalInstitution) {
+		this.educationalInstitution = educationalInstitution;
 	}
 	
-	public String getSchool() {
-		return school;
+	public String getCourse() {
+		return course;
 	}
-	public void setSchool(String school) {
-		this.school = school;
+	public void setCourse(String course) {
+		this.course = course;
 	}
 	public Date getDateStart() {
 		return dateStart;
@@ -77,5 +89,17 @@ public class UserAcademicProfile {
 	}
 	public void setDateEnd(Date dateEnd) {
 		this.dateEnd = dateEnd;
+	}
+	public UserProfile getUserProfile() {
+		return userProfile;
+	}
+	public void setUserProfile(UserProfile userProfile) {
+		this.userProfile = userProfile;
+	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
 	}
 }

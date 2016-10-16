@@ -63,17 +63,13 @@
 					</div>
 					<div class="row">
 						<div class="input-field col s6">
-							<select>
-								<option value="" disabled selected></option>
-								<option value="1">Solteiro</option>
-								<option value="2">Namorando</option>
-								<option value="3">Noivo</option>
-								<option value="4">Casado</option>
-								<option value="5">Vi&uacutevo</option>
+							<select ng-model="userProfile.userRelationship.myCivilStatus" 
+							ng-options="civilStatus.name for civilStatus in civilStatusByGender track by civilStatus.id">
 							</select><label for="civilStatus"> Estado Civil</label>
 						</div>
 						<div class="input-field col s6">
-							<input name="hometown" id="hometown" type="text" class="validate">
+							<input name="hometown" id="hometown" type="text" class="validate" 
+							ng-model="userProfile.homeTown.name">
 							<label for="last_name">Cidade Atual</label>
 						</div>
 					</div>
@@ -82,28 +78,13 @@
 					<div style="padding: 10px"></div>
 					<div class="row">
 						<div class="input-field col s6">
-							<input name="hometown" id="hometown" type="text" class="validate">
+							<input name="hometown" id="hometown" type="text" class="validate" 
+							ng-model="relationship.receiver.userProfile.name">
 							<label for="last_name">Nome</label>
 						</div>
 						<div class="input-field col s6">
-							<select>
-								<option value="" disabled selected></option>
-								<option value="1">Pai</option>
-								<option value="2">Filho</option>
-								<option value="3">Irm&atildeo</option>
-								<option value="4">Tio</option>
-								<option value="5">Sobrinho</option>
-								<option value="6">Primo</option>
-								<option value="7">Av&ocirc</option>
-								<option value="8">Neto</option>
-								<option value="9">Padrasto</option>
-								<option value="10">Enteado</option>
-								<option value="11">Cunhado</option>
-								<option value="12">Sogro</option>
-								<option value="13">Genro</option>
-								<option value="14">Namorado</option>
-								<option value="15">Noivo</option>
-								<option value="16">Marido</option>
+							<select ng-model="relationship.relationshipType.receiverDegreeOfKinship" 
+							ng-options="degreeOfKinship1.degreeOfKinship for degreeOfKinship1 in degreeOfKinshipByGender | orderBy:'degreeOfKinship'">
 							</select><label>Grau de parentesco</label>
 						</div>
 					</div>
@@ -113,60 +94,71 @@
 						<i class="material-icons">plus_one</i>
 					</button>
 				</div>
-
+				
 				<label>Acad&ecircmico</label>
 				<div class="divider"></div>
 				<div style="padding: 10px"></div>
-				<div class="row">
+				<div class="row" ng-repeat="userAcademicProfile in userAcademicProfiles">
 					<div class="input-field col s4">
-						<input id="school" type="text" class="validate"> <label
-							for="school">Local</label>
+						<input id="educationalInstitution" type="text" class="validate" 
+						ng-model="userAcademicProfile.educationalInstitution.name"> <label
+							for="educationalInstitution">Instituição de ensino</label>
+					</div>
+					<div class="input-field col s4">
+						<input id="course" type="text" class="validate" ng-model="userAcademicProfile.course"> <label
+							for="course">Curso</label>
 					</div>
 					<div class="input-field col s4">
 						<input name="startingdate" type="text" id="startingdate"
-							class="validate" ui-date> <label for="startingdate">Data
+							class="validate" ui-date ng-model="userAcademicProfile.dateStart"> <label for="startingdate">Data
 							de in&iacutecio</label>
 					</div>
 					<div class="input-field col s4">
 						<input name="finishingdate" type="text" id="finishingdate"
-							class="validate" ui-date> <label for="finishingdate">Data
+							class="validate" ui-date ng-model="userAcademicProfile.dateEnd"> <label for="finishingdate">Data
 							de t&eacutermino</label>
 					</div>
 				</div>
 				<div class="row">
-					<button type="button" class="waves-effect waves-light btn" style = "float:right">
+					<button type="button" class="waves-effect waves-light btn" style = "float:right" 
+					ng-click="newUserAcademicProfile()">
 						<i class="material-icons">plus_one</i>
 					</button>
 				</div>
-
+				
 				<label>Profissional</label>
 				<div class="divider"></div>
 				<div style="padding: 10px"></div>
-				<div class="row">
+				<div class="row" ng-repeat="userProfessionalProfile in userProfessionalProfiles">
 					<div class="input-field col s4">
-						<input id="workplace" type="text" class="validate"> <label
-							for="workplace">Local</label>
+						<input id="workplace" type="text" class="validate" ng-model="userProfessionalProfile.workplace.name"> <label
+							for="workplace">Local de trabalho</label>
+					</div>
+					<div class="input-field col s4">
+						<input id="office" type="text" class="validate" ng-model="userProfessionalProfile.office"> <label
+							for="office">Cargo</label>
 					</div>
 					<div class="input-field col s4">
 						<input name="startingdate" type="text" id="startingdate"
-							class="validate" ui-date> <label for="startingdate">Data
+							class="validate" ui-date ng-model="userProfessionalProfile.dateStart"> <label for="startingdate">Data
 							de in&iacutecio</label>
 					</div>
 					<div class="input-field col s4">
 						<input name="finishingdate" type="text" id="finishingdate"
-							class="validate" ui-date> <label for="finishingdate">Data
+							class="validate" ui-date ng-model="userProfessionalProfile.dateEnd"> <label for="finishingdate">Data
 							de t&eacutermino</label>
 					</div>
 				</div>
 				<div class="row">
-					<button type="button" class="waves-effect waves-light btn" style = "float:right">
+					<button type="button" class="waves-effect waves-light btn" style = "float:right" 
+					ng-click="newUserProfessionalProfile()">
 						<i class="material-icons">plus_one</i>
 					</button>
 				</div>
 
 				<button ng-disabled="register.$invalid"
 					class="waves-effect waves-light btn done"
-					ng-click="newProfile(userProfile, urlImageProfile)">
+					ng-click="editProfile(userProfile, urlImageProfile)">
 					<i class="material-icons left">done</i> Done
 				</button>
 				<button type="button" class="waves-effect waves-light btn cancel">
