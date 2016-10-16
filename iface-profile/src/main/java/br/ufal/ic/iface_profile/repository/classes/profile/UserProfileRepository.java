@@ -1,6 +1,8 @@
 package br.ufal.ic.iface_profile.repository.classes.profile;
 
 
+import java.util.List;
+
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Component;
 
@@ -18,5 +20,10 @@ public class UserProfileRepository extends GenericHibernateRepository<UserProfil
 			return null;
 		}
 	}	
+	
+	public List<UserProfile> findUserProfileByName(String name){
+		return this.findByCriteria(Restrictions.like("name", "%"+name+"%"));	
+		
+	}
 
 }

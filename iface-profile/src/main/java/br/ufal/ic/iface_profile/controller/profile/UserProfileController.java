@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -54,6 +55,12 @@ public class UserProfileController extends AbstractController<UserProfile, Integ
 	@ResponseBody
 	public UserProfile findUserProfileById(@PathVariable Integer id){
 		return getRepository().findUserProfileById(id);
+	}
+	
+	@RequestMapping(value = "/user/name/{name}")
+	@ResponseBody
+	public List<UserProfile> findUserProfileByName(@PathVariable String name){
+		return getRepository().findUserProfileByName(name);
 	}
 	
 	@Autowired

@@ -15,4 +15,12 @@ angular.module("iFace").config(function($routeProvider){
 		templateUrl: "app/view/edit_profile.html",
 		controller: "editProfileCtrl"
 	});
+	
+	var $cookies;
+	angular.injector(['ngCookies']).invoke(['$cookies', function(_$cookies_) {
+		$cookies = _$cookies_;
+		var user = {};
+		user.id = 1;
+		$cookies.putObject("user", user);
+	}]);
 });

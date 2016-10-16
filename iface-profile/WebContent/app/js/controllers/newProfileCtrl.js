@@ -1,5 +1,4 @@
 angular.module("iFace").controller("newProfileCtrl", function($scope, $location, profileAPI, uploadAPI, config) {
-	$scope.app = "Cadastro";
 	$scope.newProfile = function(profile, urlImageProfile){
 		profile.user = {};
 		profile.user.id = 1;

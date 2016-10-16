@@ -1,1 +1,1 @@
-angular.module("iFace", [ "ngMessages", "ngRoute" ]);
+angular.module("iFace", [ "ngMessages", "ngRoute", "ngCookies", "angucomplete-alt" ]);
