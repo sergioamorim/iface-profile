@@ -47,17 +47,17 @@ public class UserCivilStatusController extends AbstractController<UserCivilStatu
 	public void delete(@PathVariable Integer id) {
 		UserCivilStatus deletedUserCivilStatus = getRepository().findById(id);
 		
-		User user = deletedUserCivilStatus.getUser();
+		//User user = deletedUserCivilStatus.getUser();
 		
 		UserLog userLog = new UserLog();
-		userLog.setUser(user);
+		//userLog.setUser(user);
 		
 		userLog.setActivity("Remove civil status");
 		
-		userLog.setTitle(user.getUserProfile().getName()+
+		/*userLog.setTitle(user.getUserProfile().getName()+
 							" removed "+
 								deletedUserCivilStatus.getMyCivilStatus().getName()+
-									" from profile");
+									" from profile");*/
 		
 		userLog.setTimestamp(new Date());
 		
@@ -77,13 +77,13 @@ public class UserCivilStatusController extends AbstractController<UserCivilStatu
 		}
 		
 		UserLog userLog = new UserLog();		
-		User user = newUserCivilStatus.getUser();
-		userLog.setUser(user);
+		//User user = newUserCivilStatus.getUser();
+		//userLog.setUser(user);
 		
 		userLog.setActivity("Add civil status");
-		userLog.setTitle(user.getUserProfile().getName()+" added "+
-							newUserCivilStatus.getMyCivilStatus().getName()+
-								" to profile");
+		//userLog.setTitle(user.getUserProfile().getName()+" added "+
+		//					newUserCivilStatus.getMyCivilStatus().getName()+
+		//						" to profile");
 		
 		userLog.setTimestamp(new Date());
 		
@@ -103,15 +103,15 @@ public class UserCivilStatusController extends AbstractController<UserCivilStatu
 		}
 		
 		UserLog userLog = new UserLog();		
-		User user = newUserCivilStatus.getUser();
-		userLog.setUser(user);
+		//User user = newUserCivilStatus.getUser();
+		//userLog.setUser(user);
 		
 		userLog.setActivity("Civil status modification");
 		
-		userLog.setTitle(user.getUserProfile().getName()+
-							" modified "+
-								newUserCivilStatus.getMyCivilStatus().getName()+
-									" from profile");
+		//userLog.setTitle(user.getUserProfile().getName()+
+		//					" modified "+
+		//						newUserCivilStatus.getMyCivilStatus().getName()+
+		//							" from profile");
 		
 		userLog.setTimestamp(new Date());
 		

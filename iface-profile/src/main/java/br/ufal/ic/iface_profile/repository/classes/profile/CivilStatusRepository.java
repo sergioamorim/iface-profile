@@ -3,6 +3,7 @@ package br.ufal.ic.iface_profile.repository.classes.profile;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Component;
 
 import br.ufal.ic.iface_profile.model.profile.CivilStatus;
@@ -36,6 +37,10 @@ public class CivilStatusRepository extends GenericHibernateRepository<CivilStatu
 			save(x);
 		}
 		
+	}
+	
+	public List<CivilStatus> findCivilStatusByGender(Integer id){
+		return this.findByCriteria(Restrictions.eq("gender.id", id));
 	}
 
 }

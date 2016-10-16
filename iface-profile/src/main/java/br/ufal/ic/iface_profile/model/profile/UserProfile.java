@@ -17,7 +17,13 @@ import javax.persistence.TemporalType;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import br.ufal.ic.iface_profile.model.infrastructure.User;
+import br.ufal.ic.iface_profile.util.CustomJsonDateDeserializer;
+import br.ufal.ic.iface_profile.util.CustomJsonDateSerializer;
 
 @Entity
 @Table(name="userprofile")
@@ -37,6 +43,9 @@ public class UserProfile {
 	private String picture;
 	
 	@Temporal(TemporalType.DATE)
+	@JsonDeserialize(using = CustomJsonDateDeserializer.class)
+	@JsonSerialize(using = CustomJsonDateSerializer.class)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", locale = "pt-BR", timezone = "UTC")
 	private Date birthDate;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -53,6 +62,14 @@ public class UserProfile {
 	@OneToMany(fetch = FetchType.EAGER)
 	@Cascade(CascadeType.ALL)
 	private List<UserContact> userContacts;
+	
+	@OneToMany(fetch = FetchType.EAGER)
+	@Cascade(CascadeType.ALL)
+	private  List<UserAcademicProfile> userAcademicProfile;
+	
+	@OneToMany(fetch = FetchType.EAGER)
+	@Cascade(CascadeType.ALL)
+	private List<UserProfessionalProfile> userProfessionalProfile;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@Cascade(CascadeType.ALL)
@@ -126,6 +143,18 @@ public class UserProfile {
 	}
 	public void setUserRelationship(UserCivilStatus userRelationship) {
 		this.userRelationship = userRelationship;
+	}
+	public List<UserAcademicProfile> getUserAcademicProfile() {
+		return userAcademicProfile;
+	}
+	public void setUserAcademicProfile(List<UserAcademicProfile> userAcademicProfile) {
+		this.userAcademicProfile = userAcademicProfile;
+	}
+	public List<UserProfessionalProfile> getUserProfessionalProfile() {
+		return userProfessionalProfile;
+	}
+	public void setUserProfessionalProfile(List<UserProfessionalProfile> userProfessionalProfile) {
+		this.userProfessionalProfile = userProfessionalProfile;
 	}
 	
 }

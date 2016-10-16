@@ -14,7 +14,14 @@ import javax.persistence.TemporalType;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import br.ufal.ic.iface_profile.model.infrastructure.User;
+import br.ufal.ic.iface_profile.util.CustomJsonDateDeserializer;
+import br.ufal.ic.iface_profile.util.CustomJsonDateSerializer;
 
 @Entity
 @Table(name="userprofessionalprofile")
@@ -26,18 +33,28 @@ public class UserProfessionalProfile {
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@Cascade(CascadeType.ALL)
+	private UserProfile userProfile;
+	
+	@JsonIgnore
+	@ManyToOne(fetch = FetchType.EAGER)
 	private User user;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@Cascade(CascadeType.ALL)
-	private Link link;
+	private Link workplace;
 	
 	private String office;
 	
 	@Temporal(TemporalType.DATE)
+	@JsonDeserialize(using = CustomJsonDateDeserializer.class)
+	@JsonSerialize(using = CustomJsonDateSerializer.class)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", locale = "pt-BR", timezone = "UTC")
 	private Date dateStart;
 	
 	@Temporal(TemporalType.DATE)
+	@JsonDeserialize(using = CustomJsonDateDeserializer.class)
+	@JsonSerialize(using = CustomJsonDateSerializer.class)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", locale = "pt-BR", timezone = "UTC")
 	private Date dateEnd;
 	
 	public Integer getId() {
@@ -46,17 +63,12 @@ public class UserProfessionalProfile {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public User getUser() {
-		return user;
+	
+	public Link getWorkplace() {
+		return workplace;
 	}
-	public void setUser(User user) {
-		this.user = user;
-	}
-	public Link getLink() {
-		return link;
-	}
-	public void setLink(Link link) {
-		this.link = link;
+	public void setWorkplace(Link workplace) {
+		this.workplace = workplace;
 	}
 	public String getOffice() {
 		return office;
@@ -75,5 +87,17 @@ public class UserProfessionalProfile {
 	}
 	public void setDateEnd(Date dateEnd) {
 		this.dateEnd = dateEnd;
+	}
+	public UserProfile getUserProfile() {
+		return userProfile;
+	}
+	public void setUserProfile(UserProfile userProfile) {
+		this.userProfile = userProfile;
+	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
 	}
 }

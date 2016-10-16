@@ -126,7 +126,7 @@ public class UserProfileController extends AbstractController<UserProfile, Integ
 		
 		userLog.setActivity("Profile modification");
 		
-		userLog.setTitle(user.getUserProfile().getName()+"modified profile");
+		userLog.setTitle(newUserProfile.getName()+"modified profile");
 		
 		userLog.setTimestamp(new Date());
 		

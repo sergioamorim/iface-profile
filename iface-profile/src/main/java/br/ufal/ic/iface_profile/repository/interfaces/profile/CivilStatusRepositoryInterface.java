@@ -8,4 +8,5 @@ import br.ufal.ic.iface_profile.repository.interfaces.RepositoryInterface;
 
 public interface CivilStatusRepositoryInterface extends RepositoryInterface<CivilStatus, Integer>{
 	public void initializeCivilStatus(List<Gender> g);
+	public List<CivilStatus> findCivilStatusByGender(Integer id);
 }

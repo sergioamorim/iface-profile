@@ -7,4 +7,8 @@ angular.module("iFace").controller("profileCtrl", function($scope, $location, $c
 		//if(!data.user.userProfile)
 			//$location.path("/new_profile");
 	});
+	
+	$scope.openEditProfile = function(){
+		$location.path("/edit_profile")
+	}
 });
