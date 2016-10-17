@@ -22,10 +22,10 @@
 											ng-change="saveTempImage(profilePreview)" accept='image/*'
 											preview-class="img-thumbnail"
 											preview-container="imgPerfilPreview"
-											ng-model="profilePreview" media-preview>
+											ng-model="profilePreview" title="Alterar imagem" media-preview>
 									</div>
 									<div class="file-path-wrapper">
-										<input class="file-path validate" type="text">
+										<input class="file-path validate" type="text" ng-model="picture">
 									</div>
 								</div>
 							</div>
@@ -33,7 +33,7 @@
 						<div class="input-field col s6">
 							<div class="row">
 								<div class="text-center" id="imgPerfilPreview">
-									<img src="http://api.androidhive.info/images/ic_profile.png"
+									<img id="imagePreview" ng-src="{{userProfile.picture}}"
 										alt="Profile Picture" style="width: 128px; height: 128px;">
 								</div>
 							</div>
@@ -41,7 +41,7 @@
 						<button ng-show="urlImageProfile && urlImageProfile.length > 0"
 							class="waves-effect waves-light btn"
 							style="margin-right: 20px; float: right"
-							ng-click="launchEditor('imageProfile', 1)">Editar Imagem</button>
+							ng-click="launchEditor()">Editar Imagem</button>
 					</div>
 
 					<label>Geral</label>
@@ -61,9 +61,10 @@
 								for="last_name">Sobrenome</label>
 						</div>
 					</div>
+					{{civilStatusByGender}}
 					<div class="row">
 						<div class="input-field col s6">
-							<select ng-model="userProfile.userRelationship.myCivilStatus" 
+							<select id="selectGender" ng-model="userProfile.userRelationship.myCivilStatus" 
 							ng-options="civilStatus.name for civilStatus in civilStatusByGender track by civilStatus.id">
 							</select><label for="civilStatus"> Estado Civil</label>
 						</div>

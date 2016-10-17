@@ -6,7 +6,7 @@ angular.module("iFace").controller("newProfileCtrl", function($scope, $location,
 		profile.user.id = currentUser.id;
 		profile.userContacts = [];
 		profile.birthPlace.status = false;
-		profile.picture = urlImageProfile
+		profile.picture = urlImageProfile;
 		$scope.userContact.user = {};
 		$scope.userContact.user.id = currentUser.id;
 		profile.userContacts.push($scope.userContact);
@@ -51,10 +51,9 @@ angular.module("iFace").controller("newProfileCtrl", function($scope, $location,
 	});
 	
 	$scope.launchEditor = function(id, idUser) {
-		urlImage = config.rootUrl+"/app/profile-images/profile"+idUser;
 		featherEditor.launch({
 			image: 'imagePreview',
-			url: urlImage
+			url: $scope.urlImageProfile
 		});
 		return false;
 	}

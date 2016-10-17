@@ -16,7 +16,7 @@ public class UserProfileRepository extends GenericHibernateRepository<UserProfil
 	public UserProfile findUserProfileById(Integer x) {
 		try{
 			return this.findByCriteria(Restrictions.eq("user.id", x)).get(0);	
-		}catch(NullPointerException e){
+		}catch(IndexOutOfBoundsException e){
 			return null;
 		}
 	}	

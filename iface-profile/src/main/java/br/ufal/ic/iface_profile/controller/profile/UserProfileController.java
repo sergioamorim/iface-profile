@@ -141,13 +141,14 @@ public class UserProfileController extends AbstractController<UserProfile, Integ
     	URL resource = getClass().getResource("/");
         if (!file.isEmpty()) {
             try {
+            	String filename = "profile"+id+"-"+(new Date()).getTime();
             	String path = URLDecoder.decode(resource.getPath(),"UTF-8");
                 byte[] bytes = file.getBytes();
                 BufferedOutputStream stream = 
-                        new BufferedOutputStream(new FileOutputStream(new File(path+"../../app/profile-images/profile"+id)));
+                        new BufferedOutputStream(new FileOutputStream(new File(path+"../../app/profile-images/"+filename)));
                 stream.write(bytes);
                 stream.close();
-                return "/app/profile-images/profile"+id;
+                return "/app/profile-images/"+filename;
             } catch (Exception e) {
                 return "FAIL ON UPLOAD FILE: " + e.getMessage();
             }
@@ -161,11 +162,12 @@ public class UserProfileController extends AbstractController<UserProfile, Integ
     	URL resource = getClass().getResource("/");
         if (!url.isEmpty()) {
             try {
+            	String filename = "profile"+id+"-"+(new Date()).getTime();
             	String path = URLDecoder.decode(resource.getPath(),"UTF-8");
-                File f = new File(path+"../../app/profile-images/profile"+id);
+                File f = new File(path+"../../app/profile-images/"+filename);
                 FileUtils.copyURLToFile(new URL(URLDecoder.decode(url, "UTF-8")), f);
                 
-                return "/app/profile-images/profile"+id;
+                return "/app/profile-images/"+filename;
             } catch (Exception e) {
                 return "FAIL ON UPLOAD FILE: " + e.getMessage();
             }
