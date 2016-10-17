@@ -28,12 +28,6 @@ angular.module("iFace").controller("editProfileCtrl", function($scope, $location
 		});
 	}	
 	
-	$scope.$watch('civilStatusByGender', function(newValue, oldValue) {
-	      if ( newValue) {
-	        $scope.civilStatusByGender = newValue;
-	      }
-	  });
-	
 	$scope.newUserProfessionalProfile = function(){
 		$scope.userProfessionalProfiles.push({
 			user : {id:currentUser.id},

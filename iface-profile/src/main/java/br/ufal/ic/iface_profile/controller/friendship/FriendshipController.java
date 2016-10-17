@@ -66,6 +66,7 @@ public class FriendshipController extends AbstractController <Friendship, Intege
 		u.setId(1);
 		return getRepository().findNotFriends(u);
 	}
+
 	
 	@RequestMapping(value = "{id}", method = RequestMethod.DELETE)
 	@ResponseBody
@@ -119,7 +120,11 @@ public class FriendshipController extends AbstractController <Friendship, Intege
 		
 		userXLog.setTimestamp(new Date());
 		userYLog.setTimestamp(new Date());
+		/*
+		*GRAVE: Servlet.service() for servlet [service] in context with path [/iface-profile] threw exception [Request processing failed; nested exception is java.lang.NullPointerException] with root cause
 		
+		*Error in user_y.getUserProfile().getName()); e user_x.getUserProfile().getName());
+		*/
 		userXLog.setTitle("New friendship with "+user_y.getUserProfile().getName());
 		userYLog.setTitle("New friendship with "+user_x.getUserProfile().getName());
 		
@@ -127,5 +132,16 @@ public class FriendshipController extends AbstractController <Friendship, Intege
 		logRepository.save(userYLog);
 		
 		return getRepository().save(newFriendship);
+	}
+	@RequestMapping(method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public Friendship update(@RequestBody @Valid Friendship friendship, BindingResult result,
+			HttpServletResponse response) throws JsonParseException,
+			JsonMappingException, IOException {
+		if (result.hasErrors()) {
+			throw new ValidationException(result);
+		}
+		friendship.setApproved(true);
+		return getRepository().update(friendship);
 	}
 }
