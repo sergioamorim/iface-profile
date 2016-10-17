@@ -66,6 +66,7 @@ public class FriendshipController extends AbstractController <Friendship, Intege
 		u.setId(1);
 		return getRepository().findNotFriends(u);
 	}
+
 	
 	@RequestMapping(value = "{id}", method = RequestMethod.DELETE)
 	@ResponseBody
@@ -127,5 +128,16 @@ public class FriendshipController extends AbstractController <Friendship, Intege
 		logRepository.save(userYLog);
 		
 		return getRepository().save(newFriendship);
+	}
+	@RequestMapping(method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public Friendship update(@RequestBody @Valid Friendship friendship, BindingResult result,
+			HttpServletResponse response) throws JsonParseException,
+			JsonMappingException, IOException {
+		if (result.hasErrors()) {
+			throw new ValidationException(result);
+		}
+		friendship.setApproved(true);
+		return getRepository().update(friendship);
 	}
 }
