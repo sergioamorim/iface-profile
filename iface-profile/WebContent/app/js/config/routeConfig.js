@@ -15,6 +15,10 @@ angular.module("iFace").config(function($routeProvider){
 		templateUrl: "app/view/edit_profile.html",
 		controller: "editProfileCtrl"
 	});
+	$routeProvider.when("/log", {
+		templateUrl: "app/view/log.html",
+		controller: "logCtrl"
+	});
 	
 	var $cookies;
 	angular.injector(['ngCookies']).invoke(['$cookies', function(_$cookies_) {
