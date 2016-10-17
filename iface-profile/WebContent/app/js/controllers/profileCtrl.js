@@ -1,7 +1,6 @@
 angular.module("iFace").controller("profileCtrl", function($scope, $location, $cookies, profileAPI) {
 	var currentUser = $cookies.getObject("user");
-	alert(currentUser.id);
-	profileAPI.getByUserId(1).success(function(data){
+	profileAPI.getByUserId(currentUser.id).success(function(data){
 		console.log(data);
 		$scope.userProfile = data;
 		//if(!data.user.userProfile)

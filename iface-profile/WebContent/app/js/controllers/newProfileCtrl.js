@@ -1,14 +1,17 @@
-angular.module("iFace").controller("newProfileCtrl", function($scope, $location, profileAPI, uploadAPI, config) {
+angular.module("iFace").controller("newProfileCtrl", function($scope, $location, $cookies, profileAPI, uploadAPI, config) {
+	var currentUser = $cookies.getObject("user");
+	
 	$scope.newProfile = function(profile, urlImageProfile){
 		profile.user = {};
-		profile.user.id = 1;
+		profile.user.id = currentUser.id;
 		profile.userContacts = [];
 		profile.birthPlace.status = false;
 		profile.picture = urlImageProfile
 		$scope.userContact.user = {};
-		$scope.userContact.user.id = 1;
+		$scope.userContact.user.id = currentUser.id;
 		profile.userContacts.push($scope.userContact);
 		profileAPI.addProfile(profile).success(function(data, status){
+			
 			alert("Perfil cadastrado com sucesso");
 			$location.path("/index");
 		}).error(function(data,status){
@@ -17,7 +20,7 @@ angular.module("iFace").controller("newProfileCtrl", function($scope, $location,
 	},
 	
 	$scope.saveTempImage = function(image){
-		uploadAPI.uploadFileToUrl(image, 1).success(function(data){
+		uploadAPI.uploadFileToUrl(image, currentUser.id).success(function(data){
 			$scope.urlImageProfile = config.rootUrl+data;
 		}).error(function(){
 			console.log("erro ao salvar");
@@ -35,7 +38,7 @@ angular.module("iFace").controller("newProfileCtrl", function($scope, $location,
 			var img = document.getElementById(imageID);
 			img.src = newURL;
 			featherEditor.close();
-			uploadAPI.downloadEditedUserProfile(1, newURL).success(function(data){
+			uploadAPI.downloadEditedUserProfile(currentUser.id, newURL).success(function(data){
 				$scope.urlImageProfile = config.rootUrl+data;
 			}).error(function(){
 				console.log("Erro ao salvar");
