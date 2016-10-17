@@ -120,7 +120,11 @@ public class FriendshipController extends AbstractController <Friendship, Intege
 		
 		userXLog.setTimestamp(new Date());
 		userYLog.setTimestamp(new Date());
+		/*
+		*GRAVE: Servlet.service() for servlet [service] in context with path [/iface-profile] threw exception [Request processing failed; nested exception is java.lang.NullPointerException] with root cause
 		
+		*Error in user_y.getUserProfile().getName()); e user_x.getUserProfile().getName());
+		*/
 		userXLog.setTitle("New friendship with "+user_y.getUserProfile().getName());
 		userYLog.setTitle("New friendship with "+user_x.getUserProfile().getName());
 		
