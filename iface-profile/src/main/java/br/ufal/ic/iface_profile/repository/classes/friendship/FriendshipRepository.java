@@ -2,7 +2,6 @@ package br.ufal.ic.iface_profile.repository.classes.friendship;
 
 import java.util.List;
 
-import org.hibernate.SQLQuery;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
@@ -68,13 +67,16 @@ public class FriendshipRepository extends GenericHibernateRepository<Friendship,
 		 return list1;
 	}
 	
-	@SuppressWarnings("unchecked")
-	public List<Friendship> findFriendshipRequests(Integer user_id){
-		SQLQuery q1 = this.getSession().createSQLQuery("SELECT * FROM userfriendship "
-				+ "WHERE (user_x_id:=id OR user_y_id:=id) AND approved=0").addEntity(Friendship.class);
-		q1.setInteger("id", user_id);
-		return q1.list();
-		
+
+	public List<Friendship> findFriendshipRequests(Integer id){
+		return this.findByCriteria(Restrictions.and(
+				 Restrictions.or(
+					Restrictions.eq("user_x.id", id),
+					Restrictions.eq("user_y.id", id)
+					),
+				 Restrictions.eq("approved",false)
+				)	
+		 );
 	}
 
 }
