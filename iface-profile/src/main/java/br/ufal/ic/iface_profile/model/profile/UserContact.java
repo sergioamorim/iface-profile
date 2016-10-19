@@ -10,6 +10,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import br.ufal.ic.iface_profile.model.infrastructure.User;
 
 @Entity
@@ -21,6 +23,7 @@ public class UserContact {
 	private Integer id;
 	
 	@ManyToOne
+	@JsonIgnoreProperties("userProfile")
 	private User user;
 	
 	private String contact;

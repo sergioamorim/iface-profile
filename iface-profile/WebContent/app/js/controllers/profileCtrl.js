@@ -1,9 +1,15 @@
-angular.module("iFace").controller("profileCtrl", function($scope, $location, $cookies, profileAPI, friendshipAPI) {
+angular.module("iFace").controller("profileCtrl", function($scope, $location, $routeParams, $cookies, profileAPI, friendshipAPI) {
 	var currentUser = $cookies.getObject("user");
+	
 	if(currentUser != undefined){
-		profileAPI.getByUserId(currentUser.id).success(function(data){
+		var id = currentUser.id
+		if($routeParams.id != undefined)
+			id = $routeParams.id
+		profileAPI.getByUserId(id).success(function(data){
 			console.log(data);
 			$scope.userProfile = data;
+			if($routeParams.id != undefined)
+				$('#amigos').val(data.name+" "+data.lastname);
 			if(data.length == 0){
 				$location.path("/new_profile");
 				
@@ -33,4 +39,12 @@ angular.module("iFace").controller("profileCtrl", function($scope, $location, $c
 			
 		});
 	}
+	
+	$scope.$watch('amigoProcurado', function(scope){
+		if($scope.amigoProcurado != undefined){
+			var idUser = $scope.amigoProcurado.description.id;
+			$location.path("/index/"+idUser);
+		}
+	   }, true);
+	
 });

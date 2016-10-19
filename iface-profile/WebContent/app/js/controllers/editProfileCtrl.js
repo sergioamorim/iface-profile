@@ -4,29 +4,44 @@ angular.module("iFace").controller("editProfileCtrl", function($scope, $location
 	$scope.userAcademicProfiles = [];
 	$scope.userProfessionalProfiles = [];
 	
+	$(document).ready(function() {
+        $('select').material_select();
+	});
+	
 	profileAPI.getByUserId(currentUser.id).success(function(data){
 		console.log(data);
 		$scope.userProfile = data;
 		$scope.userAcademicProfiles = data.userAcademicProfile;
 		$scope.userProfessionalProfiles = data.userProfessionalProfile;
 		$scope.urlImageProfile = data.picture;
-		setSelects();
+		$scope.setSelects();
 	});
 	
 	$scope.degreeOfKinshipByGender = [];
 	$scope.civilStatusByGender = [];
 	
-	function setSelects(){
+	$scope.setSelects = function(){
 		degreeOfKinshipAPI.getDegreeOfKinshipByGender($scope.userProfile.gender.id).success(function(data){
-			console.log(data);
 			$scope.degreeOfKinshipByGender = data;
 		});
 		
 		civilStatusAPI.getCivilStatusByGender($scope.userProfile.gender.id).success(function(data){
-			console.log(data);
 			$scope.civilStatusByGender = data;
 		});
-	}	
+	};	
+	
+	function sleep(ms) {
+		  return new Promise(resolve => setTimeout(resolve, ms));
+		}
+	
+	$scope.$watch('civilStatusByGender', function(scope){
+		if($scope.civilStatusByGender != undefined){
+			sleep(500).then(() => {
+				$('select').material_select();
+			});
+			
+		}
+	   }, true);
 	
 	$scope.newUserProfessionalProfile = function(){
 		$scope.userProfessionalProfiles.push({
@@ -53,6 +68,7 @@ angular.module("iFace").controller("editProfileCtrl", function($scope, $location
 			profile.userAcademicProfile = $scope.userAcademicProfiles;
 			profile.picture = urlImageProfile;
 			profile.userProfessionalProfile = $scope.userProfessionalProfiles;
+			delete profile.user.userProfile;
 		profileAPI.updateProfile(profile).success(function(data, status){
 			alert("Perfil editado com sucesso.");
 			$location.path("/index");

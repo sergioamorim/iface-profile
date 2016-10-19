@@ -7,6 +7,10 @@ angular.module("iFace").config(function($routeProvider){
 		templateUrl: "app/view/profile.html",
 		controller: "profileCtrl"
 	});
+	$routeProvider.when("/index/:id", {
+		templateUrl: "app/view/profile.html",
+		controller: "profileCtrl"
+	});
 	$routeProvider.when("/new_profile", {
 		templateUrl: "app/view/new_profile.html",
 		controller: "newProfileCtrl"

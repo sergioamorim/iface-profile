@@ -8,7 +8,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import br.ufal.ic.iface_profile.model.profile.UserProfile;
@@ -28,7 +28,7 @@ public class User {
 	private String email;
 	
 	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-	@JsonIdentityReference(alwaysAsId = true)
+	@JsonIgnoreProperties("user")
 	@OneToOne(mappedBy="user", fetch=FetchType.LAZY)
 	private UserProfile userProfile;
 
