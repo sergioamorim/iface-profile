@@ -47,24 +47,30 @@ angular.module("iFace").controller("profileCtrl", function($scope, $location, $r
 	$scope.openEditProfile = function(){
 		$location.path("/edit_profile");
 	}
-	$scope.requestfriendship = function(){
+	$scope.clickButtonFriendship = function(){
 		if($scope.buttonFriendship == "Adicionar aos amigos"){
-			profileAPI.getByUserId(currentUser.id).success(function(data){
-				var user_x = data.user;
-				profileAPI.getByUserId($routeParams.id).success(function(data){
-					var user_y = data.user;
-					friendshipAPI.requestfriendship(user_x,user_y).success(function(data){					
-					
-					});
-				});
-			});
+			$scope.requestfriendship();
+			$scope.buttonFriendship = "Cancelar solicitação";
 		}
 		else if($scope.buttonFriendship == "Aceita Solicitação"){
 			$scope.acceptingfriendship($scope.friendship.id);
+			$scope.buttonFriendship = "Cancelar amizade";
 		}
 		else{
 			$scope.refusefriendship($scope.friendship.id);
+			$scope.buttonFriendship = "Adicionar aos amigos";
 		}
+	}
+	$scope.requestfriendship = function(){	
+		profileAPI.getByUserId(currentUser.id).success(function(data){
+			var user_x = data.user;
+			profileAPI.getByUserId($routeParams.id).success(function(data){
+				var user_y = data.user;
+				friendshipAPI.requestfriendship(user_x,user_y).success(function(data){										
+					
+				});
+			});
+		});
 	}
 	$scope.acceptingfriendship = function(friendship_id){
 		friendshipAPI.acceptingfriendship(friendship_id).success(function(data){
