@@ -23,7 +23,6 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 
 import br.ufal.ic.iface_profile.controller.AbstractController;
 import br.ufal.ic.iface_profile.exceptions.ValidationException;
-import br.ufal.ic.iface_profile.model.infrastructure.User;
 import br.ufal.ic.iface_profile.model.profile.UserCivilStatus;
 import br.ufal.ic.iface_profile.model.storytelling.UserLog;
 import br.ufal.ic.iface_profile.repository.classes.storytelling.UserLogRepository;

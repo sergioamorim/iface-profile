@@ -26,6 +26,7 @@ import br.ufal.ic.iface_profile.controller.AbstractController;
 import br.ufal.ic.iface_profile.exceptions.ValidationException;
 import br.ufal.ic.iface_profile.model.friendship.Friendship;
 import br.ufal.ic.iface_profile.model.infrastructure.User;
+import br.ufal.ic.iface_profile.model.profile.UserProfile;
 import br.ufal.ic.iface_profile.model.storytelling.UserLog;
 import br.ufal.ic.iface_profile.repository.interfaces.friendship.FriendshipRepositoryInterface;
 import br.ufal.ic.iface_profile.repository.interfaces.storytelling.UserLogRepositoryInterface;
@@ -52,6 +53,12 @@ public class FriendshipController extends AbstractController <Friendship, Intege
 	@ResponseBody
 	public List<User> findFriends(@PathVariable Integer id){
 		return getRepository().findFriends(id);
+	}
+	
+	@RequestMapping (value="/find_friends_by_name/{id}/{name}")
+	@ResponseBody
+	public List<UserProfile> findFriendsByName(@PathVariable Integer id, @PathVariable String name){
+		return getRepository().findFriendsByName(id, name);
 	}
 	
 	@RequestMapping(value="/find_requests/{id}", method = RequestMethod.GET)
