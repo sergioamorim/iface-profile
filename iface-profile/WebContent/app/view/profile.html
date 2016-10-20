@@ -29,30 +29,36 @@
 					style="width: 160px; height: 160px;">
 				<h1 class="profileTitle">{{userProfile.name+"
 					"+userProfile.lastname}}</h1>
+
 				<button class="waves-effect waves-light btn"
 					ng-click="openEditProfile()"
-					style="float: right; margin-left: 10px"'>Editar Perfil</button>
+					style="float: right; margin-left: 10px">Editar Perfil</button>
 				<a class="waves-effect waves-light btn modal-trigger" href="#modal1"
 					style="float: right;">Solicita&ccedil&otildees Pendentes</a>
+				<button class="waves-effect waves-light btn" ng-show="isMyPerfil()"
+					ng-click="requestfriendship()"
+					style="float: right; margin-left: 10px">Adicionar aos
+					amigos</button>
 
 				<div id="modal1" class="modal">
 					<div class="modal-content">
-						<div class="row" style = "padding:10px">
-							
-								<img ng-src="{{userProfile.picture}}" alt="Profile Picture"
-									style="width: 40px; height: 40px; float: left" class="circle">
-								<label style="color: black; font-size: 16px">{{userProfile.name+"
-									"+userProfile.lastname+" deseja lhe adicionar como "}}</label>
+						<div class="row" style="padding: 10px">
 
-								<button class="waves-effect waves-light btn"
-									style="float: right; margin-left: 10px"'>Recusar</button>
-								<button class="waves-effect waves-light btn"
-									style="float: right; margin-left: 10px"'>Aceitar</button>
-	
+							<img ng-src="{{userProfile.picture}}" alt="Profile Picture"
+								style="width: 40px; height: 40px; float: left" class="circle">
+							<label style="color: black; font-size: 16px">{{userProfile.name+"
+								"+userProfile.lastname+" deseja lhe adicionar como "}}</label>
+
+							<button class="waves-effect waves-light btn"
+								style="float: right; margin-left: 10px"'>Recusar</button>
+							<button class="waves-effect waves-light btn"
+								style="float: right; margin-left: 10px"'>Aceitar</button>
+
 						</div>
 					</div>
 
 				</div>
+
 			</div>
 		</div>
 

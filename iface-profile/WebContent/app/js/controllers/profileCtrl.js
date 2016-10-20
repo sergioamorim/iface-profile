@@ -1,12 +1,12 @@
 angular.module("iFace").controller("profileCtrl", function($scope, $location, $routeParams, $cookies, profileAPI, friendshipAPI) {
 	var currentUser = $cookies.getObject("user");
-	
 	if(currentUser != undefined){
 		var id = currentUser.id
-		if($routeParams.id != undefined)
+		if($routeParams.id != undefined){
 			id = $routeParams.id
+		}
 		profileAPI.getByUserId(id).success(function(data){
-			//console.log(data);
+			console.log(data);
 			$scope.userProfile = data;
 			if($routeParams.id != undefined)
 				$('#amigos').val(data.name+" "+data.lastname);
@@ -18,40 +18,24 @@ angular.module("iFace").controller("profileCtrl", function($scope, $location, $r
 	}else{
 		$location.path("/signup");
 	}
-	//so para teste em requestfriendship
-	profileAPI.getByUserId(2).success(function(data){
-		$scope.userprofile2=data;
-	});
-	
-	//trocar id
-	friendshipAPI.findFriendshipRequests(1).success(function(data){
-		$scope.friendshipRequests=data;
-		console.log($scope.friendshipRequests);
-		
-		//console.log($scope.friendshipRequests.user_y.userProfile.name);
-	});
-	
+	$scope.isMyPerfil  = function(){
+		return ($routeParams.id != undefined && $routeParams.id != currentUser.id)
+	}	
 	
 	$scope.openEditProfile = function(){
 		$location.path("/edit_profile");
 	}
-	
 	$scope.requestfriendship = function(){
-		friendshipAPI.requestfriendship($scope.userProfile.user, $scope.userprofile2.user).success(function(data){
-			
+		profileAPI.getByUserId(currentUser.id).success(function(data){
+			var user_x = data.user;
+			profileAPI.getByUserId($routeParams.id).success(function(data){
+				var user_y = data.user;
+				friendshipAPI.requestfriendship(user_x,user_y).success(function(data){					
+					
+				});
+			});
 		});
 	}
-	$scope.acceptingfriendship = function(id_friendship){
-		friendshipAPI.acceptingfriendship(id_friendship).success(function(data){
-			
-		});
-	}
-	$scope.refusefriendship = function(id){
-		friendshipAPI.refusefriendship(id).success(function(data){
-			
-		});
-	}
-	
 	$scope.$watch('amigoProcurado', function(scope){
 		if($scope.amigoProcurado != undefined){
 			var idUser = $scope.amigoProcurado.description.id;
