@@ -51,14 +51,14 @@
 						<div class="input-field col s6">
 							<input name="name" id="first_name" type="text"
 								ng-model="userProfile.name" ng-required="true" ng-minlength='2'
-								class="validate" required> <label for="first_name">
+								class="validate" required> <label for="first_name" ng-class="{ 'active' : userProfile.name }">
 								Nome</label>
 						</div>
 						<div class="input-field col s6">
 							<input name="lastname" id="last_name" type="text"
 								class="validate" ng-model="userProfile.lastname"
 								ng-required="true" ng-minlength="2"> <label
-								for="last_name">Sobrenome</label>
+								for="last_name" ng-class="{ 'active' : userProfile.lastname }">Sobrenome</label>
 						</div>
 					</div>
 					
@@ -71,7 +71,7 @@
 						<div class="input-field col s6">
 							<input name="hometown" id="hometown" type="text" class="validate" 
 							ng-model="userProfile.homeTown.name">
-							<label for="last_name">Cidade Atual</label>
+							<label for="last_name" ng-class="{ 'active' : userProfile.homeTown.name }">Cidade Atual</label>
 						</div>
 					</div>
 					<label>Fam&iacutelia e Relacionamentos</label>
@@ -81,7 +81,7 @@
 						<div class="input-field col s6">
 							<input name="hometown" id="hometown" type="text" class="validate" 
 							ng-model="relationship.receiver.userProfile.name">
-							<label for="last_name">Nome</label>
+							<label for="last_name" ng-class="{ 'active' : relationship.receiver.userProfile.name }">Nome</label>
 						</div>
 						<div class="input-field col s6">
 							<select ng-model="relationship.relationshipType.receiverDegreeOfKinship" 
@@ -103,20 +103,22 @@
 					<div class="input-field col s4">
 						<input id="educationalInstitution" type="text" class="validate" 
 						ng-model="userAcademicProfile.educationalInstitution.name"> <label
-							for="educationalInstitution">Instituição de ensino</label>
+							for="educationalInstitution" ng-class="{ 'active' : userAcademicProfile.educationalInstitution.name }">Instituição de ensino</label>
 					</div>
 					<div class="input-field col s4">
 						<input id="course" type="text" class="validate" ng-model="userAcademicProfile.course"> <label
-							for="course">Curso</label>
+							for="course" ng-class="{ 'active' : userAcademicProfile.course }">Curso</label>
 					</div>
 					<div class="input-field col s4">
 						<input name="startingdate" type="text" id="startingdate"
-							class="validate" ui-date ng-model="userAcademicProfile.dateStart"> <label for="startingdate">Data
+							class="validate" ui-date ng-model="userAcademicProfile.dateStart"> <label for="startingdate" 
+							ng-class="{ 'active' : userAcademicProfile.dateStart }">Data
 							de in&iacutecio</label>
 					</div>
 					<div class="input-field col s4">
 						<input name="finishingdate" type="text" id="finishingdate"
-							class="validate" ui-date ng-model="userAcademicProfile.dateEnd"> <label for="finishingdate">Data
+							class="validate" ui-date ng-model="userAcademicProfile.dateEnd"> <label for="finishingdate" 
+							ng-class="{ 'active' : userAcademicProfile.dateEnd }">Data
 							de t&eacutermino</label>
 					</div>
 				</div>
@@ -133,20 +135,22 @@
 				<div class="row" ng-repeat="userProfessionalProfile in userProfessionalProfiles">
 					<div class="input-field col s4">
 						<input id="workplace" type="text" class="validate" ng-model="userProfessionalProfile.workplace.name"> <label
-							for="workplace">Local de trabalho</label>
+							for="workplace" ng-class="{ 'active' : userProfessionalProfile.workplace.name }">Local de trabalho</label>
 					</div>
 					<div class="input-field col s4">
 						<input id="office" type="text" class="validate" ng-model="userProfessionalProfile.office"> <label
-							for="office">Cargo</label>
+							for="office" ng-class="{ 'active' : userProfessionalProfile.office }">Cargo</label>
 					</div>
 					<div class="input-field col s4">
 						<input name="startingdate" type="text" id="startingdate"
-							class="validate" ui-date ng-model="userProfessionalProfile.dateStart"> <label for="startingdate">Data
+							class="validate" ui-date ng-model="userProfessionalProfile.dateStart"> <label for="startingdate" 
+							ng-class="{ 'active' : userProfessionalProfile.dateStart }">Data
 							de in&iacutecio</label>
 					</div>
 					<div class="input-field col s4">
 						<input name="finishingdate" type="text" id="finishingdate"
-							class="validate" ui-date ng-model="userProfessionalProfile.dateEnd"> <label for="finishingdate">Data
+							class="validate" ui-date ng-model="userProfessionalProfile.dateEnd"> <label for="finishingdate" 
+							ng-class="{ 'active' : userProfessionalProfile.dateEnd }">Data
 							de t&eacutermino</label>
 					</div>
 				</div>
