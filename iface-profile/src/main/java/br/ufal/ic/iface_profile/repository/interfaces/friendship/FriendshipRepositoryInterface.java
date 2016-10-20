@@ -13,4 +13,5 @@ public interface FriendshipRepositoryInterface extends RepositoryInterface <Frie
 	public List<User> findFriends (Integer x);
 	public List<Friendship> findFriendshipRequests(Integer id);
 	public List<UserProfile> findFriendsByName (Integer id_user, String name);
+	public Friendship hasFriendship (Integer id_1, Integer id_2);
 }

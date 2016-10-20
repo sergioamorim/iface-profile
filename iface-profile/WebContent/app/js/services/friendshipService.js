@@ -42,11 +42,21 @@ angular.module("iFace").factory("friendshipAPI", function($http, config){
 			}
         });
 	}
+	var _hasFriendship = function(id_1,id_2){
+		return $http({
+            url: config.baseUrl+"/friendship/hasFriendship/"+id_1+"_"+id_2,
+            method: "GET",
+            headers: {
+				"Content-Type": "application/json"
+			}
+        });
+	} 
 	return {
 		requestfriendship: _requestfriendship,
 		acceptingfriendship: _acceptingfriendship,
 		refusefriendship: _refusefriendship,
-		findFriendshipRequests: _findFriendshipRequests
+		findFriendshipRequests: _findFriendshipRequests,
+		hasFriendship: _hasFriendship
 	}
 	
 });

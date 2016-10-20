@@ -106,5 +106,23 @@ public class FriendshipRepository extends GenericHibernateRepository<Friendship,
 		return u;		
 	}
 
+	@Override
+	public Friendship hasFriendship(Integer id_1, Integer id_2) {
+		try{
+		return this.findByCriteria(Restrictions.or(
+				Restrictions.and(
+						Restrictions.eq("user_x.id", id_1),
+						Restrictions.eq("user_y.id", id_2)
+				),
+				Restrictions.and(
+						Restrictions.eq("user_y.id", id_1),
+						Restrictions.eq("user_x.id", id_2)
+				)
+				
+		)).get(0);
+		}catch(IndexOutOfBoundsException e){
+			return	null;
+		}
+	}
 
 }
