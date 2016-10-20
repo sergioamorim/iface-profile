@@ -33,10 +33,20 @@ angular.module("iFace").factory("friendshipAPI", function($http, config){
 			}
         });
     }
+	var _findFriendshipRequests = function(id_friendship){
+		return $http({
+            url: config.baseUrl+"/friendship/find_requests/"+id_friendship,
+            method: "GET",
+            headers: {
+				"Content-Type": "application/json"
+			}
+        });
+	}
 	return {
 		requestfriendship: _requestfriendship,
 		acceptingfriendship: _acceptingfriendship,
-		refusefriendship: _refusefriendship
+		refusefriendship: _refusefriendship,
+		findFriendshipRequests: _findFriendshipRequests
 	}
 	
 });

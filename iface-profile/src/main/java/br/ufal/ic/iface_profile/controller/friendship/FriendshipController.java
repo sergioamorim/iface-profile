@@ -125,8 +125,8 @@ public class FriendshipController extends AbstractController <Friendship, Intege
 		
 		*Error in user_y.getUserProfile().getName()); e user_x.getUserProfile().getName());
 		*/
-		userXLog.setTitle("New friendship with "+user_y.getUserProfile().getName());
-		userYLog.setTitle("New friendship with "+user_x.getUserProfile().getName());
+		userXLog.setTitle("New friendship with "+"nome1");//user_y.getUserProfile().getName());
+		userYLog.setTitle("New friendship with "+"nome2");//user_x.getUserProfile().getName());
 		
 		logRepository.save(userXLog);
 		logRepository.save(userYLog);
