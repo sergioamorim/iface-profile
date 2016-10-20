@@ -54,6 +54,13 @@ public class FriendshipController extends AbstractController <Friendship, Intege
 		return getRepository().findFriends(id);
 	}
 	
+	@RequestMapping (value="/hasFriendship/{id_1}_{id_2}", method = RequestMethod.GET)
+	@ResponseBody
+	public Friendship hasFriendship(@PathVariable Integer id_1, @PathVariable Integer id_2){
+		return getRepository().hasFriendship(id_1,id_2);
+	}
+	
+	
 	@RequestMapping(value="/find_requests/{id}", method = RequestMethod.GET)
 	@ResponseBody
 	public List<Friendship> findFriendshipRequests(@PathVariable Integer id){
