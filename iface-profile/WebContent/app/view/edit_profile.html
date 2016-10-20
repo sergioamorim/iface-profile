@@ -79,9 +79,20 @@
 					<div style="padding: 10px"></div>
 					<div class="row">
 						<div class="input-field col s6">
-							<input name="hometown" id="hometown" type="text" class="validate" 
-							ng-model="relationship.receiver.userProfile.name">
-							<label for="last_name" ng-class="{ 'active' : relationship.receiver.userProfile.name }">Nome</label>
+
+						<angucomplete-alt id="teste"
+						  placeholder="Nome"
+              			  pause="10"
+			              selected-object="teste"
+			              remote-url="/iface-profile/service/user_profile/user/name/"
+			              remote-url-data-field=""
+			              title-field="name,lastname"
+			              description-field=""
+			              image-field="picture"
+			              input-class="form-control form-control-small"
+			              minlength="1"
+					      match-class="highlight"/>
+						
 						</div>
 						<div class="input-field col s6">
 							<select ng-model="relationship.relationshipType.receiverDegreeOfKinship" 
