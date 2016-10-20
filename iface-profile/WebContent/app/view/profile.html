@@ -16,6 +16,7 @@
 		<a href="#" class="brand-logo" style="padding-left: 15px">iFace</a>
 		<div class="nav-wrapper">
 			<ul id="nav-mobile" class="right hide-on-med-and-down">
+				
 				<li><a>Sair</a></li>
 			</ul>
 		</div>
@@ -23,6 +24,13 @@
 </div>
 <div class="containerProfile">
 	<div class="profile-screen">
+	<angucomplete-alt id="amigos" placeholder="Buscar Usu�rio"
+					pause="10" selected-object="amigoProcurado"
+					remote-url="/iface-profile/service/user_profile/user/name/"
+					remote-url-data-field="" title-field="name,lastname"
+					description-field="" image-field="picture"
+					input-class="form-control form-control-small" minlength="1"
+					match-class="highlight" />
 		<div class="col s12">
 			<div class="row">
 				<img ng-src="{{userProfile.picture}}" alt="Profile Picture"
@@ -32,56 +40,58 @@
 
 				<button class="waves-effect waves-light btn"
 					ng-click="openEditProfile()"
+					ng-show="userProfile.id == currentUser.id"
 					style="float: right; margin-left: 10px">Editar Perfil</button>
-				
-				<a class="waves-effect waves-light btn modal-trigger"  ng-click="getFriendshipRequests()"href="#modal1"
-					ng-show="!isMyPerfil() " style="float: right;">Solicita&ccedil&otildees Pendentes</a>
-				
+
+				<a class="waves-effect waves-light btn modal-trigger"
+					ng-click="getFriendshipRequests()" href="#modal1"
+					ng-show="!isMyPerfil() " style="float: right;">Solicita&ccedil&otildees
+					Pendentes</a>
+
 				<button class="waves-effect waves-light btn" ng-show="isMyPerfil()"
 					ng-click="requestfriendship()"
 					style="float: right; margin-left: 10px">{{buttonFriendship}}</button>
 
 				<div id="modal1" class="modal">
-					<div class="modal-content" ng-repeat="findFriendshipRequest in findFriendshipRequests">
+					<div class="modal-content"
+						ng-repeat="findFriendshipRequest in findFriendshipRequests">
 						<div class="row" style="padding: 10px">
 
-							<img ng-src="{{findFriendshipRequest.user_x.userProfile.picture}}" alt="Profile Picture"
+							<img
+								ng-src="{{findFriendshipRequest.user_x.userProfile.picture}}"
+								alt="Profile Picture"
 								style="width: 40px; height: 40px; float: left" class="circle">
-							
+
 							<label style="color: black; font-size: 16px">{{findFriendshipRequest.user_x.userProfile.name+"
-								"+findFriendshipRequest.user_x.userProfile.lastname+" deseja lhe adicionar como amigo"}}</label>
+								"+findFriendshipRequest.user_x.userProfile.lastname+" deseja lhe
+								adicionar como amigo"}}</label>
 
-							<button class="waves-effect waves-light btn" ng-click="refusefriendship(findFriendshipRequest.id)"
+							<button class="waves-effect waves-light btn"
+								ng-click="refusefriendship(findFriendshipRequest.id)"
 								style="float: right; margin-left: 10px"'>Recusar</button>
-							<button class="waves-effect waves-light btn" ng-click="acceptingfriendship(findFriendshipRequest.id)"
+							<button class="waves-effect waves-light btn"
+								ng-click="acceptingfriendship(findFriendshipRequest.id)"
 								style="float: right; margin-left: 10px"'>Aceitar</button>
-
 						</div>
 					</div>
-
 				</div>
-
 			</div>
 		</div>
 
-		<angucomplete-alt id="amigos" placeholder="Procurar amigos" pause="10"
-			selected-object="amigoProcurado"
-			remote-url="/iface-profile/service/user_profile/user/name/"
-			remote-url-data-field="" title-field="name,lastname"
-			description-field="" image-field="picture"
-			input-class="form-control form-control-small" minlength="1"
-			match-class="highlight" />
+		
 
 		<nav class="nav-wrapper"
 			style="margin-top: 20px; margin-bottom: 20px;">
 			<ul id="nav-mobile" class="left hide-on-med-and-down">
-				<li><a>Sobre</a></li>
-				<li><a>Amigos</a></li>
+				<li><a ng-click="tab = 0">Sobre</a></li>
+				<li><a ng-click="tab = 1">Amigos</a></li>
+				<li ng-show="userProfile.id == currentUser.id" ng-click="tab = 2"><a>Hist&oacuterico</a></li>
 			</ul>
 		</nav>
-		<label>Visão Geral</label>
-		<div class="divider"></div>
-		<div style="padding: 10px">
+		<div ng-if="tab == 0">
+			<label>Visão Geral</label>
+			<div class="divider"></div>
+			<div style="padding: 10px"></div>
 			<div class="row">
 				<div class="col s4">{{"G&ecircnero:
 					"+userProfile.gender.name}}</div>
@@ -100,41 +110,48 @@
 			</div>
 			<label>Fam&iacutelia e relacionamentos</label>
 			<div class="divider"></div>
-			<div style="padding: 10px">
-				<div class="row">
-					<div class="col s4"></div>
-					<div class="col s4"></div>
-					<div class="col s4"></div>
-				</div>
-
+			<div style="padding: 10px"></div>
+			<div class="row">
+				<div class="col s4"></div>
+				<div class="col s4"></div>
+				<div class="col s4"></div>
 			</div>
 			<label>Acadêmico</label>
 			<div class="divider"></div>
-			<div style="padding: 10px">
-				<div class="row"
-					ng-repeat="userAcademicProfile in userProfile.userAcademicProfile">
-					<div class="col s3">Instituição de ensino:
-						{{userAcademicProfile.educationalInstitution.name}}</div>
-					<div class="col s3">Curso: {{userAcademicProfile.course}}</div>
-					<div class="col s3">Data de Início:
-						{{userAcademicProfile.dateStart | date:'dd/MM/yyyy'}}</div>
-					<div class="col s3">Data de Término:
-						{{userAcademicProfile.dateEnd | date:'dd/MM/yyyy'}}</div>
-				</div>
+			<div style="padding: 10px"></div>
+			<div class="row"
+				ng-repeat="userAcademicProfile in userProfile.userAcademicProfile">
+				<div class="col s3">Instituição de ensino:
+					{{userAcademicProfile.educationalInstitution.name}}</div>
+				<div class="col s3">Curso: {{userAcademicProfile.course}}</div>
+				<div class="col s3">Data de Início:
+					{{userAcademicProfile.dateStart | date:'dd/MM/yyyy'}}</div>
+				<div class="col s3">Data de Término:
+					{{userAcademicProfile.dateEnd | date:'dd/MM/yyyy'}}</div>
 			</div>
 			<label>Profissional</label>
 			<div class="divider"></div>
-			<div style="padding: 10px">
-				<div class="row"
-					ng-repeat="userProfessionalProfile in userProfile.userProfessionalProfile">
-					<div class="col s3">Local de Trabalho:
-						{{userProfessionalProfile.workplace.name}}</div>
-					<div class="col s3">Cargo: {{userProfessionalProfile.office}}</div>
-					<div class="col s3">Data de Início:
-						{{userProfessionalProfile.dateStart | date:'dd/MM/yyyy'}}</div>
-					<div class="col s3">Data de Término:
-						{{userProfessionalProfile.dateEnd | date:'dd/MM/yyyy'}}</div>
-				</div>
+			<div style="padding: 10px"></div>
+			<div class="row"
+				ng-repeat="userProfessionalProfile in userProfile.userProfessionalProfile">
+				<div class="col s3">Local de Trabalho:
+					{{userProfessionalProfile.workplace.name}}</div>
+				<div class="col s3">Cargo: {{userProfessionalProfile.office}}</div>
+				<div class="col s3">Data de Início:
+					{{userProfessionalProfile.dateStart | date:'dd/MM/yyyy'}}</div>
+				<div class="col s3">Data de Término:
+					{{userProfessionalProfile.dateEnd | date:'dd/MM/yyyy'}}</div>
 			</div>
 		</div>
+		<div ng if="tab == 1">
+		<div class = "col s8" ng-repeat = "friend in friends"> 
+		<div class = "col s4" ><img ng-src="{{friend.picture}}" alt="ProfileF Picture"
+					style="width: 80px; height: 80px;"><label>{{friend.name+"
+					"+friend.lastname}}</label> </div>
+		</div>
+		</div>
+		<div ng if="tab == 2">
+		
+		</div>
+	</div>
 	</div>
