@@ -74,16 +74,16 @@
 							<label for="last_name" ng-class="{ 'active' : userProfile.homeTown.name }">Cidade Atual</label>
 						</div>
 					</div>
+					{{relationships}}
 					<label>Fam&iacutelia e Relacionamentos</label>
 					<div class="divider"></div>
 					<div style="padding: 10px"></div>
 					<div class="row" ng-repeat="relationship in relationships">
 						<div class="input-field col s6">
-
-						<angucomplete-alt id="teste"
+						<angucomplete-alt ng-click="onAutoComplete($index, relationship)"
 						  placeholder="Nome"
               			  pause="10"
-			              selected-object="teste"
+			              selected-object="relationship.user_y"
 			              remote-url="/iface-profile/service/friendship/find_friends_by_name/{{userProfile.user.id}}/"
 			              remote-url-data-field=""
 			              title-field="name,lastname"
@@ -96,7 +96,7 @@
 						</div>
 						<div class="input-field col s6">
 							<select ng-model="relationship.relationshipType.receiverDegreeOfKinship" 
-							ng-options="degreeOfKinship1.degreeOfKinship for degreeOfKinship1 in degreeOfKinshipByGender | orderBy:'degreeOfKinship'">
+							ng-options="degreeOfKinship1.degreeOfKinship for degreeOfKinship1 in degreeOfKinshipByGender[$index] | orderBy:'degreeOfKinship'">
 							</select><label>Grau de parentesco</label>
 						</div>
 					</div>
