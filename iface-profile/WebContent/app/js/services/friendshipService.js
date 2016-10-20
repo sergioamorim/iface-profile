@@ -42,6 +42,17 @@ angular.module("iFace").factory("friendshipAPI", function($http, config){
 			}
         });
 	}
+	
+	var _findFriends = function(id_user){
+		return $http({
+            url: config.baseUrl+"/friendship/find_friends/"+id_user,
+            method: "GET",
+            headers: {
+				"Content-Type": "application/json"
+			}
+        });
+	}
+	
 	var _hasFriendship = function(id_1,id_2){
 		return $http({
             url: config.baseUrl+"/friendship/hasFriendship/"+id_1+"_"+id_2,
@@ -61,13 +72,16 @@ angular.module("iFace").factory("friendshipAPI", function($http, config){
 			}
 		});
 	}
+	
+	
 	return {
 		requestfriendship: _requestfriendship,
 		acceptingfriendship: _acceptingfriendship,
 		refusefriendship: _refusefriendship,
 		findFriendshipRequests: _findFriendshipRequests,
 		hasFriendship: _hasFriendship,
-		getFriendships: _getFriendships
+		getFriendships: _getFriendships,
+		findFriends: _findFriends
 	}
 	
 });
