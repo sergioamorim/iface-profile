@@ -3,6 +3,7 @@ package br.ufal.ic.iface_profile.repository.classes.friendship;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
@@ -81,19 +82,25 @@ public class FriendshipRepository extends GenericHibernateRepository<Friendship,
 		 );
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<UserProfile> findFriendsByName (Integer id_user, String name){
-		List<UserProfile> u = new ArrayList<UserProfile>()	;
+		List<UserProfile> u = new ArrayList<UserProfile>();
 		
-		List<Friendship> f = this.findByCriteria(Restrictions.and(
+		Criteria c = getSession().createCriteria(Friendship.class, "friendship");
+		c.createAlias("friendship.user_x", "user_x"); 
+		c.createAlias("friendship.user_y", "user_y");
+		c.add(Restrictions.and(
 				Restrictions.or(
 						Restrictions.and(
-								Restrictions.like("userX.username", "%"+name+"%"),
+								Restrictions.like("user_x.username", "%"+name+"%"),
 								Restrictions.eq("user_y.id", id_user)),
 						Restrictions.and(
-								Restrictions.like("userY.username", "%"+name+"%"),
+								Restrictions.like("user_y.username", "%"+name+"%"),
 								Restrictions.eq("user_x.id", id_user)),
-				Restrictions.eq("approved", true)
+				Restrictions.eq("friendship.approved", true)
 						)));
+		List<Friendship> f = c.list();
+		
 		
 		for(Friendship aux : f){
 			if(aux.getUser_x().getId() == id_user){
