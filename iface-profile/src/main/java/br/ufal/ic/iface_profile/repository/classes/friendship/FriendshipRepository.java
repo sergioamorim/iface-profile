@@ -73,11 +73,8 @@ public class FriendshipRepository extends GenericHibernateRepository<Friendship,
 
 	public List<Friendship> findFriendshipRequests(Integer id){
 		return this.findByCriteria(Restrictions.and(
-				 Restrictions.or(
-					Restrictions.eq("user_x.id", id),
-					Restrictions.eq("user_y.id", id)
-					),
-				 Restrictions.eq("approved",false)
+				Restrictions.eq("user_y.id", id),
+			    Restrictions.eq("approved",false)
 				)	
 		 );
 	}

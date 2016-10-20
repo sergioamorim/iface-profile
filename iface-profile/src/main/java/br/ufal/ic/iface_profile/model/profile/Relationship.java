@@ -30,6 +30,7 @@ public class Relationship {
 	@Cascade(CascadeType.ALL)
 	private RelationshipType relationshipType;
 	
+	private boolean statusSolicitation;
 	
 	public Integer getId() {
 		return id;
@@ -61,5 +62,4 @@ public class Relationship {
 	public void setStatusSolicitation(boolean statusSolicitation) {
 		this.statusSolicitation = statusSolicitation;
 	}
-	private boolean statusSolicitation;
 }

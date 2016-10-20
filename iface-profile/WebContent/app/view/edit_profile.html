@@ -77,7 +77,7 @@
 					<label>Fam&iacutelia e Relacionamentos</label>
 					<div class="divider"></div>
 					<div style="padding: 10px"></div>
-					<div class="row">
+					<div class="row" ng-repeat="relationship in relationships">
 						<div class="input-field col s6">
 
 						<angucomplete-alt id="teste"
@@ -102,7 +102,8 @@
 					</div>
 				</div>
 				<div class="row">
-					<button type="button" class="waves-effect waves-light btn" style = "float:right">
+					<button type="button" class="waves-effect waves-light btn" style = "float:right" 
+					ng-click="newRelationships()">
 						<i class="material-icons">plus_one</i>
 					</button>
 				</div>
