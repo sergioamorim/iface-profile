@@ -29,8 +29,8 @@ angular.module("iFace").controller("profileCtrl", function($scope, $location, $r
 			
 		});
 	}
-	$scope.acceptingfriendship = function(friendship){
-		friendshipAPI.acceptingfriendship(friendship).success(function(data){
+	$scope.acceptingfriendship = function(id_friendship){
+		friendshipAPI.acceptingfriendship(id_friendship).success(function(data){
 			
 		});
 	}

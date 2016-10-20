@@ -133,14 +133,10 @@ public class FriendshipController extends AbstractController <Friendship, Intege
 		
 		return getRepository().save(newFriendship);
 	}
-	@RequestMapping(method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "{id}", method = RequestMethod.PUT)
 	@ResponseBody
-	public Friendship update(@RequestBody @Valid Friendship friendship, BindingResult result,
-			HttpServletResponse response) throws JsonParseException,
-			JsonMappingException, IOException {
-		if (result.hasErrors()) {
-			throw new ValidationException(result);
-		}
+	public Friendship update(@PathVariable Integer id){
+		Friendship friendship = getRepository().findById(id);
 		friendship.setApproved(true);
 		return getRepository().update(friendship);
 	}
