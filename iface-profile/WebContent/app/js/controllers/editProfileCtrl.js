@@ -5,12 +5,24 @@ angular.module("iFace").controller("editProfileCtrl", function($scope, $location
 	$scope.userProfessionalProfiles = [];
 	$scope.relationships = []; 
 	
+	$scope.degreeOfKinshipByGender = [];
+	$scope.civilStatusByGender = [];
+	
+	
 	$(document).ready(function() {
         $('select').material_select();
 	});
 	
+	$scope.onAutoComplete = function(index, relationship){
+		if(relationship.user_y != undefined){
+			console.log(index);
+			userProfile = relationship.user_y.description;
+			relationship.user_y = userProfile.user;
+			setDegreeOfKinship(index, userProfile);
+		}
+	}
+	
 	relationshipAPI.getRelationships(currentUser.id).success(function(data){
-		console.log(data);
 		$scope.relationships = data;
 	});
 	
@@ -23,22 +35,26 @@ angular.module("iFace").controller("editProfileCtrl", function($scope, $location
 		$scope.setSelects();
 	});
 	
-	$scope.degreeOfKinshipByGender = [];
-	$scope.civilStatusByGender = [];
 	
 	$scope.setSelects = function(){
-		degreeOfKinshipAPI.getDegreeOfKinshipByGender($scope.userProfile.gender.id).success(function(data){
-			$scope.degreeOfKinshipByGender = data;
-		});
-		
 		civilStatusAPI.getCivilStatusByGender($scope.userProfile.gender.id).success(function(data){
 			$scope.civilStatusByGender = data;
 		});
 	};	
 	
 	function sleep(ms) {
-		  return new Promise(resolve => setTimeout(resolve, ms));
-		}
+	  return new Promise(resolve => setTimeout(resolve, ms));
+	}
+	
+	function setDegreeOfKinship(index, user){
+		console.log(user);
+		degreeOfKinshipAPI.getDegreeOfKinshipByGender(user.gender.id).success(function(data){
+			$scope.degreeOfKinshipByGender[index] = data;
+			sleep(500).then(() => {
+				$('select').material_select();
+			});
+		});
+	}
 	
 	$scope.$watch('civilStatusByGender', function(scope){
 		if($scope.civilStatusByGender != undefined){
