@@ -1,11 +1,17 @@
-angular.module("iFace").controller("editProfileCtrl", function($scope, $location, $cookies, profileAPI, degreeOfKinshipAPI, civilStatusAPI, uploadAPI, config) {
+angular.module("iFace").controller("editProfileCtrl", function($scope, $location, $cookies, profileAPI, degreeOfKinshipAPI, relationshipAPI, civilStatusAPI, uploadAPI, config) {
 	var currentUser = $cookies.getObject("user");
 	
 	$scope.userAcademicProfiles = [];
 	$scope.userProfessionalProfiles = [];
+	$scope.relationships = []; 
 	
 	$(document).ready(function() {
         $('select').material_select();
+	});
+	
+	relationshipAPI.getRelationships(currentUser.id).success(function(data){
+		console.log(data);
+		$scope.relationships = data;
 	});
 	
 	profileAPI.getByUserId(currentUser.id).success(function(data){
@@ -53,6 +59,7 @@ angular.module("iFace").controller("editProfileCtrl", function($scope, $location
 		})
 	};
 	
+	
 	$scope.newUserAcademicProfile = function(){
 		$scope.userAcademicProfiles.push({
 			user : {id:currentUser.id},
@@ -61,6 +68,17 @@ angular.module("iFace").controller("editProfileCtrl", function($scope, $location
 			dateStart : '',
 			dateEnd : ''
 		})
+	};
+	
+	$scope.newRelationships = function(){
+		$scope.relationships.push({
+			sender : {id:currentUser.id},
+			statusSolicitation : false
+		});
+		sleep(500).then(() => {
+			$('select').material_select();
+		});
+		
 	};
 	
 	$scope.editProfile = function(profile, urlImageProfile){
