@@ -27,7 +27,7 @@ public class User {
 	
 	private String email;
 	
-	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+	//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 	@JsonIgnoreProperties("user")
 	@OneToOne(mappedBy="user", fetch=FetchType.LAZY)
 	private UserProfile userProfile;
