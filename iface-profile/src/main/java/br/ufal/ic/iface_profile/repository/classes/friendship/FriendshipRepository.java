@@ -1,5 +1,6 @@
 package br.ufal.ic.iface_profile.repository.classes.friendship;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.criterion.DetachedCriteria;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import br.ufal.ic.iface_profile.model.friendship.Friendship;
 import br.ufal.ic.iface_profile.model.infrastructure.User;
+import br.ufal.ic.iface_profile.model.profile.UserProfile;
 import br.ufal.ic.iface_profile.repository.classes.GenericHibernateRepository;
 import br.ufal.ic.iface_profile.repository.classes.infrastructure.UserRepository;
 import br.ufal.ic.iface_profile.repository.interfaces.friendship.FriendshipRepositoryInterface;
@@ -78,6 +80,32 @@ public class FriendshipRepository extends GenericHibernateRepository<Friendship,
 				)	
 		 );
 	}
+	
+	public List<UserProfile> findFriendsByName (Integer id_user, String name){
+		List<UserProfile> u = new ArrayList<UserProfile>()	;
+		
+		List<Friendship> f = this.findByCriteria(Restrictions.and(
+				Restrictions.or(
+						Restrictions.and(
+								Restrictions.like("userX.username", "%"+name+"%"),
+								Restrictions.eq("user_y.id", id_user)),
+						Restrictions.and(
+								Restrictions.like("userY.username", "%"+name+"%"),
+								Restrictions.eq("user_x.id", id_user)),
+				Restrictions.eq("approved", true)
+						)));
+		
+		for(Friendship aux : f){
+			if(aux.getUser_x().getId() == id_user){
+				u.add(aux.getUser_y().getUserProfile());
+			}else{
+				u.add(aux.getUser_x().getUserProfile());
+			}
+		}
+		
+		return u;		
+	}
+
 	@Override
 	public Friendship hasFriendship(Integer id_1, Integer id_2) {
 		try{
