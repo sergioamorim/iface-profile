@@ -29,24 +29,41 @@
 					style="width: 160px; height: 160px;">
 				<h1 class="profileTitle">{{userProfile.name+"
 					"+userProfile.lastname}}</h1>
-				<button class="waves-effect waves-light btn" ng-click="openEditProfile()" style = "float:right"'>
-					Editar Perfil</button>
+				<button class="waves-effect waves-light btn"
+					ng-click="openEditProfile()"
+					style="float: right; margin-left: 10px"'>Editar Perfil</button>
+				<a class="waves-effect waves-light btn modal-trigger" href="#modal1"
+					style="float: right;">Solicita&ccedil&otildees Pendentes</a>
+
+				<div id="modal1" class="modal">
+					<div class="modal-content">
+						<div class="row" style = "padding:10px">
+							
+								<img ng-src="{{userProfile.picture}}" alt="Profile Picture"
+									style="width: 40px; height: 40px; float: left" class="circle">
+								<label style="color: black; font-size: 16px">{{userProfile.name+"
+									"+userProfile.lastname+" deseja lhe adicionar como "}}</label>
+
+								<button class="waves-effect waves-light btn"
+									style="float: right; margin-left: 10px"'>Recusar</button>
+								<button class="waves-effect waves-light btn"
+									style="float: right; margin-left: 10px"'>Aceitar</button>
+	
+						</div>
+					</div>
+
+				</div>
 			</div>
 		</div>
-		
-		<angucomplete-alt id="amigos"
-              placeholder="Procurar amigos"
-              pause="10"
-              selected-object="amigoProcurado"
-              remote-url="/iface-profile/service/user_profile/user/name/"
-              remote-url-data-field=""
-              title-field="name,lastname"
-              description-field=""
-              image-field="picture"
-              input-class="form-control form-control-small"
-              minlength="1"
-		      match-class="highlight"/>
-              
+
+		<angucomplete-alt id="amigos" placeholder="Procurar amigos" pause="10"
+			selected-object="amigoProcurado"
+			remote-url="/iface-profile/service/user_profile/user/name/"
+			remote-url-data-field="" title-field="name,lastname"
+			description-field="" image-field="picture"
+			input-class="form-control form-control-small" minlength="1"
+			match-class="highlight" />
+
 		<nav class="nav-wrapper"
 			style="margin-top: 20px; margin-bottom: 20px;">
 			<ul id="nav-mobile" class="left hide-on-med-and-down">
@@ -86,21 +103,29 @@
 			<label>Acadêmico</label>
 			<div class="divider"></div>
 			<div style="padding: 10px">
-				<div class="row" ng-repeat="userAcademicProfile in userProfile.userAcademicProfile">
-					<div class="col s3">Instituição de ensino: {{userAcademicProfile.educationalInstitution.name}}</div>
+				<div class="row"
+					ng-repeat="userAcademicProfile in userProfile.userAcademicProfile">
+					<div class="col s3">Instituição de ensino:
+						{{userAcademicProfile.educationalInstitution.name}}</div>
 					<div class="col s3">Curso: {{userAcademicProfile.course}}</div>
-					<div class="col s3">Data de Início: {{userAcademicProfile.dateStart | date:'dd/MM/yyyy'}}</div>
-					<div class="col s3">Data de Término: {{userAcademicProfile.dateEnd | date:'dd/MM/yyyy'}}</div>
+					<div class="col s3">Data de Início:
+						{{userAcademicProfile.dateStart | date:'dd/MM/yyyy'}}</div>
+					<div class="col s3">Data de Término:
+						{{userAcademicProfile.dateEnd | date:'dd/MM/yyyy'}}</div>
 				</div>
 			</div>
 			<label>Profissional</label>
 			<div class="divider"></div>
 			<div style="padding: 10px">
-				<div class="row" ng-repeat="userProfessionalProfile in userProfile.userProfessionalProfile">
-					<div class="col s3">Local de Trabalho: {{userProfessionalProfile.workplace.name}}</div>
+				<div class="row"
+					ng-repeat="userProfessionalProfile in userProfile.userProfessionalProfile">
+					<div class="col s3">Local de Trabalho:
+						{{userProfessionalProfile.workplace.name}}</div>
 					<div class="col s3">Cargo: {{userProfessionalProfile.office}}</div>
-					<div class="col s3">Data de Início: {{userProfessionalProfile.dateStart | date:'dd/MM/yyyy'}}</div>
-					<div class="col s3">Data de Término: {{userProfessionalProfile.dateEnd | date:'dd/MM/yyyy'}}</div>
+					<div class="col s3">Data de Início:
+						{{userProfessionalProfile.dateStart | date:'dd/MM/yyyy'}}</div>
+					<div class="col s3">Data de Término:
+						{{userProfessionalProfile.dateEnd | date:'dd/MM/yyyy'}}</div>
 				</div>
 			</div>
 		</div>
