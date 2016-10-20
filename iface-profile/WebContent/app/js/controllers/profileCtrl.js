@@ -19,16 +19,14 @@ angular.module("iFace").controller("profileCtrl", function($scope, $location, $r
 		$location.path("/signup");
 	}
 	//so para teste em requestfriendship
-	profileAPI.getByUserId(2).success(function(data){
+	/*profileAPI.getByUserId(2).success(function(data){
 		$scope.userprofile2=data;
-	});
+	});*/
 	
 	//trocar id
 	friendshipAPI.findFriendshipRequests(1).success(function(data){
 		$scope.friendshipRequests=data;
-		console.log($scope.friendshipRequests);
 		
-		//console.log($scope.friendshipRequests.user_y.userProfile.name);
 	});
 	
 	
