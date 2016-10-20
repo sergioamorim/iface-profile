@@ -99,10 +99,10 @@ angular.module("iFace").controller("editProfileCtrl", function($scope, $location
 	
 	$scope.editProfile = function(profile, urlImageProfile){
 
-			profile.userAcademicProfile = $scope.userAcademicProfiles;
-			profile.picture = urlImageProfile;
-			profile.userProfessionalProfile = $scope.userProfessionalProfiles;
-			delete profile.user.userProfile;
+		profile.userAcademicProfile = $scope.userAcademicProfiles;
+		profile.picture = urlImageProfile;
+		profile.userProfessionalProfile = $scope.userProfessionalProfiles;
+		delete profile.user.userProfile;
 		profileAPI.updateProfile(profile).success(function(data, status){
 			alert("Perfil editado com sucesso.");
 			$location.path("/index");
