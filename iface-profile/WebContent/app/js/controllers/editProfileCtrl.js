@@ -136,6 +136,7 @@ angular.module("iFace").controller("editProfileCtrl", function($scope, $location
 		
 		profileAPI.updateProfile(profile).success(function(data, status){
 			relationshipWrapper = {};
+			relationshipWrapper.genderSenderId = $scope.userProfile.gender.id;
 			relationshipWrapper.relationships = $scope.relationships;
 			relationshipAPI.saveAllRelationships(relationshipWrapper).success(function(data, status){
 				alert("Perfil editado com sucesso.");

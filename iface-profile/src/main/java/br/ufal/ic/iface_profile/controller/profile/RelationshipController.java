@@ -156,7 +156,7 @@ public class RelationshipController extends AbstractController<Relationship, Int
 			HttpServletResponse response) throws JsonParseException,
 			JsonMappingException, IOException {
 		for (Relationship u : listRelationship.getRelationships()){
-			u.setRelationshipType(getRelationshipTypeRepository().findRelationshipTypeByGender(u.getSender().getUserProfile().getGender().getId(), u.getRelationshipType().getReceiverDegreeOfKinship().getId()));
+			u.setRelationshipType(getRelationshipTypeRepository().findRelationshipTypeByGender(listRelationship.getGenderSenderId(), u.getRelationshipType().getReceiverDegreeOfKinship().getId()));
 		}
 		if (result.hasErrors()) {
 			throw new ValidationException(result);

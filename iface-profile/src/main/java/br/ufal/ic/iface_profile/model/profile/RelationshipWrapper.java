@@ -5,6 +5,16 @@ import java.util.List;
 public class RelationshipWrapper {
 
 	private List<Relationship> relationships;
+	
+	private Integer genderSenderId;
+
+	public Integer getGenderSenderId() {
+		return genderSenderId;
+	}
+
+	public void setGenderSenderId(Integer genderSenderId) {
+		this.genderSenderId = genderSenderId;
+	}
 
 	public List<Relationship> getRelationships() {
 		return relationships;
