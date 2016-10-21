@@ -72,7 +72,22 @@ angular.module("iFace").factory("friendshipAPI", function($http, config){
 			}
 		});
 	}
-	
+	var _userBlock = function(User_x, User_y){
+		frienship = {
+				user_x: User_x,
+				user_y: User_y,
+				approved: false,
+				blocked_user: User_y.id
+		}
+		return $http({
+            url: config.baseUrl+"/friendship/block_user",
+            method: "POST",
+            data: frienship,
+            headers: {
+				"Content-Type": "application/json"
+			}
+        });
+	}
 	
 	return {
 		requestfriendship: _requestfriendship,
@@ -81,7 +96,8 @@ angular.module("iFace").factory("friendshipAPI", function($http, config){
 		findFriendshipRequests: _findFriendshipRequests,
 		hasFriendship: _hasFriendship,
 		getFriendships: _getFriendships,
-		findFriends: _findFriends
+		findFriends: _findFriends,
+		userBlock: _userBlock
 	}
 	
 });

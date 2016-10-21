@@ -1,6 +1,10 @@
 angular.module("iFace").controller("profileCtrl", function($scope, $location, $routeParams, $cookies, profileAPI, friendshipAPI, relationshipAPI, logAPI) {
 	$scope.friends=[];
 	$scope.tab = 0;
+	$scope.buttonUserBlock = "Bloquear Usuario";
+	$scope.isUserBlocked = false;
+	$scope.IAmBlocked = false;
+	
 	var currentUser = $cookies.getObject("user");
 	$scope.currentUser = $cookies.getObject("user");
 	
@@ -39,13 +43,14 @@ angular.module("iFace").controller("profileCtrl", function($scope, $location, $r
 		profileAPI.getByUserId(id).success(function(data){
 			$scope.userProfile = data;
 			
-			if($scope.isMyPerfil()){
+			if($scope.isNotMyPerfil()){
 				friendshipAPI.hasFriendship(currentUser.id,$routeParams.id).success(function(data){
 					$scope.friendship=data;
 					if($scope.friendship==""){
 						$scope.buttonFriendship = "Adicionar aos amigos";
 					}
 					else{
+						$scope.statusBlockUser();
 						var statusFriendship = $scope.friendship.approved;
 						if(statusFriendship)
 							$scope.buttonFriendship = "Cancelar amizade";
@@ -71,7 +76,7 @@ angular.module("iFace").controller("profileCtrl", function($scope, $location, $r
 	}else{
 		$location.path("/signup");
 	}
-	$scope.isMyPerfil  = function(){
+	$scope.isNotMyPerfil  = function(){
 		return ($routeParams.id != undefined && $routeParams.id != currentUser.id)
 	}	
 	
@@ -81,15 +86,15 @@ angular.module("iFace").controller("profileCtrl", function($scope, $location, $r
 	$scope.clickButtonFriendship = function(){
 		if($scope.buttonFriendship == "Adicionar aos amigos"){
 			$scope.requestfriendship();
-			$scope.buttonFriendship = "Cancelar solicitação";
+		
 		}
 		else if($scope.buttonFriendship == "Aceita Solicitação"){
 			$scope.acceptingfriendship($scope.friendship.id);
-			$scope.buttonFriendship = "Cancelar amizade";
+			
 		}
 		else{
 			$scope.refusefriendship($scope.friendship.id);
-			$scope.buttonFriendship = "Adicionar aos amigos";
+			
 		}
 	}
 	$scope.requestfriendship = function(){	
@@ -98,19 +103,29 @@ angular.module("iFace").controller("profileCtrl", function($scope, $location, $r
 			profileAPI.getByUserId($routeParams.id).success(function(data){
 				var user_y = data.user;
 				friendshipAPI.requestfriendship(user_x,user_y).success(function(data){										
-					
+					$scope.newFriendship = data;
+					$scope.buttonFriendship = "Cancelar solicitação";
 				});
 			});
 		});
 	}
 	$scope.acceptingfriendship = function(friendship_id){
 		friendshipAPI.acceptingfriendship(friendship_id).success(function(data){
-			$scope.popFriendshipRequest(friendship_id);
+			if(!$scope.isNotMyPerfil()){
+				$scope.popFriendshipRequest(friendship_id)
+			};
+			$scope.buttonFriendship = "Cancelar amizade";
 		});
 	}
 	$scope.refusefriendship = function(friendship_id){
+		if(friendship_id == undefined){
+			friendship_id = $scope.newFriendship.id;
+		}
 		friendshipAPI.refusefriendship(friendship_id).success(function(data){
-			$scope.popFriendshipRequest(friendship_id);
+			if(!$scope.isNotMyPerfil()){
+				$scope.popFriendshipRequest(friendship_id)
+			};
+			$scope.buttonFriendship = "Adicionar aos amigos";
 		});
 	}
 	$scope.getFriendshipRequests = function(){
@@ -123,6 +138,38 @@ angular.module("iFace").controller("profileCtrl", function($scope, $location, $r
 			if(friendship.id!=friendship_id) 
 				return friendship;
 		});
+	}
+	$scope.blockUser = function(){
+		profileAPI.getByUserId(currentUser.id).success(function(data){
+			var user_x = data.user;
+			profileAPI.getByUserId($routeParams.id).success(function(data){
+				var user_y = data.user;
+				friendshipAPI.userBlock(user_x,user_y).success(function(data){											
+					if($scope.buttonUserBlock == "Bloquear Usuario"){
+						$scope.buttonUserBlock = "Desbloquear Usuario";
+						$scope.isUserBlocked = true;
+						$scope.newFriendship = data;
+					}
+					else{
+						$scope.buttonUserBlock = "Bloquear Usuario";
+						$scope.buttonFriendship = "Cancelar amizade";
+						$scope.isUserBlocked = false;
+					}
+				});
+			});
+		});
+	}
+	$scope.statusBlockUser = function(){
+		var idBlocked = $scope.friendship.blocked_user;
+		if(idBlocked!=null){
+			$scope.isUserBlocked = true;
+			if(idBlocked==currentUser.id){	
+				$scope.IAmBlocked = true;
+			}
+			else{
+				$scope.buttonUserBlock = "Desbloquear Usuario";
+			}
+		}
 	}
 	
 	$scope.$watch('amigoProcurado', function(scope){

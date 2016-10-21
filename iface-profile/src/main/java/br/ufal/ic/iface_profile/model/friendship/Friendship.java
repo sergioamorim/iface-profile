@@ -26,6 +26,8 @@ public class Friendship {
 	
 	private Boolean approved;
 	
+	private Integer blocked_user;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -49,5 +51,11 @@ public class Friendship {
 	}
 	public void setApproved(Boolean approved) {
 		this.approved = approved;
+	}
+	public Integer getBlocked_user() {
+		return blocked_user;
+	}
+	public void setBlocked_user(Integer blocked_user) {
+		this.blocked_user = blocked_user;
 	}
 }

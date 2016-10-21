@@ -40,17 +40,19 @@
 
 				<button class="waves-effect waves-light btn"
 					ng-click="openEditProfile()"
-					ng-show="userProfile.id == currentUser.id"
+			        ng-show="userProfile.id == currentUser.id"
 					style="float: right; margin-left: 10px">Editar Perfil</button>
-
-				<a class="waves-effect waves-light btn modal-trigger"
-					ng-click="getFriendshipRequests()" href="#modal1"
-					ng-show="!isMyPerfil() " style="float: right;">Solicita&ccedil&otildees
-					Pendentes</a>
-
-				<button class="waves-effect waves-light btn" ng-show="isMyPerfil()"
+				
+				<a class="waves-effect waves-light btn modal-trigger"  ng-click="getFriendshipRequests()"href="#modal1"
+					ng-show="!isNotMyPerfil() " style="float: right;">Solicita&ccedil&otildees Pendentes</a>
+				
+				<button class="waves-effect waves-light btn" ng-show="isNotMyPerfil() && !IAmBlocked && !isUserBlocked"
 					ng-click="clickButtonFriendship()"
 					style="float: right; margin-left: 10px">{{buttonFriendship}}</button>
+				
+				<button class="waves-effect waves-light btn" ng-show="isNotMyPerfil() && !IAmBlocked"
+					ng-click="blockUser()"
+					style="float: right; margin-left: 10px">{{buttonUserBlock}}</button>
 
 				<div id="modal1" class="modal">
 					<div class="modal-content"
