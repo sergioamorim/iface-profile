@@ -85,58 +85,77 @@ angular.module("iFace").controller("profileCtrl", function($scope, $location, $r
 	}
 	$scope.clickButtonFriendship = function(){
 		if($scope.buttonFriendship == "Adicionar aos amigos"){
-			$scope.requestfriendship();
+			$scope.requestFriendship();
 		
 		}
 		else if($scope.buttonFriendship == "Aceita Solicitação"){
-			$scope.acceptingfriendship($scope.friendship.id);
+			$scope.acceptingFriendship($scope.friendship.id);
 			
 		}
 		else{
-			$scope.refusefriendship($scope.friendship.id);
+			$scope.refuseFriendship($scope.friendship.id);
 			
 		}
 	}
-	$scope.requestfriendship = function(){	
+	$scope.requestFriendship = function(){	
 		profileAPI.getByUserId(currentUser.id).success(function(data){
 			var user_x = data.user;
 			profileAPI.getByUserId($routeParams.id).success(function(data){
 				var user_y = data.user;
-				friendshipAPI.requestfriendship(user_x,user_y).success(function(data){										
+				friendshipAPI.requestFriendship(user_x,user_y).success(function(data){										
 					$scope.newFriendship = data;
 					$scope.buttonFriendship = "Cancelar solicitação";
 				});
 			});
 		});
 	}
-	$scope.acceptingfriendship = function(friendship_id){
-		friendshipAPI.acceptingfriendship(friendship_id).success(function(data){
+	$scope.acceptingFriendship = function(friendship_id){
+		friendshipAPI.acceptingFriendship(friendship_id).success(function(data){
 			if(!$scope.isNotMyPerfil()){
 				$scope.popFriendshipRequest(friendship_id)
 			};
 			$scope.buttonFriendship = "Cancelar amizade";
 		});
 	}
-	$scope.refusefriendship = function(friendship_id){
+	$scope.refuseFriendship = function(friendship_id){
 		if(friendship_id == undefined){
 			friendship_id = $scope.newFriendship.id;
 		}
-		friendshipAPI.refusefriendship(friendship_id).success(function(data){
+		friendshipAPI.refuseFriendship(friendship_id).success(function(data){
 			if(!$scope.isNotMyPerfil()){
 				$scope.popFriendshipRequest(friendship_id)
 			};
 			$scope.buttonFriendship = "Adicionar aos amigos";
 		});
 	}
-	$scope.getFriendshipRequests = function(){
+	$scope.refuseRelationship = function(relationship_id){
+		relationshipAPI.refuseRelationship(relationship_id).success(function(data){
+			$scope.popRelationshipRequest(relationship_id);
+		});
+	}
+	$scope.acceptingRelationship = function(relationship_id){
+		relationshipAPI.acceptingRelationship(relationship_id).success(function(data){
+			$scope.popRelationshipRequest(relationship_id);
+		});
+	}
+	$scope.getRequests = function(){
 		friendshipAPI.findFriendshipRequests(currentUser.id).success(function(data){
 			$scope.findFriendshipRequests=data;
+			relationshipAPI.findRelationshipRequests(currentUser.id).success(function(data){
+				$scope.findRelationshipRequests = data;
+			});
 		});
 	}
 	$scope.popFriendshipRequest = function(friendship_id){
 		$scope.findFriendshipRequests = $scope.findFriendshipRequests.filter(function (friendship){
 			if(friendship.id!=friendship_id) 
 				return friendship;
+		});
+	}
+	$scope.popRelationshipRequest = function(relationship_id){
+		$scope.findRelationshipRequests = $scope.findRelationshipRequests.filter(function (relationship){
+			if(relationship.id!=relationship_id) 
+				return relationship;
 		});
 	}
 	$scope.blockUser = function(){
