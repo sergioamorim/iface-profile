@@ -14,10 +14,10 @@ angular.module("iFace").controller("editProfileCtrl", function($scope, $location
 	});
 	
 	$scope.onAutoComplete = function(index, relationship){
-		if(relationship.user_y != undefined){
+		if(relationship.receiver != undefined){
 			console.log(index);
-			userProfile = relationship.user_y.description;
-			relationship.user_y = userProfile.user;
+			userProfile = relationship.receiver.description;
+			relationship.receiver = userProfile.user;
 			setDegreeOfKinship(index, userProfile);
 		}
 	}
@@ -75,6 +75,10 @@ angular.module("iFace").controller("editProfileCtrl", function($scope, $location
 		})
 	};
 	
+	$scope.removeProfessional = function(index){
+		$scope.userProfessionalProfiles.splice(index, 1);
+	}
+	
 	
 	$scope.newUserAcademicProfile = function(){
 		$scope.userAcademicProfiles.push({
@@ -85,6 +89,10 @@ angular.module("iFace").controller("editProfileCtrl", function($scope, $location
 			dateEnd : ''
 		})
 	};
+	
+	$scope.removeAcademic = function(index){
+		$scope.userAcademicProfiles.splice(index, 1);
+	}
 	
 	$scope.newRelationships = function(){
 		$scope.relationships.push({
@@ -103,9 +111,16 @@ angular.module("iFace").controller("editProfileCtrl", function($scope, $location
 		profile.picture = urlImageProfile;
 		profile.userProfessionalProfile = $scope.userProfessionalProfiles;
 		delete profile.user.userProfile;
+		
 		profileAPI.updateProfile(profile).success(function(data, status){
-			alert("Perfil editado com sucesso.");
-			$location.path("/index");
+			relationshipWrapper = {};
+			relationshipWrapper.relationships = $scope.relationships;
+			relationshipAPI.saveAllRelationships(relationshipWrapper).success(function(data, status){
+				alert("Perfil editado com sucesso.");
+				$location.path("/index");
+			}).error(function(data, status){
+				$scope.error = "Ocorreu um error, não foi possível editar o perfil.";
+			});
 		}).error(function(data,status){
 			$scope.error = "Ocorreu um error, não foi possível editar o perfil.";
 		});

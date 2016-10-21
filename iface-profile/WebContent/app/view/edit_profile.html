@@ -74,7 +74,7 @@
 							<label for="last_name" ng-class="{ 'active' : userProfile.homeTown.name }">Cidade Atual</label>
 						</div>
 					</div>
-					{{relationships}}
+					
 					<label>Fam&iacutelia e Relacionamentos</label>
 					<div class="divider"></div>
 					<div style="padding: 10px"></div>
@@ -83,7 +83,7 @@
 						<angucomplete-alt ng-click="onAutoComplete($index, relationship)"
 						  placeholder="Nome"
               			  pause="10"
-			              selected-object="relationship.user_y"
+			              selected-object="relationship.receiver"
 			              remote-url="/iface-profile/service/friendship/find_friends_by_name/{{userProfile.user.id}}/"
 			              remote-url-data-field=""
 			              title-field="name,lastname"
@@ -133,6 +133,11 @@
 							ng-class="{ 'active' : userAcademicProfile.dateEnd }">Data
 							de t&eacutermino</label>
 					</div>
+					<div class="input-field col s4">
+						<button type="button" class="waves-effect waves-light btn cancel" ng-click="removeAcademic($index)">
+							<i class="material-icons" >clear</i>
+						</button>
+					</div>
 				</div>
 				<div class="row">
 					<button type="button" class="waves-effect waves-light btn" style = "float:right" 
@@ -165,6 +170,12 @@
 							ng-class="{ 'active' : userProfessionalProfile.dateEnd }">Data
 							de t&eacutermino</label>
 					</div>
+					<div class="input-field col s4">
+						<button type="button" class="waves-effect waves-light btn cancel" ng-click="removeProfessional($index)">
+							<i class="material-icons" >clear</i>
+						</button>
+					</div>
+					
 				</div>
 				<div class="row">
 					<button type="button" class="waves-effect waves-light btn" style = "float:right" 
