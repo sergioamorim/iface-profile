@@ -7,9 +7,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
-
 import br.ufal.ic.iface_profile.model.infrastructure.User;
 
 @Entity
@@ -27,7 +24,6 @@ public class Relationship {
 	private User receiver;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@Cascade(CascadeType.ALL)
 	private RelationshipType relationshipType;
 	
 	private boolean statusSolicitation;

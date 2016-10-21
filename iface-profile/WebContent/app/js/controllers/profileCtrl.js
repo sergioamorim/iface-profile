@@ -1,4 +1,4 @@
-angular.module("iFace").controller("profileCtrl", function($scope, $location, $routeParams, $cookies, profileAPI, friendshipAPI, logAPI) {
+angular.module("iFace").controller("profileCtrl", function($scope, $location, $routeParams, $cookies, profileAPI, friendshipAPI, relationshipAPI, logAPI) {
 	$scope.friends=[];
 	$scope.tab = 0;
 	var currentUser = $cookies.getObject("user");
@@ -11,6 +11,20 @@ angular.module("iFace").controller("profileCtrl", function($scope, $location, $r
 	friendshipAPI.findFriends(id2).success(function(data){
 		console.log(data);
 		$scope.friends = data;
+	});
+	
+	relationshipAPI.getRelationships(id2).success(function(data){
+		for(var i=0; i<data.length; i++){
+			if(data[i].receiver.id == id2){
+				data[i].kinship = data[i].relationshipType.senderDegreeOfKinship.degreeOfKinship;
+				data[i].name = data[i].sender.userProfile.name+" "+data[i].sender.userProfile.lastname;
+			}else{
+				data[i].kinship = data[i].relationshipType.receiverDegreeOfKinship.degreeOfKinship;
+				data[i].name = data[i].receiver.userProfile.name+" "+data[i].receiver.userProfile.lastname;
+			}
+		}
+		$scope.relationships = data;
+		
 	});
 	
 	logAPI.getByUserId(currentUser.id).success(function(data){

@@ -23,7 +23,17 @@ angular.module("iFace").controller("editProfileCtrl", function($scope, $location
 	}
 	
 	relationshipAPI.getRelationships(currentUser.id).success(function(data){
-		$scope.relationships = data;
+		for(var i=0; i<data.length; i++){
+			if(data[i].receiver.id == currentUser.id){
+				data[i].kinship = data[i].relationshipType.senderDegreeOfKinship.degreeOfKinship;
+				data[i].name = data[i].sender.userProfile.name+" "+data[i].sender.userProfile.lastname;
+			}else{
+				data[i].kinship = data[i].relationshipType.receiverDegreeOfKinship.degreeOfKinship;
+				data[i].name = data[i].receiver.userProfile.name+" "+data[i].receiver.userProfile.lastname;
+			}
+		}
+		$scope.existingRelationships = data;
+		
 	});
 	
 	profileAPI.getByUserId(currentUser.id).success(function(data){
@@ -96,7 +106,7 @@ angular.module("iFace").controller("editProfileCtrl", function($scope, $location
 	
 	$scope.newRelationships = function(){
 		$scope.relationships.push({
-			sender : {id:currentUser.id},
+			sender : $scope.userProfile.user,
 			statusSolicitation : false
 		});
 		sleep(500).then(() => {
@@ -104,6 +114,18 @@ angular.module("iFace").controller("editProfileCtrl", function($scope, $location
 		});
 		
 	};
+	
+	$scope.removeRelationship = function(index){
+		$scope.relationships.splice(index, 1);
+	}
+	
+	$scope.deleteRelationship = function(id, index){
+		relationshipAPI.deleteRelationship(id).success(function(){
+			$scope.existingRelationships.splice(index, 1);
+		}).error(function(){
+			alert("Erro ao remover relacionamento");
+		})
+	}
 	
 	$scope.editProfile = function(profile, urlImageProfile){
 

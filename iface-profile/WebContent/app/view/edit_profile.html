@@ -82,8 +82,26 @@
 					<label>Fam&iacutelia e Relacionamentos</label>
 					<div class="divider"></div>
 					<div style="padding: 10px"></div>
+					<div class="row" ng-repeat="eRelationship in existingRelationships">
+						<div class="input-field col s4">
+							<input type="text" readonly="readonly"
+								value="{{eRelationship.name}}">
+							<label class="active">Nome</label>
+						</div>
+						<div class="input-field col s4">
+							<input type="text" readonly="readonly"
+								ng-model="eRelationship.kinship">
+							<label class="active">Grau de parentesco</label>
+						</div>
+						<div class="input-field col s4">
+							<button type="button" class="waves-effect waves-light btn cancel"
+								ng-click="deleteRelationship(eRelationship.id, $index)">
+								<i class="material-icons">clear</i>
+							</button>
+						</div>
+					</div>
 					<div class="row" ng-repeat="relationship in relationships">
-						<div class="input-field col s6">
+						<div class="input-field col s4">
 							<angucomplete-alt ng-click="onAutoComplete($index, relationship)"
 								placeholder="Nome" pause="10"
 								selected-object="relationship.receiver"
@@ -91,13 +109,19 @@
 								remote-url-data-field="" title-field="name,lastname"
 								description-field="" image-field="picture"
 								input-class="form-control form-control-small" minlength="1"
-								match-class="highlight" />
+								match-class="highlight" class="validate"/>
 						</div>
-						<div class="input-field col s6">
-							<select
+						<div class="input-field col s4">
+							<select class="validate"
 								ng-model="relationship.relationshipType.receiverDegreeOfKinship"
 								ng-options="degreeOfKinship1.degreeOfKinship for degreeOfKinship1 in degreeOfKinshipByGender[$index] | orderBy:'degreeOfKinship'">
 							</select><label>Grau de parentesco</label>
+						</div>
+						<div class="input-field col s4">
+							<button type="button" class="waves-effect waves-light btn cancel"
+								ng-click="removeRelationship($index)">
+								<i class="material-icons">clear</i>
+							</button>
 						</div>
 					</div>
 					<div class="row">
@@ -147,7 +171,12 @@
 							</button>
 						</div>
 					</div>
-
+					<div class="row">
+							<button type="button" class="waves-effect waves-light btn"
+								style="float: right" ng-click="newUserAcademicProfile()">
+								<i class="material-icons">plus_one</i>
+							</button>
+						</div>
 					<label>Profissional</label>
 					<div class="divider"></div>
 					<div style="padding: 10px"></div>
@@ -189,14 +218,12 @@
 							</button>
 						</div>
 					</div>
-
-				</div>
-				<div class="row">
 					<button type="button" class="waves-effect waves-light btn"
-						style="float: right" ng-click="newUserAcademicProfile()">
+						style="float: right" ng-click="newUserProfessionalProfile()">
 						<i class="material-icons">plus_one</i>
 					</button>
 				</div>
+
 				<button ng-disabled="register.$invalid"
 					class="waves-effect waves-light btn done"
 					ng-click="editProfile(userProfile, urlImageProfile)">
