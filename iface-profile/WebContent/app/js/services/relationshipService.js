@@ -15,8 +15,13 @@ angular.module("iFace").factory("relationshipAPI", function($http, config){
         });
 	}
 	
+	var _deleteRelationship = function(id){
+		return $http.delete(config.baseUrl+"/relationship/"+id);
+	}
+	
 	return {
 		getRelationships: _getRelationships,
-		saveAllRelationships: _saveAllRelationships
+		saveAllRelationships: _saveAllRelationships,
+		deleteRelationship: _deleteRelationship
 	} 
 });
