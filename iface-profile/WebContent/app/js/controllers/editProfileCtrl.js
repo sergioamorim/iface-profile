@@ -106,7 +106,7 @@ angular.module("iFace").controller("editProfileCtrl", function($scope, $location
 	
 	$scope.newRelationships = function(){
 		$scope.relationships.push({
-			sender : {id:currentUser.id},
+			sender : $scope.userProfile.user,
 			statusSolicitation : false
 		});
 		sleep(500).then(() => {
