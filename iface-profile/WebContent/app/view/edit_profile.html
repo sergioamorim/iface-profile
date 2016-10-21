@@ -93,167 +93,115 @@
 								input-class="form-control form-control-small" minlength="1"
 								match-class="highlight" />
 						</div>
+						<div class="input-field col s6">
+							<select
+								ng-model="relationship.relationshipType.receiverDegreeOfKinship"
+								ng-options="degreeOfKinship1.degreeOfKinship for degreeOfKinship1 in degreeOfKinshipByGender[$index] | orderBy:'degreeOfKinship'">
+							</select><label>Grau de parentesco</label>
+						</div>
 					</div>
-					<div class="input-field col s6">
-						<select
-							ng-model="relationship.relationshipType.receiverDegreeOfKinship"
-							ng-options="degreeOfKinship1.degreeOfKinship for degreeOfKinship1 in degreeOfKinshipByGender[$index] | orderBy:'degreeOfKinship'">
-						</select><label>Grau de parentesco</label>
-					</div>
-				</div>
-			<div class="row">
-				<button type="button" class="waves-effect waves-light btn"
-					style="float: right" ng-click="newRelationships()">
-					<i class="material-icons">plus_one</i>
-				</button>
-			</div>
-
-			<label>Acad&ecircmico</label>
-			<div class="divider"></div>
-			<div style="padding: 10px"></div>
-			<div class="row"
-				ng-repeat="userAcademicProfile in userAcademicProfiles">
-				<div class="input-field col s4">
-					<input id="educationalInstitution" type="text" class="validate"
-						ng-model="userAcademicProfile.educationalInstitution.name">
-					<label for="educationalInstitution"
-						ng-class="{ 'active' : userAcademicProfile.educationalInstitution.name }">Instituição
-						de ensino</label>
-				</div>
-				<div class="input-field col s4">
-					<input id="course" type="text" class="validate"
-						ng-model="userAcademicProfile.course"> <label for="course"
-						ng-class="{ 'active' : userAcademicProfile.course }">Curso</label>
-				</div>
-				<div class="input-field col s4">
-					<input name="startingdate" type="text" id="startingdate"
-						class="validate" ui-date ng-model="userAcademicProfile.dateStart">
-					<label for="startingdate"
-						ng-class="{ 'active' : userAcademicProfile.dateStart }">Data
-						de in&iacutecio</label>
-				</div>
-				<div class="input-field col s4">
-					<input name="finishingdate" type="text" id="finishingdate"
-						class="validate" ui-date ng-model="userAcademicProfile.dateEnd">
-					<label for="finishingdate"
-						ng-class="{ 'active' : userAcademicProfile.dateEnd }">Data
-						de t&eacutermino</label>
-				</div>
-				<div class="input-field col s4">
-					<button type="button" class="waves-effect waves-light btn cancel"
-						ng-click="removeAcademic($index)">
-						<i class="material-icons">clear</i>
-					</button>
-				</div>
-			</div>
-			<div class="input-field col s4">
-				<input id="course" type="text" class="validate"
-					ng-model="userAcademicProfile.course"> <label for="course"
-					ng-class="{ 'active' : userAcademicProfile.course }">Curso</label>
-			</div>
-			<label>Profissional</label>
-				<div class="divider"></div>
-				<div style="padding: 10px"></div>
-				<div class="row"
-					ng-repeat="userProfessionalProfile in userProfessionalProfiles">
-					<div class="input-field col s4">
-						<input id="workplace" type="text" class="validate"
-							ng-model="userProfessionalProfile.workplace.name"> <label
-							for="workplace"
-							ng-class="{ 'active' : userProfessionalProfile.workplace.name }">Local
-							de trabalho</label>
-					</div>
-					<div class="input-field col s4">
-						<input id="office" type="text" class="validate"
-							ng-model="userProfessionalProfile.office"> <label
-							for="office"
-							ng-class="{ 'active' : userProfessionalProfile.office }">Cargo</label>
-					</div>
-					<div class="input-field col s4">
-						<input name="startingdate" type="text" id="startingdate"
-							class="validate" ui-date
-							ng-model="userProfessionalProfile.dateStart"> <label
-							for="startingdate"
-							ng-class="{ 'active' : userProfessionalProfile.dateStart }">Data
-							de in&iacutecio</label>
-					</div>
-					<div class="input-field col s4">
-						<input name="finishingdate" type="text" id="finishingdate"
-							class="validate" ui-date
-							ng-model="userProfessionalProfile.dateEnd"> <label
-							for="finishingdate"
-							ng-class="{ 'active' : userProfessionalProfile.dateEnd }">Data
-							de t&eacutermino</label>
-					</div>
-					<div class="input-field col s4">
-						<button type="button" class="waves-effect waves-light btn cancel"
-							ng-click="removeProfessional($index)">
-							<i class="material-icons">clear</i>
+					<div class="row">
+						<button type="button" class="waves-effect waves-light btn"
+							style="float: right" ng-click="newRelationships()">
+							<i class="material-icons">plus_one</i>
 						</button>
 					</div>
-				</div>
-				<div class="input-field col s4">
-					<input name="finishingdate" type="text" id="finishingdate"
-						class="validate" ui-date ng-model="userAcademicProfile.dateEnd">
-					<label for="finishingdate"
-						ng-class="{ 'active' : userAcademicProfile.dateEnd }">Data
-						de t&eacutermino</label>
-				</div>
-			</div>
-			<div class="row">
-				<button type="button" class="waves-effect waves-light btn"
-					style="float: right" ng-click="newUserAcademicProfile()">
-					<i class="material-icons">plus_one</i>
-				</button>
-			</div>
 
-			<label>Profissional</label>
-			<div class="divider"></div>
-			<div style="padding: 10px"></div>
-			<div class="row"
-				ng-repeat="userProfessionalProfile in userProfessionalProfiles">
-				<div class="input-field col s4">
-					<input id="workplace" type="text" class="validate"
-						ng-model="userProfessionalProfile.workplace.name"> <label
-						for="workplace"
-						ng-class="{ 'active' : userProfessionalProfile.workplace.name }">Local
-						de trabalho</label>
-				</div>
-				<div class="input-field col s4">
-					<input id="office" type="text" class="validate"
-						ng-model="userProfessionalProfile.office"> <label
-						for="office"
-						ng-class="{ 'active' : userProfessionalProfile.office }">Cargo</label>
-				</div>
-				<div class="input-field col s4">
-					<input name="startingdate" type="text" id="startingdate"
-						class="validate" ui-date
-						ng-model="userProfessionalProfile.dateStart"> <label
-						for="startingdate"
-						ng-class="{ 'active' : userProfessionalProfile.dateStart }">Data
-						de in&iacutecio</label>
-				</div>
-				<div class="input-field col s4">
-					<input name="finishingdate" type="text" id="finishingdate"
-						class="validate" ui-date
-						ng-model="userProfessionalProfile.dateEnd"> <label
-						for="finishingdate"
-						ng-class="{ 'active' : userProfessionalProfile.dateEnd }">Data
-						de t&eacutermino</label>
-				</div>
-			</div>
-			<div class="row">
-				<button type="button" class="waves-effect waves-light btn"
-					style="float: right" ng-click="newUserProfessionalProfile()">
-					<i class="material-icons">plus_one</i>
-				</button>
-			</div>
+					<label>Acad&ecircmico</label>
+					<div class="divider"></div>
+					<div style="padding: 10px"></div>
+					<div class="row"
+						ng-repeat="userAcademicProfile in userAcademicProfiles">
+						<div class="input-field col s4">
+							<input id="educationalInstitution" type="text" class="validate"
+								ng-model="userAcademicProfile.educationalInstitution.name">
+							<label for="educationalInstitution"
+								ng-class="{ 'active' : userAcademicProfile.educationalInstitution.name }">Instituição
+								de ensino</label>
+						</div>
+						<div class="input-field col s4">
+							<input id="course" type="text" class="validate"
+								ng-model="userAcademicProfile.course"> <label
+								for="course"
+								ng-class="{ 'active' : userAcademicProfile.course }">Curso</label>
+						</div>
+						<div class="input-field col s4">
+							<input name="startingdate" type="text" id="startingdate"
+								class="validate" ui-date
+								ng-model="userAcademicProfile.dateStart"> <label
+								for="startingdate"
+								ng-class="{ 'active' : userAcademicProfile.dateStart }">Data
+								de in&iacutecio</label>
+						</div>
+						<div class="input-field col s4">
+							<input name="finishingdate" type="text" id="finishingdate"
+								class="validate" ui-date ng-model="userAcademicProfile.dateEnd">
+							<label for="finishingdate"
+								ng-class="{ 'active' : userAcademicProfile.dateEnd }">Data
+								de t&eacutermino</label>
+						</div>
+						<div class="input-field col s4">
+							<button type="button" class="waves-effect waves-light btn cancel"
+								ng-click="removeAcademic($index)">
+								<i class="material-icons">clear</i>
+							</button>
+						</div>
+					</div>
 
-			<button ng-disabled="register.$invalid"
-				class="waves-effect waves-light btn done"
-				ng-click="editProfile(userProfile, urlImageProfile)">
-				<i class="material-icons left">done</i> Done
-			</button>
+					<label>Profissional</label>
+					<div class="divider"></div>
+					<div style="padding: 10px"></div>
+					<div class="row"
+						ng-repeat="userProfessionalProfile in userProfessionalProfiles">
+						<div class="input-field col s4">
+							<input id="workplace" type="text" class="validate"
+								ng-model="userProfessionalProfile.workplace.name"> <label
+								for="workplace"
+								ng-class="{ 'active' : userProfessionalProfile.workplace.name }">Local
+								de trabalho</label>
+						</div>
+						<div class="input-field col s4">
+							<input id="office" type="text" class="validate"
+								ng-model="userProfessionalProfile.office"> <label
+								for="office"
+								ng-class="{ 'active' : userProfessionalProfile.office }">Cargo</label>
+						</div>
+						<div class="input-field col s4">
+							<input name="startingdate" type="text" id="startingdate"
+								class="validate" ui-date
+								ng-model="userProfessionalProfile.dateStart"> <label
+								for="startingdate"
+								ng-class="{ 'active' : userProfessionalProfile.dateStart }">Data
+								de in&iacutecio</label>
+						</div>
+						<div class="input-field col s4">
+							<input name="finishingdate" type="text" id="finishingdate"
+								class="validate" ui-date
+								ng-model="userProfessionalProfile.dateEnd"> <label
+								for="finishingdate"
+								ng-class="{ 'active' : userProfessionalProfile.dateEnd }">Data
+								de t&eacutermino</label>
+						</div>
+						<div class="input-field col s4">
+							<button type="button" class="waves-effect waves-light btn cancel"
+								ng-click="removeProfessional($index)">
+								<i class="material-icons">clear</i>
+							</button>
+						</div>
+					</div>
+
+				</div>
+				<div class="row">
+					<button type="button" class="waves-effect waves-light btn"
+						style="float: right" ng-click="newUserAcademicProfile()">
+						<i class="material-icons">plus_one</i>
+					</button>
+				</div>
+				<button ng-disabled="register.$invalid"
+					class="waves-effect waves-light btn done"
+					ng-click="editProfile(userProfile, urlImageProfile)">
+					<i class="material-icons left">done</i> Done
+				</button>
 		</form>
 	</div>
 </div>
