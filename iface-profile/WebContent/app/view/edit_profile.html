@@ -147,7 +147,12 @@
 							</button>
 						</div>
 					</div>
-
+					<div class="row">
+							<button type="button" class="waves-effect waves-light btn"
+								style="float: right" ng-click="newUserAcademicProfile()">
+								<i class="material-icons">plus_one</i>
+							</button>
+						</div>
 					<label>Profissional</label>
 					<div class="divider"></div>
 					<div style="padding: 10px"></div>
@@ -189,14 +194,12 @@
 							</button>
 						</div>
 					</div>
-
-				</div>
-				<div class="row">
 					<button type="button" class="waves-effect waves-light btn"
-						style="float: right" ng-click="newUserAcademicProfile()">
+						style="float: right" ng-click="newUserProfessionalProfile()">
 						<i class="material-icons">plus_one</i>
 					</button>
 				</div>
+
 				<button ng-disabled="register.$invalid"
 					class="waves-effect waves-light btn done"
 					ng-click="editProfile(userProfile, urlImageProfile)">
