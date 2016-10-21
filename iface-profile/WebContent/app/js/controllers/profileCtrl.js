@@ -4,8 +4,11 @@ angular.module("iFace").controller("profileCtrl", function($scope, $location, $r
 	var currentUser = $cookies.getObject("user");
 	$scope.currentUser = $cookies.getObject("user");
 	
-	
-	friendshipAPI.findFriends(currentUser.id).success(function(data){
+	var id2 = $routeParams.id;
+	if ($routeParams.id == undefined) {
+		id2 = currentUser.id;
+	}
+	friendshipAPI.findFriends(id2).success(function(data){
 		console.log(data);
 		$scope.friends = data;
 	});
