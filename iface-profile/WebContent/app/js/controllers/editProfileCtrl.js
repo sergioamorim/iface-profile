@@ -23,7 +23,8 @@ angular.module("iFace").controller("editProfileCtrl", function($scope, $location
 	}
 	
 	relationshipAPI.getRelationships(currentUser.id).success(function(data){
-		$scope.relationships = data;
+		$scope.existingRelationships = data;
+		console.log(data);
 	});
 	
 	profileAPI.getByUserId(currentUser.id).success(function(data){
@@ -104,6 +105,10 @@ angular.module("iFace").controller("editProfileCtrl", function($scope, $location
 		});
 		
 	};
+	
+	$scope.removeRelationship = function(index){
+		$scope.relationships.splice(index, 1);
+	}
 	
 	$scope.editProfile = function(profile, urlImageProfile){
 
