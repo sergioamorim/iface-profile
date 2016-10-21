@@ -26,6 +26,7 @@ import br.ufal.ic.iface_profile.controller.AbstractController;
 import br.ufal.ic.iface_profile.exceptions.ValidationException;
 import br.ufal.ic.iface_profile.model.infrastructure.User;
 import br.ufal.ic.iface_profile.model.profile.Relationship;
+import br.ufal.ic.iface_profile.model.profile.RelationshipWrapper;
 import br.ufal.ic.iface_profile.model.storytelling.UserLog;
 import br.ufal.ic.iface_profile.repository.interfaces.profile.RelationshipRepositoryInterface;
 import br.ufal.ic.iface_profile.repository.interfaces.storytelling.UserLogRepositoryInterface;
@@ -137,6 +138,20 @@ public class RelationshipController extends AbstractController<Relationship, Int
 		logRepository.save(userLog);
 
 		return getRepository().update(newRelationship);
+	}
+	
+	
+	@RequestMapping(value = "/save_all", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public boolean saveAll(@RequestBody @Valid RelationshipWrapper listRelationship, BindingResult result,
+			HttpServletResponse response) throws JsonParseException,
+			JsonMappingException, IOException {
+		if (result.hasErrors()) {
+			throw new ValidationException(result);
+		}
+		for(Relationship r:listRelationship.getRelationships())
+			getRepository().save(r);
+		return true;
 	}
 	
 }
