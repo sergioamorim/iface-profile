@@ -29,6 +29,7 @@ import br.ufal.ic.iface_profile.model.profile.Relationship;
 import br.ufal.ic.iface_profile.model.profile.RelationshipWrapper;
 import br.ufal.ic.iface_profile.model.storytelling.UserLog;
 import br.ufal.ic.iface_profile.repository.interfaces.profile.RelationshipRepositoryInterface;
+import br.ufal.ic.iface_profile.repository.interfaces.profile.RelationshipTypeRepositoryInterface;
 import br.ufal.ic.iface_profile.repository.interfaces.storytelling.UserLogRepositoryInterface;
 
 @RestController
@@ -40,9 +41,17 @@ public class RelationshipController extends AbstractController<Relationship, Int
 	@Qualifier("relationshipRepository")
 	private RelationshipRepositoryInterface repository;
 	
+	@Autowired
+	@Qualifier("relationshipTypeRepository")
+	private RelationshipTypeRepositoryInterface relationshipTypeRepository;
+	
+	protected RelationshipTypeRepositoryInterface getRelationshipTypeRepository(){
+		return this.relationshipTypeRepository;
+	}
 	protected RelationshipRepositoryInterface getRepository(){
 		return this.repository;
 	}
+	
 	
 	@RequestMapping(value = "/find_relationship/{id}", method = RequestMethod.GET)
 	@ResponseBody
@@ -146,6 +155,9 @@ public class RelationshipController extends AbstractController<Relationship, Int
 	public boolean saveAll(@RequestBody @Valid RelationshipWrapper listRelationship, BindingResult result,
 			HttpServletResponse response) throws JsonParseException,
 			JsonMappingException, IOException {
+		for (Relationship u : listRelationship.getRelationships()){
+			u.setRelationshipType(getRelationshipTypeRepository().findRelationshipTypeByGender(u.getSender().getUserProfile().getGender().getId(), u.getRelationshipType().getReceiverDegreeOfKinship().getId()));
+		}
 		if (result.hasErrors()) {
 			throw new ValidationException(result);
 		}

@@ -8,6 +8,6 @@ import br.ufal.ic.iface_profile.repository.interfaces.RepositoryInterface;
 
 public interface RelationshipTypeRepositoryInterface extends RepositoryInterface<RelationshipType, Integer>{
 
-	public RelationshipType findRelationshipTypeByGender(Integer id_receiver,Integer id_sender);
+	public RelationshipType findRelationshipTypeByGender(Integer gender_sender,Integer dok_receiver);
 	public void initializeRelationshipTypes(List<DegreeOfKinship> m,List<DegreeOfKinship> f);
 }

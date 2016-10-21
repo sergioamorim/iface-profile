@@ -3,10 +3,8 @@ package br.ufal.ic.iface_profile.repository.classes.profile;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.criterion.DetachedCriteria;
-import org.hibernate.criterion.Projections;
+import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.criterion.Subqueries;
 import org.springframework.stereotype.Component;
 
 import br.ufal.ic.iface_profile.model.profile.DegreeOfKinship;
@@ -20,23 +18,22 @@ public class RelationshipTypeRepository extends GenericHibernateRepository<Relat
 	
 public RelationshipType findRelationshipTypeByGender(Integer gender_sender,Integer dok_receiver){
 		
-		DetachedCriteria userSubquery1 = DetachedCriteria.forClass(RelationshipType.class, "f")
-				.setProjection(Projections.property("f.senderDegreeOfKinship.id"))
-				.add(Restrictions.eq("receiverDegreeOfKinship.id",dok_receiver))
-				;
+		Criteria c = getSession().createCriteria(RelationshipType.class, "relationshiptype");
+		c.createAlias("relationshiptype.senderDegreeOfKinship" , "sender");
+		c.createAlias("sender.gender", "gender");
+		c.createAlias("relationshiptype.receiverDegreeOfKinship", "receiverdok");
+		c.add(Restrictions.and(
+				Restrictions.eq("receiverdok.id", dok_receiver),
+				Restrictions.eq("gender.id", gender_sender)));
 		
-		DetachedCriteria userSubquery2 = DetachedCriteria.forClass(DegreeOfKinship.class, "f")
-				.setProjection(Projections.property("f.id"))
-				.add(Restrictions.eq("gender.id", gender_sender))
-				;
 		try{
-			return 	this.findByCriteria(Restrictions.and(	
-					(Subqueries.propertyIn("id", userSubquery1)),
-					(Subqueries.propertyIn("id", userSubquery2))
-				)).get(0);
-		}catch(NullPointerException e){
+			RelationshipType rt = (RelationshipType) c.list().get(0);
+			return rt;
+		}catch(IndexOutOfBoundsException e){
 			return null;
-		}	
+		}
+		
+		
 	}
 	
 	
