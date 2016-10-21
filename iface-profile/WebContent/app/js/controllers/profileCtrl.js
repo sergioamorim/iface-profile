@@ -1,4 +1,4 @@
-angular.module("iFace").controller("profileCtrl", function($scope, $location, $routeParams, $cookies, profileAPI, friendshipAPI) {
+angular.module("iFace").controller("profileCtrl", function($scope, $location, $routeParams, $cookies, profileAPI, friendshipAPI, logAPI) {
 	$scope.friends=[];
 	$scope.tab = 0;
 	var currentUser = $cookies.getObject("user");
@@ -13,7 +13,9 @@ angular.module("iFace").controller("profileCtrl", function($scope, $location, $r
 		$scope.friends = data;
 	});
 	
-	
+	logAPI.getByUserId(currentUser.id).success(function(data){
+		$scope.userLogs = data;
+	});
 
 	if(currentUser != undefined){
 		var id = currentUser.id

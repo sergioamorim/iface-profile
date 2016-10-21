@@ -108,56 +108,62 @@
 				<div ng-show="userProfile.homeTown" class="col s4">{{"Mora em
 					"+userProfile.homeTown.name}}</div>
 			</div>
-			<div ng-hide = "">
-			<label>Fam&iacutelia e relacionamentos</label>
-			<div class="divider"></div>
-			<div style="padding: 10px"></div>
-			<div class="row">
-				<div class="col s4"></div>
-				<div class="col s4"></div>
-				<div class="col s4"></div>
+			<div ng-hide="">
+				<label>Fam&iacutelia e relacionamentos</label>
+				<div class="divider"></div>
+				<div style="padding: 10px"></div>
+				<div class="row">
+					<div class="col s4"></div>
+					<div class="col s4"></div>
+					<div class="col s4"></div>
+				</div>
 			</div>
+			<div ng-hide="userProfile.userAcademicProfile.length == 0">
+				<label>Acadêmico</label>
+				<div class="divider"></div>
+				<div style="padding: 10px"></div>
+				<div class="row"
+					ng-repeat="userAcademicProfile in userProfile.userAcademicProfile">
+					<div class="col s3">Instituição de ensino:
+						{{userAcademicProfile.educationalInstitution.name}}</div>
+					<div class="col s3">Curso: {{userAcademicProfile.course}}</div>
+					<div class="col s3">Data de Início:
+						{{userAcademicProfile.dateStart | date:'dd/MM/yyyy'}}</div>
+					<div class="col s3">Data de Término:
+						{{userAcademicProfile.dateEnd | date:'dd/MM/yyyy'}}</div>
+				</div>
 			</div>
-			<div ng-hide = "userProfile.userAcademicProfile.length == 0">
-			<label>Acadêmico</label>
-			<div class="divider"></div>
-			<div style="padding: 10px"></div>
-			<div class="row"
-				ng-repeat="userAcademicProfile in userProfile.userAcademicProfile">
-				<div class="col s3">Instituição de ensino:
-					{{userAcademicProfile.educationalInstitution.name}}</div>
-				<div class="col s3">Curso: {{userAcademicProfile.course}}</div>
-				<div class="col s3">Data de Início:
-					{{userAcademicProfile.dateStart | date:'dd/MM/yyyy'}}</div>
-				<div class="col s3">Data de Término:
-					{{userAcademicProfile.dateEnd | date:'dd/MM/yyyy'}}</div>
-			</div>
-			</div>
-			<div ng-hide = "userProfile.userProfessionalProfile.length == 0">
-			<label>Profissional</label>
-			<div class="divider"></div>
-			<div style="padding: 10px"></div>
-			<div class="row"
-				ng-repeat="userProfessionalProfile in userProfile.userProfessionalProfile">
-				<div class="col s3">Local de Trabalho:
-					{{userProfessionalProfile.workplace.name}}</div>
-				<div class="col s3">Cargo: {{userProfessionalProfile.office}}</div>
-				<div class="col s3">Data de Início:
-					{{userProfessionalProfile.dateStart | date:'dd/MM/yyyy'}}</div>
-				<div class="col s3">Data de Término:
-					{{userProfessionalProfile.dateEnd | date:'dd/MM/yyyy'}}</div>
-			</div>
+			<div ng-hide="userProfile.userProfessionalProfile.length == 0">
+				<label>Profissional</label>
+				<div class="divider"></div>
+				<div style="padding: 10px"></div>
+				<div class="row"
+					ng-repeat="userProfessionalProfile in userProfile.userProfessionalProfile">
+					<div class="col s3">Local de Trabalho:
+						{{userProfessionalProfile.workplace.name}}</div>
+					<div class="col s3">Cargo: {{userProfessionalProfile.office}}</div>
+					<div class="col s3">Data de Início:
+						{{userProfessionalProfile.dateStart | date:'dd/MM/yyyy'}}</div>
+					<div class="col s3">Data de Término:
+						{{userProfessionalProfile.dateEnd | date:'dd/MM/yyyy'}}</div>
+				</div>
 			</div>
 		</div>
 		<div ng-if="tab == 1">
-			<div class="col s12 row" >
+			<div class="col s12 row">
 				<div class="col s3" ng-repeat="friend in friends">
 					<img ng-src="{{friend.userProfile.picture}}" alt="ProfileF Picture"
-						style="width: 80px; height: 80px;">   <a href = "/iface-profile/#/index/{{friend.id}}">{{friend.userProfile.name+"
+						style="width: 80px; height: 80px;"> <a
+						href="/iface-profile/#/index/{{friend.id}}">{{friend.userProfile.name+"
 						"+friend.userProfile.lastname}}</a>
 				</div>
 			</div>
 		</div>
-		<div ng-if="tab == 2"></div>
+		<div ng-if="tab == 2">
+			<div ng-repeat="userLog in userLogs">
+				{{userLog.title}} - {{userLog.activity}}
+				<div class = "divider"></div>
+			</div>
+		</div>
 	</div>
 </div>
