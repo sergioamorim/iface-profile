@@ -6,6 +6,18 @@ body {
 	text-align: center;
 }
 
+.input-field label{
+	color:black !important;
+}
+
+label.active{
+	color:black;
+}
+
+label {
+	color:black
+}
+
 .space-bot {
 	margin-bottom: 35px;
 }
@@ -39,7 +51,7 @@ body {
 	padding: 20px;
 	padding-bottom: 40px;
 	border-radius: 5px;
-	background-color: #577BA5;
+	background-color: #779faf;
 	box-shadow: 0 1px 6px rgba(0, 0, 0, .3);
 	color: white;
 }

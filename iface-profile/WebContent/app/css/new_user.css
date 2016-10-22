@@ -2,6 +2,14 @@ body {
 	background-color: #5F6872;
 }
 
+label {
+	color:black;
+}
+
+input{
+	color:black;
+}
+
 .text-center {
 	text-align: center;
 }
@@ -39,7 +47,7 @@ body {
 	padding: 20px;
 	padding-bottom: 20px;
 	border-radius: 5px;
-	background-color: #577BA5;
+	background-color: #779faf;
 	box-shadow: 0 5px 6px rgba(0, 0, 0, .3);
 	color: white;
 }
@@ -79,6 +87,14 @@ body {
 .input-group .ng-invalid {
 	border: 2px solid #e74c3c;
 	border-radius: 3px;
+}
+
+.input-field label{
+	color:black !important;
+}
+
+label.active{
+	color:black;
 }
 
 /* Error Box */
