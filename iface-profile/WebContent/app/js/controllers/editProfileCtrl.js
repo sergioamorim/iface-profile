@@ -22,7 +22,7 @@ angular.module("iFace").controller("editProfileCtrl", function($scope, $location
 		}
 	}
 	
-	relationshipAPI.getRelationships(currentUser.id).success(function(data){
+	relationshipAPI.getAllRelationships(currentUser.id).success(function(data){
 		for(var i=0; i<data.length; i++){
 			if(data[i].receiver.id == currentUser.id){
 				data[i].kinship = data[i].relationshipType.senderDegreeOfKinship.degreeOfKinship;

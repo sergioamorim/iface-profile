@@ -40,22 +40,23 @@
 
 				<button class="waves-effect waves-light btn"
 					ng-click="openEditProfile()"
-					ng-show="userProfile.id == currentUser.id"
+			        ng-show="userProfile.id == currentUser.id"
 					style="float: right; margin-left: 10px">Editar Perfil</button>
-
-				<a class="waves-effect waves-light btn modal-trigger"
-					ng-click="getFriendshipRequests()" href="#modal1"
-					ng-show="!isMyPerfil() " style="float: right;">Solicita&ccedil&otildees
-					Pendentes</a>
-
-				<button class="waves-effect waves-light btn" ng-show="isMyPerfil()"
+				
+				<a class="waves-effect waves-light btn modal-trigger"  ng-click="getRequests()"href="#modal1"
+					ng-show="!isNotMyPerfil() " style="float: right;">Solicita&ccedil&otildees Pendentes</a>
+				
+				<button class="waves-effect waves-light btn" ng-show="isNotMyPerfil() && !IAmBlocked && !isUserBlocked"
 					ng-click="clickButtonFriendship()"
 					style="float: right; margin-left: 10px">{{buttonFriendship}}</button>
+				
+				<button class="waves-effect waves-light btn" ng-show="isNotMyPerfil() && !IAmBlocked"
+					ng-click="blockUser()"
+					style="float: right; margin-left: 10px">{{buttonUserBlock}}</button>
 
 				<div id="modal1" class="modal">
-					<div class="modal-content"
-						ng-repeat="findFriendshipRequest in findFriendshipRequests">
-						<div class="row" style="padding: 10px">
+					<div class="modal-content">
+						<div class="row" style="padding: 10px" ng-repeat="findFriendshipRequest in findFriendshipRequests">
 
 							<img
 								ng-src="{{findFriendshipRequest.user_x.userProfile.picture}}"
@@ -67,10 +68,28 @@
 								adicionar como amigo"}}</label>
 
 							<button class="waves-effect waves-light btn"
-								ng-click="refusefriendship(findFriendshipRequest.id)"
+								ng-click="refuseFriendship(findFriendshipRequest.id)"
 								style="float: right; margin-left: 10px"'>Recusar</button>
 							<button class="waves-effect waves-light btn"
-								ng-click="acceptingfriendship(findFriendshipRequest.id)"
+								ng-click="acceptingFriendship(findFriendshipRequest.id)"
+								style="float: right; margin-left: 10px"'>Aceitar</button>
+						</div>
+						<div class="row" style="padding: 10px" ng-repeat="findRelationshipRequest in findRelationshipRequests">
+
+							<img
+								ng-src="{{findRelationshipRequest.sender.userProfile.picture}}"
+								alt="Profile Picture"
+								style="width: 40px; height: 40px; float: left" class="circle">
+
+							<label style="color: black; font-size: 16px">{{findRelationshipRequest.sender.userProfile.name+"
+									"+findRelationshipRequest.sender.userProfile.lastname+" deseja lhe
+								adicionar como "+findRelationshipRequest.relationshipType.receiverDegreeOfKinship.degreeOfKinship}}</label>
+
+							<button class="waves-effect waves-light btn"
+								ng-click="refuseRelationship(findRelationshipRequest.id)"
+								style="float: right; margin-left: 10px"'>Recusar</button>
+							<button class="waves-effect waves-light btn"
+								ng-click="acceptingRelationship(findRelationshipRequest.id)"
 								style="float: right; margin-left: 10px"'>Aceitar</button>
 						</div>
 					</div>

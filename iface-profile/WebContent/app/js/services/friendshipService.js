@@ -1,6 +1,6 @@
 angular.module("iFace").factory("friendshipAPI", function($http, config){
 
-	var _requestfriendship = function(User_x,User_y){
+	var _requestFriendship = function(User_x,User_y){
 		frienship = {
 				user_x: User_x,
 				user_y: User_y,
@@ -15,7 +15,7 @@ angular.module("iFace").factory("friendshipAPI", function($http, config){
 			}
         });
     }
-	var _acceptingfriendship = function(id_friendship){
+	var _acceptingFriendship = function(id_friendship){
 		return $http({
             url: config.baseUrl+"/friendship/"+id_friendship,
             method: "PUT",
@@ -24,7 +24,7 @@ angular.module("iFace").factory("friendshipAPI", function($http, config){
 			}
         }); 
     }
-	var _refusefriendship = function(id_friendship){
+	var _refuseFriendship = function(id_friendship){
 		return $http({
             url: config.baseUrl+"/friendship/"+id_friendship,
             method: "DELETE",
@@ -33,9 +33,9 @@ angular.module("iFace").factory("friendshipAPI", function($http, config){
 			}
         });
     }
-	var _findFriendshipRequests = function(id_friendship){
+	var _findFriendshipRequests = function(User_id){
 		return $http({
-            url: config.baseUrl+"/friendship/find_requests/"+id_friendship,
+            url: config.baseUrl+"/friendship/find_requests/"+User_id,
             method: "GET",
             headers: {
 				"Content-Type": "application/json"
@@ -72,16 +72,32 @@ angular.module("iFace").factory("friendshipAPI", function($http, config){
 			}
 		});
 	}
-	
+	var _userBlock = function(User_x, User_y){
+		frienship = {
+				user_x: User_x,
+				user_y: User_y,
+				approved: false,
+				blocked_user: User_y.id
+		}
+		return $http({
+            url: config.baseUrl+"/friendship/block_user",
+            method: "POST",
+            data: frienship,
+            headers: {
+				"Content-Type": "application/json"
+			}
+        });
+	}
 	
 	return {
-		requestfriendship: _requestfriendship,
-		acceptingfriendship: _acceptingfriendship,
-		refusefriendship: _refusefriendship,
+		requestFriendship: _requestFriendship,
+		acceptingFriendship: _acceptingFriendship,
+		refuseFriendship: _refuseFriendship,
 		findFriendshipRequests: _findFriendshipRequests,
 		hasFriendship: _hasFriendship,
 		getFriendships: _getFriendships,
-		findFriends: _findFriends
+		findFriends: _findFriends,
+		userBlock: _userBlock
 	}
 	
 });

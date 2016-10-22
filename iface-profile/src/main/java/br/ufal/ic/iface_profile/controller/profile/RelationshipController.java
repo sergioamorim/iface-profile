@@ -63,12 +63,14 @@ public class RelationshipController extends AbstractController<Relationship, Int
 	@ResponseBody
 	public List<Relationship> findRelationshipRequests(@PathVariable Integer id){
 		return getRepository().findRelationshipRequests(id);
+
 	}
 	
 	@RequestMapping(value = "/find_all_relationships/{id}", method = RequestMethod.GET)
 	@ResponseBody
 	public List<Relationship> findAllRelationships(@PathVariable Integer id){
 		return getRepository().findAllRelationships(id);
+
 	}
 	
 	@Autowired
@@ -127,15 +129,11 @@ public class RelationshipController extends AbstractController<Relationship, Int
 		return getRepository().save(newRelationship);
 	}
 	
-	@RequestMapping(method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "{id}", method = RequestMethod.PUT)
 	@ResponseBody
-	public Relationship update(@RequestBody @Valid Relationship newRelationship, BindingResult result,
-			HttpServletResponse response) throws JsonParseException,
-			JsonMappingException, IOException {
-		if (result.hasErrors()) {
-			throw new ValidationException(result);
-		}
-		
+	public Relationship update(@PathVariable Integer id){
+		Relationship newRelationship = getRepository().findById(id);
+		newRelationship.setStatusSolicitation(true);
 		UserLog userLog = new UserLog();		
 		User user = newRelationship.getSender();
 		userLog.setUser(user);
