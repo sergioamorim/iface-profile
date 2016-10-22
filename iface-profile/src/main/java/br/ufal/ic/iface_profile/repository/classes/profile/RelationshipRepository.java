@@ -23,6 +23,16 @@ public class RelationshipRepository extends GenericHibernateRepository<Relations
 				)	
 		 );
 	}
+	
+	public List<Relationship> findAllRelationships(Integer x){
+		return this.findByCriteria(
+				 Restrictions.or(
+					Restrictions.eq("sender.id", x),
+					Restrictions.eq("receiver.id", x)
+					)
+		 );
+	}
+	
 	public List<Relationship> findRelationshipRequests(Integer id){
 		return this.findByCriteria(Restrictions.and(
 				Restrictions.eq("receiver.id", id),
@@ -33,3 +43,5 @@ public class RelationshipRepository extends GenericHibernateRepository<Relations
 
 
 }
+
+

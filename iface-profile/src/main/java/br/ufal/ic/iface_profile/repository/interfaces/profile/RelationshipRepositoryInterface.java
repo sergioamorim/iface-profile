@@ -9,4 +9,5 @@ public interface RelationshipRepositoryInterface extends RepositoryInterface<Rel
 
 	public List<Relationship> findRelationships(Integer x);
 	public List<Relationship> findRelationshipRequests(Integer user_id);
+	public List<Relationship> findAllRelationships(Integer x);
 }

@@ -15,6 +15,10 @@ angular.module("iFace").factory("relationshipAPI", function($http, config){
         });
 	}
 	
+	var _getAllRelationships = function(id){
+		return $http.get(config.baseUrl+"/relationship/find_all_relationships/"+id);
+	}
+	
 	var _deleteRelationship = function(id){
 		return $http.delete(config.baseUrl+"/relationship/"+id);
 	}
@@ -42,6 +46,7 @@ angular.module("iFace").factory("relationshipAPI", function($http, config){
 		getRelationships: _getRelationships,
 		saveAllRelationships: _saveAllRelationships,
 		deleteRelationship: _deleteRelationship,
+		getAllRelationships: _getAllRelationships,
 		findRelationshipRequests: _findRelationshipRequests,
 		acceptingRelationship: _acceptingRelationship,
 		refuseRelationship: _deleteRelationship
