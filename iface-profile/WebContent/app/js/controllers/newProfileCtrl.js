@@ -1,6 +1,7 @@
 angular.module("iFace").controller("newProfileCtrl", function($scope, $location, $cookies, profileAPI, uploadAPI, config) {
 	var currentUser = $cookies.getObject("user");
 	
+	$scope.urlImageProfile = "http://api.androidhive.info/images/ic_profile.png"
 	$scope.newProfile = function(profile, urlImageProfile){
 		profile.user = {};
 		profile.user.id = currentUser.id;
