@@ -22,7 +22,10 @@ public class UserProfileRepository extends GenericHibernateRepository<UserProfil
 	}	
 	
 	public List<UserProfile> findUserProfileByName(String name){
-		return this.findByCriteria(Restrictions.like("name", "%"+name+"%"));	
+		return this.findByCriteria(
+				Restrictions.or(
+						Restrictions.like("name", "%"+name+"%"),
+						Restrictions.like("lastname", "%"+name+"%")));	
 		
 	}
 

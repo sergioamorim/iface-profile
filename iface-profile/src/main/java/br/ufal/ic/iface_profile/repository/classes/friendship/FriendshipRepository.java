@@ -86,16 +86,18 @@ public class FriendshipRepository extends GenericHibernateRepository<Friendship,
 		Criteria c = getSession().createCriteria(Friendship.class, "friendship");
 		c.createAlias("friendship.user_x", "user_x"); 
 		c.createAlias("friendship.user_y", "user_y");
+		c.createAlias("user_x.userProfile", "userProfileX");
+		c.createAlias("user_y.userProfile", "userProfileY");
 		c.add(Restrictions.and(
 				Restrictions.or(
 						Restrictions.and(
-								Restrictions.like("user_x.username", "%"+name+"%"),
+								Restrictions.like("userProfileX.name", "%"+name+"%"),
 								Restrictions.eq("user_y.id", id_user)),
 						Restrictions.and(
-								Restrictions.like("user_y.username", "%"+name+"%"),
-								Restrictions.eq("user_x.id", id_user)),
+								Restrictions.like("userProfileY.name", "%"+name+"%"),
+								Restrictions.eq("user_x.id", id_user))),
 				Restrictions.eq("friendship.approved", true)
-						)));
+						));
 		List<Friendship> f = c.list();
 		
 		
