@@ -56,12 +56,12 @@ public class UserAcademicProfileController extends AbstractController<UserAcadem
 		UserLog userLog = new UserLog();
 		userLog.setUser(user);
 		
-		userLog.setActivity("Remove academic profile");
+		userLog.setActivity("Remover perfil acadêmico");
 		
 		userLog.setTitle(user.getUserProfile().getName()+
-							" removed "+
+							" removeu "+
 								deletedUserAcademicProfile.getCourse()+
-									" from profile");
+									" do perfil");
 		
 		userLog.setTimestamp(new Date());
 		
@@ -83,10 +83,10 @@ public class UserAcademicProfileController extends AbstractController<UserAcadem
 		User user = newUserAcademicProfile.getUser();
 		userLog.setUser(user);
 		
-		userLog.setActivity("Add academic profile");
-		userLog.setTitle(user.getUserProfile().getName()+" added "+
+		userLog.setActivity("Adicionar perfil acadêmico");
+		userLog.setTitle(user.getUserProfile().getName()+" adicionou "+
 							newUserAcademicProfile.getCourse()+
-								" to profile");
+								" ao perfil");
 		
 		userLog.setTimestamp(new Date());
 		
@@ -108,12 +108,12 @@ public class UserAcademicProfileController extends AbstractController<UserAcadem
 		User user = newUserAcademicProfile.getUser();
 		userLog.setUser(user);
 		
-		userLog.setActivity("Academic profile modification");
+		userLog.setActivity("Modificação de perfil acadêmico");
 		
 		userLog.setTitle(user.getUserProfile().getName()+
-							" modified "+
+							" modificou "+
 								newUserAcademicProfile.getCourse()+
-									" on profile");
+									" no perfil");
 		
 		userLog.setTimestamp(new Date());
 		

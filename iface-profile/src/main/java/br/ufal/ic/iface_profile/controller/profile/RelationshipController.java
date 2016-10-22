@@ -87,12 +87,12 @@ public class RelationshipController extends AbstractController<Relationship, Int
 		UserLog userLog = new UserLog();
 		userLog.setUser(user);
 		
-		userLog.setActivity("Relationship ending");
+		userLog.setActivity("Desfazer Relacionamento");
 		
 		userLog.setTitle(user.getUserProfile().getName()+
-							" removed " +
+							" removou " +
 								deletedRelationship.getReceiver().getUserProfile().getName() +
-									" as " +
+									" como " +
 										deletedRelationship.getRelationshipType().getSenderDegreeOfKinship().getDegreeOfKinship());
 		
 		userLog.setTimestamp(new Date());
@@ -115,11 +115,11 @@ public class RelationshipController extends AbstractController<Relationship, Int
 		User user = newRelationship.getSender();
 		userLog.setUser(user);
 		
-		userLog.setActivity("Relationship began");
+		userLog.setActivity("Novo Relacionamento");
 		userLog.setTitle(user.getUserProfile().getName() + 
-							" added " +
+							" adicionou " +
 								newRelationship.getReceiver().getUserProfile().getName() +
-								" as " +
+								" como " +
 									newRelationship.getRelationshipType().getSenderDegreeOfKinship().getDegreeOfKinship());
 		
 		userLog.setTimestamp(new Date());
@@ -138,12 +138,12 @@ public class RelationshipController extends AbstractController<Relationship, Int
 		User user = newRelationship.getSender();
 		userLog.setUser(user);
 		
-		userLog.setActivity("Relationship modification");
+		userLog.setActivity("Modificação de relacionamento");
 		
 		userLog.setTitle(user.getUserProfile().getName()+
-							" accepted "+
+							" aceitou "+
 								newRelationship.getSender().getUserProfile().getName() +
-									" as "+
+									" como "+
 										newRelationship.getRelationshipType().getReceiverDegreeOfKinship().getDegreeOfKinship());
 		
 		userLog.setTimestamp(new Date());

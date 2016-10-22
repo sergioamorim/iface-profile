@@ -101,8 +101,8 @@ public class UserProfileController extends AbstractController<UserProfile, Integ
 		User user = newUserProfile.getUser();
 		userLog.setUser(user);
 		
-		userLog.setActivity("Create profile");
-		userLog.setTitle(newUserProfile.getName()+" starts using iFace");
+		userLog.setActivity("Criação de perfil");
+		userLog.setTitle(newUserProfile.getName()+" começou a usar o iFace");
 		
 		userLog.setTimestamp(new Date());
 		
@@ -124,9 +124,9 @@ public class UserProfileController extends AbstractController<UserProfile, Integ
 		User user = newUserProfile.getUser();
 		userLog.setUser(user);
 		
-		userLog.setActivity("Profile modification");
+		userLog.setActivity("Modificação de Perfil");
 		
-		userLog.setTitle(newUserProfile.getName()+" modified profile");
+		userLog.setTitle(newUserProfile.getName()+" modificou o perfil");
 		
 		userLog.setTimestamp(new Date());
 		

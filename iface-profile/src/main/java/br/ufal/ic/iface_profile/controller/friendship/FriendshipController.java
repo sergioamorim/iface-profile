@@ -95,14 +95,14 @@ public class FriendshipController extends AbstractController <Friendship, Intege
 			userXLog.setUser(user_x);
 			userYLog.setUser(user_y);
 			
-			userXLog.setActivity("Undo friendship");
-			userYLog.setActivity("Undo friendship");
+			userXLog.setActivity("Dezfazer amizade");
+			userYLog.setActivity("Desfazer amizade");
 			
 			userXLog.setTimestamp(new Date());
 			userYLog.setTimestamp(new Date());
 			
-			userXLog.setTitle("Undo friendship with "+user_y.getUserProfile().getName());
-			userYLog.setTitle("Undo friendship with "+user_x.getUserProfile().getName());
+			userXLog.setTitle("Desfez amizade com "+user_y.getUserProfile().getName());
+			userYLog.setTitle("Desfez amizade com "+user_x.getUserProfile().getName());
 			
 			logRepository.save(userXLog);
 			logRepository.save(userYLog);
@@ -127,14 +127,14 @@ public class FriendshipController extends AbstractController <Friendship, Intege
 		userXLog.setUser(user_x);
 		userYLog.setUser(user_y);
 		
-		userXLog.setActivity("New friendship");
-		userYLog.setActivity("New friendship");
+		userXLog.setActivity("Nova amizade");
+		userYLog.setActivity("Nova amizade");
 		
 		userXLog.setTimestamp(new Date());
 		userYLog.setTimestamp(new Date());
 		
-		userXLog.setTitle("New friendship with "+user_y.getUserProfile().getName());
-		userYLog.setTitle("New friendship with "+user_x.getUserProfile().getName());
+		userXLog.setTitle("Nova amizade com "+user_y.getUserProfile().getName());
+		userYLog.setTitle("Nova amizade com "+user_x.getUserProfile().getName());
 		
 		logRepository.save(userXLog);
 		logRepository.save(userYLog);

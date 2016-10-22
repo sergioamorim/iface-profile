@@ -4,7 +4,7 @@ body {
 
 nav {
     color: #fff;
-    background-color: #779faf;
+    background-color: #929978;
     width: 100%;
     height: 46px;
     line-height: 46px;
@@ -56,7 +56,7 @@ a {
 	padding: 20px;
 	padding-bottom: 20px;	
 	border-radius: 0px;
-	background-color: #779faf;
+	background-color: #bec6a1;
 	box-shadow: 0 5px 6px rgba(0, 0, 0, .3);
 	color: black;
 }

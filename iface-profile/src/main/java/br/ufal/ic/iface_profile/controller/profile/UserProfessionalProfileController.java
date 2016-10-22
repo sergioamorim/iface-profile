@@ -83,10 +83,10 @@ public class UserProfessionalProfileController extends AbstractController<UserPr
 		User user = newUserProfessionalProfile.getUser();
 		userLog.setUser(user);
 		
-		userLog.setActivity("Add professional profile");
-		userLog.setTitle(user.getUserProfile().getName()+" added "+
+		userLog.setActivity("Adicionou perfil profissional");
+		userLog.setTitle(user.getUserProfile().getName()+" adicionou "+
 							newUserProfessionalProfile.getOffice()+
-								" to profile");
+								" ao perfil");
 		
 		userLog.setTimestamp(new Date());
 		
@@ -108,12 +108,12 @@ public class UserProfessionalProfileController extends AbstractController<UserPr
 		User user = newUserProfessionalProfile.getUser();
 		userLog.setUser(user);
 		
-		userLog.setActivity("Professional profile modification");
+		userLog.setActivity("Perfil profissional modificado");
 		
 		userLog.setTitle(user.getUserProfile().getName()+
-							" modified "+
+							" modificou "+
 								newUserProfessionalProfile.getOffice()+
-									" on profile");
+									" no perfil");
 		
 		userLog.setTimestamp(new Date());
 		

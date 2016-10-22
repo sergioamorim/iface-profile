@@ -28,7 +28,7 @@ angular.module("iFace").config(function($routeProvider){
 	angular.injector(['ngCookies']).invoke(['$cookies', function(_$cookies_) {
 		$cookies = _$cookies_;
 		var user = {};
-		user.id = 1;
+		user.id = 2;
 		$cookies.putObject("user", user);
 	}]);
 });
