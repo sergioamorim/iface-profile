@@ -25,6 +25,15 @@ public class RelationshipRepository extends GenericHibernateRepository<Relations
 		 );
 	}
 	
+	public List<Relationship> findAllRelationships(Integer x){
+		return this.findByCriteria(
+				 Restrictions.or(
+					Restrictions.eq("sender.id", x),
+					Restrictions.eq("receiver.id", x)
+					)
+		 );
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<Relationship> findRelationshipRequests(Integer user_id){
 		SQLQuery q1 = this.getSession().createSQLQuery("SELECT * FROM relationship "
@@ -36,3 +45,5 @@ public class RelationshipRepository extends GenericHibernateRepository<Relations
 
 
 }
+
+
